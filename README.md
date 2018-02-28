@@ -43,6 +43,15 @@ The main settings can be found inside the `_config.yml` file:
 - **social** diverse social media usernames (optional)
 - **google_analytics** Google Analytics key (optional)
 
+
+## Troubleshooting
+
+```bash
+You have already activated public_suffix a.b.c, but your Gemfile requires public_suffix x.y.z. Prepending `bundle exec` to your command may solve this
+```
+
+Simply call `bundle update`
+
 ## License
 
 This is [MIT](LICENSE) with no added caveats, so feel free to use this Jekyll theme on your site without linking back to me or using a disclaimer.

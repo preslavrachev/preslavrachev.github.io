@@ -8,8 +8,9 @@ permalink: :year/:month/:day/:title/
 
 markdown: kramdown
 highlighter: rouge
-gems: [jekyll-paginate]
+plugins: [jekyll-paginate, amp-jekyll]
 paginate: 5
+ampdir: amp
 
 navigation:
  - title: Home
