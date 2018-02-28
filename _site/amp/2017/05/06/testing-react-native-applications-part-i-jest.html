@@ -1,0 +1,206 @@
+<!doctype html>
+<html amp lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Testing React Native Applications Part I: Jest</title>
+    <link rel="canonical" href="http://brianmaierjr.github.com/long-haul/2017/05/06/testing-react-native-applications-part-i-jest/" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-custom>
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+
+<h1 class="post-title">
+ <div class="header">
+     <div class="container">
+         <h1 class="logo"><a href="/">Preslav Rachev</a></h1>
+         <nav class="nav-collapse">
+             <ul class="noList">
+                 
+                 <li class="element first  ">
+                     <a href="/index.html">Home</a>
+                 </li> 
+                 
+                 <li class="element   ">
+                     <a href="/about">About</a>
+                 </li> 
+                 
+                 <li class="element   last">
+                     <a href="/contact">Contact</a>
+                 </li> 
+                 
+                 <li> <a href="https://github.com/brianmaierjr/long-haul" target="_blank">GitHub</a>
+</li>
+                 <li><a href="https://github.com/brianmaierjr/long-haul/archive/master.zip">Download Theme</a></li>
+             </ul>
+         </nav>
+     </div>
+ </div><!-- end .header -->
+
+</h1>
+<span>
+2017-05-06 00:00:00 +0200 - {"name"=>"Preslav Rachev"}
+</span>
+<p>When I started with React Native not long ago I was frustrated by the overwhelming amount of irrelevant information on how to test React applications. React is known to evolve fast, often introducing breaking changes, so this should not be surprising to most developers. Still, the amount of deprecated content out there leaves a sort of a bad feeling, especially among developers who have just started working with React or RN.</p>
+
+<p>Having spent a few days, breaking walls down on my own, I decided to document the current state of testing affairs, with the hope that my post won’t become obsolete by the time it comes out.</p>
+
+<p><strong>Note:</strong> Though I initially wanted to write a big post describing RN testing in detail, I decided to split it up into manageable chunks. This post will talk about Jest, what it is, and why it is useful.</p>
+
+<h2 id="jest">Jest</h2>
+<p>When you create a new React or React Native application via one of the provided CLI tools, it automatically creates a sample unit test using a framework called <a href="https://facebook.github.io/jest/">Jest</a>. I have to say upfront. You don’t necessarily have to use Jest for your RN tests, but it definitely brings a few interesting features to the table.</p>
+
+<p>Similar to Mocha, Jest is an opininionated test runner and assertion framework, which uses the familiar BDD syntax of describing and asserting tests:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">describe</span><span class="p">(</span><span class="s1">'calculator'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">describe</span><span class="p">(</span><span class="s1">'add()'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">it</span><span class="p">(</span><span class="s1">'should add 2 numbers togoether'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">expect</span><span class="p">(</span><span class="nx">calculator</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)).</span><span class="nx">toEqual</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+    <span class="p">});</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<h3 id="setting-up">Setting up</h3>
+<p>Setting Jest up and writing your first test is fairly easy, due to its ‘convention-over-configuration’ approach. Though fine-tuning the Jest config is totally possible, there are predefined defaults for everything. In fact, all you need to do is place your tests under <code class="highlighter-rouge">__tests__</code>, and mock modules under <code class="highlighter-rouge">__mocks__</code> and Jest will find them automatically.</p>
+
+<h3 id="mocking">Mocking</h3>
+
+<p>On top of that though, Jest provides a few interesting features on its own. One is its aggressive approach to mocking. Up to a few versions, ago, Jest’s <code class="highlighter-rouge">automock</code> option was set to <code class="highlighter-rouge">true</code> by default. This meant that unless it were explicitly configured not to do so, Jest would create a mock out of every library and dependancy relevant to your code. The development team <a href="https://facebook.github.io/jest/blog/2016/09/01/jest-15.html">realized</a> though that this is one idea too aggressive, and though the option is still there, it is set to <code class="highlighter-rouge">false</code> by default:</p>
+
+<blockquote>
+  <p>We introduced automocking at Facebook and it worked great for us when unit testing was adopted in a large existing code base with few existing tests, but over time it felt like people spent more time fighting with mocked/unmocked modules than it would have taken them to write a test normally. We also noticed that library authors often require a huge number of basic modules that always have to be manually unmocked.</p>
+</blockquote>
+
+<p>Still, with automocking turned off, you could pretty easily mock entire modules, or just a few functions whose calls are expensive or unnecessary (HTTP requests, disk read/writes etc).</p>
+
+<h4 id="jest-mocking-cheatsheet">Jest Mocking Cheatsheet</h4>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Mock-related functions available via the global Jest object</span>
+<span class="nx">jest</span><span class="p">.</span><span class="nx">resetAllMocks</span><span class="p">()</span>
+<span class="nx">jest</span><span class="p">.</span><span class="nx">clearAllTimers</span><span class="p">()</span>
+<span class="nx">jest</span><span class="p">.</span><span class="nx">disableAutomock</span><span class="p">()</span>
+<span class="nx">jest</span><span class="p">.</span><span class="nx">enableAutomock</span><span class="p">()</span>
+<span class="nx">jest</span><span class="p">.</span><span class="nx">fn</span><span class="p">(?</span><span class="nx">implementation</span><span class="p">)</span>
+<span class="nx">jest</span><span class="p">.</span><span class="nx">isMockFunction</span><span class="p">(</span><span class="nx">fn</span><span class="p">)</span>
+<span class="nx">jest</span><span class="p">.</span><span class="nx">genMockFromModule</span><span class="p">(</span><span class="nx">moduleName</span><span class="p">)</span>
+<span class="nx">jest</span><span class="p">.</span><span class="nx">mock</span><span class="p">(</span><span class="nx">moduleName</span><span class="p">,</span> <span class="p">?</span><span class="nx">factory</span><span class="p">,</span> <span class="p">?</span><span class="nx">options</span><span class="p">)</span>
+<span class="nx">jest</span><span class="p">.</span><span class="nx">resetModules</span><span class="p">()</span>
+<span class="nx">jest</span><span class="p">.</span><span class="nx">setMock</span><span class="p">(</span><span class="nx">moduleName</span><span class="p">,</span> <span class="nx">moduleExports</span><span class="p">)</span>
+<span class="nx">jest</span><span class="p">.</span><span class="nx">unmock</span><span class="p">(</span><span class="nx">moduleName</span><span class="p">)</span>
+<span class="nx">jest</span><span class="p">.</span><span class="nx">spyOn</span><span class="p">()</span>
+
+<span class="c1">// Mock functions available to every mock</span>
+<span class="nx">mockFn</span><span class="p">.</span><span class="nx">mock</span><span class="p">.</span><span class="nx">calls</span>
+<span class="nx">mockFn</span><span class="p">.</span><span class="nx">mock</span><span class="p">.</span><span class="nx">instances</span>
+<span class="nx">mockFn</span><span class="p">.</span><span class="nx">mockClear</span><span class="p">()</span>
+<span class="nx">mockFn</span><span class="p">.</span><span class="nx">mockReset</span><span class="p">()</span>
+<span class="nx">mockFn</span><span class="p">.</span><span class="nx">mockRestore</span><span class="p">()</span>
+<span class="nx">mockFn</span><span class="p">.</span><span class="nx">mockImplementation</span><span class="p">(</span><span class="nx">fn</span><span class="p">)</span>
+<span class="nx">mockFn</span><span class="p">.</span><span class="nx">mockImplementationOnce</span><span class="p">(</span><span class="nx">fn</span><span class="p">)</span>
+<span class="nx">mockFn</span><span class="p">.</span><span class="nx">mockReturnThis</span><span class="p">()</span>
+<span class="nx">mockFn</span><span class="p">.</span><span class="nx">mockReturnValue</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span>
+<span class="nx">mockFn</span><span class="p">.</span><span class="nx">mockReturnValueOnce</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="snapshotting">Snapshotting</h3>
+<p>Besides mocking, snapshotting is the other big feature that Jest provides. If you are using the React or React Native CLI, you must have already seen this line of code in your tests:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">expect</span><span class="p">(</span><span class="nx">tree</span><span class="p">).</span><span class="nx">toMatchSnapshot</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>When asserting against a snapshot, Jest will look for an existing one in the <code class="highlighter-rouge">__snapshots__</code> directory, and if none were found, will save the current one there. The next time the test gets run, the current one gets compared to the existing one, and if there is a change, the test will break.</p>
+
+<p>Snapshotting comes super useful when testing the integration of multiple components, where the result is usually a heavily neseted structure. The way developers write such tests is either using many assertions, writing portions of the expected output by hand, or use a few, but very shallow assertions (like <code class="highlighter-rouge">toContain</code>). Snapshotting, therefore, helps save a lot of time writing all this tedious assertion code by hand.</p>
+
+<p>This example out of the <a href="https://facebook.github.io/jest/blog/2016/07/27/jest-14.html">official Jest blog</a> uses the rendered output of a React component to illustrate snapshotting:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">renderer</span> <span class="k">from</span> <span class="s1">'react-test-renderer'</span><span class="p">;</span>
+
+<span class="nx">test</span><span class="p">(</span><span class="s1">'Link renders correctly'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">tree</span> <span class="o">=</span> <span class="nx">renderer</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">Link</span> <span class="nx">page</span><span class="o">=</span><span class="s2">"http://www.facebook.com"</span><span class="o">&gt;</span><span class="nx">Facebook</span><span class="o">&lt;</span><span class="sr">/Link</span><span class="err">&gt;
+</span>  <span class="p">).</span><span class="nx">toJSON</span><span class="p">();</span>
+  <span class="nx">expect</span><span class="p">(</span><span class="nx">tree</span><span class="p">).</span><span class="nx">toMatchSnapshot</span><span class="p">();</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>and the corresponding snapshot that gets saved:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">exports</span><span class="p">[</span><span class="s1">'Link renders correctly 1'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'
+&lt;a
+  className="normal"
+  href="http://www.facebook.com"
+  onMouseEnter={[Function bound _onMouseEnter]}
+  onMouseLeave={[Function bound _onMouseLeave]}&gt;
+  Facebook
+&lt;/a&gt;
+'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Though you will certainly find snapshotting useful for verifying the rendered output of your apps and components, these are by far not the only uses cases. I find it very helpful when verifying global application state, e.g. using libraries like Redux or other similar approaches.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+<p>All in all, I find Jest’s ‘zero-conf, batteries-included’ approach to testing pretty fun to work with. Starting a new project, especially a React or React Native one, it makes sense to go with it, since it comes bundled in. Even if you are already having a large codebase of tests, assuming they follow the familiar BDD conventions (and most probably using Jasmine assertions), you can get it up and running on Jest in pretty much no time. Beware that the documentation is not always up-to-date, so you might have to invest some further time checking Medium and GitHub.</p>
+
+<p>Now that I’ve cleared it up a bit what Jest is all about, I will focus on structurally testing React Native applications in my next post.</p>
+
+<h2 id="further-reading">Further Reading</h2>
+
+<ul>
+  <li><a href="https://facebook.github.io/jest/">The official Jest website</a></li>
+  <li><a href="http://thejsguy.com/2015/01/12/jasmine-vs-mocha-chai-and-sinon.html">Jasmine vs. Mocha, Chai, and Sinon</a></li>
+  <li><a href="http://instea.sk/2016/08/testing-react-applications-with-karma-jest-or-mocha/">Testing React Applications with Karma, Jest or Mocha</a></li>
+  <li><a href="https://dmitriiabramov.github.io/jest-cheatsheet/index.html">Jest CheatSheet</a></li>
+  <li><a href="https://facebook.github.io/jest/docs/tutorial-react-native.html">Testing React Native Apps · Jest</a></li>
+  <li><a href="https://medium.com/xebia/de-mystifying-jest-snapshot-test-mocks-8e7183d109ea">De-mystifying Jest Snapshot Test Mocks</a></li>
+</ul>
+
+
+<div class="footer">
+   <div class="container">
+      <p class="copy">© 2018 
+         <a href="http://brianmaierjr.com">Brian Maier Jr.</a> Powered by <a href="http://jekyllrb.com">Jekyll</a>. Header photo by: <a style='background-color:black;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, "San Francisco", "Helvetica Neue", Helvetica, Ubuntu, Roboto, Noto, "Segoe UI", Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px;' href="http://unsplash.com/@ckirby?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge" target="_blank" rel="noopener noreferrer" title="Download free do whatever you want high-resolution photos from Cameron Kirby"><span style="display:inline-block;padding:2px 3px;"><svg xmlns="http://www.w3.org/2000/svg" style="height:12px;width:auto;position:relative;vertical-align:middle;top:-1px;fill:white;" viewbox="0 0 32 32"><title></title>
+<path d="M20.8 18.1c0 2.7-2.2 4.8-4.8 4.8s-4.8-2.1-4.8-4.8c0-2.7 2.2-4.8 4.8-4.8 2.7.1 4.8 2.2 4.8 4.8zm11.2-7.4v14.9c0 2.3-1.9 4.3-4.3 4.3h-23.4c-2.4 0-4.3-1.9-4.3-4.3v-15c0-2.3 1.9-4.3 4.3-4.3h3.7l.8-2.3c.4-1.1 1.7-2 2.9-2h8.6c1.2 0 2.5.9 2.9 2l.8 2.4h3.7c2.4 0 4.3 1.9 4.3 4.3zm-8.6 7.5c0-4.1-3.3-7.5-7.5-7.5-4.1 0-7.5 3.4-7.5 7.5s3.3 7.5 7.5 7.5c4.2-.1 7.5-3.4 7.5-7.5z"></path></svg></span><span style="display:inline-block;padding:2px 3px;">Cameron Kirby</span></a>
+      </p>
+
+      <div class="footer-links"> 
+         <ul class="noList"> 
+            
+            <li><a href="https://www.facebook.com/brianmaierjr">
+                  <svg id="facebook-square" class="custom-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewbox="0 0 100 100" style="height: 30px; width: 30px;"><circle class="outer-shape" cx="50" cy="50" r="48" style="opacity: 1;"></circle>
+                  <path class="inner-shape" style="opacity: 1;" transform="translate(25,25) scale(0.5)" d="M82.667,1H17.335C8.351,1,1,8.351,1,17.336v65.329c0,8.99,7.351,16.335,16.334,16.335h65.332 C91.652,99.001,99,91.655,99,82.665V17.337C99,8.353,91.652,1.001,82.667,1L82.667,1z M84.318,50H68.375v42.875H50V50h-8.855V35.973 H50v-9.11c0-12.378,5.339-19.739,19.894-19.739h16.772V22.3H72.967c-4.066-0.007-4.57,2.12-4.57,6.078l-0.023,7.594H86.75 l-2.431,14.027V50z"></path>
+                  </svg>
+            </a></li>
+            
+            
+            <li><a href="https://twitter.com/brianmaierjr">
+                  <svg id="twitter" class="custom-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewbox="0 0 100 100" style="height: 30px; width: 30px;"><circle class="outer-shape" cx="50" cy="50" r="48" style="opacity: 1;"></circle>
+                  <path class="inner-shape" style="opacity: 1;" transform="translate(25,25) scale(0.5)" d="M99.001,19.428c-3.606,1.608-7.48,2.695-11.547,3.184c4.15-2.503,7.338-6.466,8.841-11.189 c-3.885,2.318-8.187,4-12.768,4.908c-3.667-3.931-8.893-6.387-14.676-6.387c-11.104,0-20.107,9.054-20.107,20.223 c0,1.585,0.177,3.128,0.52,4.609c-16.71-0.845-31.525-8.895-41.442-21.131C6.092,16.633,5.1,20.107,5.1,23.813 c0,7.017,3.55,13.208,8.945,16.834c-3.296-0.104-6.397-1.014-9.106-2.529c-0.002,0.085-0.002,0.17-0.002,0.255 c0,9.799,6.931,17.972,16.129,19.831c-1.688,0.463-3.463,0.71-5.297,0.71c-1.296,0-2.555-0.127-3.783-0.363 c2.559,8.034,9.984,13.882,18.782,14.045c-6.881,5.424-15.551,8.657-24.971,8.657c-1.623,0-3.223-0.096-4.796-0.282 c8.898,5.738,19.467,9.087,30.82,9.087c36.982,0,57.206-30.817,57.206-57.543c0-0.877-0.02-1.748-0.059-2.617 C92.896,27.045,96.305,23.482,99.001,19.428z"></path>
+                  </svg>
+            </a></li>
+            
+            
+            <li><a href="https://github.com/brianmaierjr">
+                  <svg id="github" class="custom-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewbox="0 0 100 100" style="height: 30px; width: 30px;"><circle class="outer-shape" cx="50" cy="50" r="48" style="opacity: 1;"></circle>
+                  <path class="inner-shape" style="opacity: 1;" transform="translate(25,25) scale(0.5)" d="M50,1C22.938,1,1,22.938,1,50s21.938,49,49,49s49-21.938,49-49S77.062,1,50,1z M79.099,79.099 c-3.782,3.782-8.184,6.75-13.083,8.823c-1.245,0.526-2.509,0.989-3.79,1.387v-7.344c0-3.86-1.324-6.699-3.972-8.517 c1.659-0.16,3.182-0.383,4.57-0.67c1.388-0.287,2.855-0.702,4.402-1.245c1.547-0.543,2.935-1.189,4.163-1.938 c1.228-0.75,2.409-1.723,3.541-2.919s2.082-2.552,2.847-4.067s1.372-3.334,1.818-5.455c0.446-2.121,0.67-4.458,0.67-7.01 c0-4.945-1.611-9.155-4.833-12.633c1.467-3.828,1.308-7.991-0.478-12.489l-1.197-0.143c-0.829-0.096-2.321,0.255-4.474,1.053 c-2.153,0.798-4.57,2.105-7.249,3.924c-3.797-1.053-7.736-1.579-11.82-1.579c-4.115,0-8.039,0.526-11.772,1.579 c-1.69-1.149-3.294-2.097-4.809-2.847c-1.515-0.75-2.727-1.26-3.637-1.532c-0.909-0.271-1.754-0.439-2.536-0.503 c-0.782-0.064-1.284-0.079-1.507-0.048c-0.223,0.031-0.383,0.064-0.478,0.096c-1.787,4.53-1.946,8.694-0.478,12.489 c-3.222,3.477-4.833,7.688-4.833,12.633c0,2.552,0.223,4.889,0.67,7.01c0.447,2.121,1.053,3.94,1.818,5.455 c0.765,1.515,1.715,2.871,2.847,4.067s2.313,2.169,3.541,2.919c1.228,0.751,2.616,1.396,4.163,1.938 c1.547,0.543,3.014,0.957,4.402,1.245c1.388,0.287,2.911,0.511,4.57,0.67c-2.616,1.787-3.924,4.626-3.924,8.517v7.487 c-1.445-0.43-2.869-0.938-4.268-1.53c-4.899-2.073-9.301-5.041-13.083-8.823c-3.782-3.782-6.75-8.184-8.823-13.083 C9.934,60.948,8.847,55.56,8.847,50s1.087-10.948,3.231-16.016c2.073-4.899,5.041-9.301,8.823-13.083s8.184-6.75,13.083-8.823 C39.052,9.934,44.44,8.847,50,8.847s10.948,1.087,16.016,3.231c4.9,2.073,9.301,5.041,13.083,8.823 c3.782,3.782,6.75,8.184,8.823,13.083c2.143,5.069,3.23,10.457,3.23,16.016s-1.087,10.948-3.231,16.016 C85.848,70.915,82.88,75.317,79.099,79.099L79.099,79.099z"></path>
+                  </svg>
+            </a></li>
+             
+            
+            <li><a href="mailto:brimaidesigns@gmail.com">
+                  <svg id="mail" class="custom-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewbox="0 0 100 100" style="height: 30px; width: 30px;"><circle class="outer-shape" cx="50" cy="50" r="48" style="opacity: 1;"></circle>
+                  <path class="inner-shape" style="opacity: 1;" transform="translate(25,25) scale(0.5)" d="M50,1C22.938,1,1,22.938,1,50s21.938,49,49,49s49-21.938,49-49S77.062,1,50,1z M25.5,25.5h49 c0.874,0,1.723,0.188,2.502,0.542L50,57.544L22.998,26.041C23.777,25.687,24.626,25.499,25.5,25.5L25.5,25.5z M19.375,68.375v-36.75 c0-0.128,0.005-0.256,0.014-0.383l17.96,20.953L19.587,69.958C19.448,69.447,19.376,68.916,19.375,68.375L19.375,68.375z M74.5,74.5 h-49c-0.541,0-1.072-0.073-1.583-0.212l17.429-17.429L50,66.956l8.653-10.096l17.429,17.429C75.572,74.427,75.041,74.5,74.5,74.5 L74.5,74.5z M80.625,68.375c0,0.541-0.073,1.072-0.211,1.583L62.652,52.195l17.96-20.953c0.008,0.127,0.014,0.255,0.014,0.383 L80.625,68.375L80.625,68.375z"></path>
+                  </svg>
+            </a></li>
+            
+         </ul>
+      </div>
+   </div>
+</div><!-- end .footer -->
+
+
+</body>
+</html>
