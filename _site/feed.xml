@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Preslav Rachev</title>
+    <title>Preslav's Thoughts and Ramblings</title>
     <description>Long Form Jekyll theme built with SASS / COMPASS / SUSY</description>
-    <link>http://brianmaierjr.github.com/long-haul/</link>
-    <atom:link href="http://brianmaierjr.github.com/long-haul/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 28 Feb 2018 21:48:43 +0100</pubDate>
-    <lastBuildDate>Wed, 28 Feb 2018 21:48:43 +0100</lastBuildDate>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Thu, 01 Mar 2018 12:27:58 +0100</pubDate>
+    <lastBuildDate>Thu, 01 Mar 2018 12:27:58 +0100</lastBuildDate>
     <generator>Jekyll v3.7.3</generator>
     
       
@@ -75,8 +75,8 @@
 </description>
         
         <pubDate>Sat, 01 Jul 2017 00:00:00 +0200</pubDate>
-        <link>http://brianmaierjr.github.com/long-haul/2017/07/01/essential-python-libraries-machine-learning-data-science/</link>
-        <guid isPermaLink="true">http://brianmaierjr.github.com/long-haul/2017/07/01/essential-python-libraries-machine-learning-data-science/</guid>
+        <link>http://localhost:4000/2017/07/01/essential-python-libraries-machine-learning-data-science/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/07/01/essential-python-libraries-machine-learning-data-science/</guid>
         
         
       </item>
@@ -206,8 +206,8 @@
 </description>
         
         <pubDate>Sat, 06 May 2017 00:00:00 +0200</pubDate>
-        <link>http://brianmaierjr.github.com/long-haul/2017/05/06/testing-react-native-applications-part-i-jest/</link>
-        <guid isPermaLink="true">http://brianmaierjr.github.com/long-haul/2017/05/06/testing-react-native-applications-part-i-jest/</guid>
+        <link>http://localhost:4000/2017/05/06/testing-react-native-applications-part-i-jest/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/05/06/testing-react-native-applications-part-i-jest/</guid>
         
         
       </item>
@@ -282,8 +282,8 @@
 </description>
         
         <pubDate>Mon, 15 Dec 2014 00:00:00 +0100</pubDate>
-        <link>http://brianmaierjr.github.com/long-haul/2014/12/15/example-post-formatting/</link>
-        <guid isPermaLink="true">http://brianmaierjr.github.com/long-haul/2014/12/15/example-post-formatting/</guid>
+        <link>http://localhost:4000/2014/12/15/example-post-formatting/</link>
+        <guid isPermaLink="true">http://localhost:4000/2014/12/15/example-post-formatting/</guid>
         
         
       </item>
@@ -310,8 +310,8 @@
 </description>
         
         <pubDate>Sun, 14 Dec 2014 00:00:00 +0100</pubDate>
-        <link>http://brianmaierjr.github.com/long-haul/2014/12/14/featured-image/</link>
-        <guid isPermaLink="true">http://brianmaierjr.github.com/long-haul/2014/12/14/featured-image/</guid>
+        <link>http://localhost:4000/2014/12/14/featured-image/</link>
+        <guid isPermaLink="true">http://localhost:4000/2014/12/14/featured-image/</guid>
         
         
       </item>
@@ -339,8 +339,8 @@
 </description>
         
         <pubDate>Sat, 13 Dec 2014 00:00:00 +0100</pubDate>
-        <link>http://brianmaierjr.github.com/long-haul/2014/12/13/code-snippet/</link>
-        <guid isPermaLink="true">http://brianmaierjr.github.com/long-haul/2014/12/13/code-snippet/</guid>
+        <link>http://localhost:4000/2014/12/13/code-snippet/</link>
+        <guid isPermaLink="true">http://localhost:4000/2014/12/13/code-snippet/</guid>
         
         
       </item>
@@ -377,8 +377,8 @@
 </description>
         
         <pubDate>Fri, 12 Dec 2014 00:00:00 +0100</pubDate>
-        <link>http://brianmaierjr.github.com/long-haul/2014/12/12/figure-with-caption/</link>
-        <guid isPermaLink="true">http://brianmaierjr.github.com/long-haul/2014/12/12/figure-with-caption/</guid>
+        <link>http://localhost:4000/2014/12/12/figure-with-caption/</link>
+        <guid isPermaLink="true">http://localhost:4000/2014/12/12/figure-with-caption/</guid>
         
         
       </item>
@@ -407,8 +407,8 @@
 </description>
         
         <pubDate>Thu, 11 Dec 2014 00:00:00 +0100</pubDate>
-        <link>http://brianmaierjr.github.com/long-haul/2014/12/11/image-in-post/</link>
-        <guid isPermaLink="true">http://brianmaierjr.github.com/long-haul/2014/12/11/image-in-post/</guid>
+        <link>http://localhost:4000/2014/12/11/image-in-post/</link>
+        <guid isPermaLink="true">http://localhost:4000/2014/12/11/image-in-post/</guid>
         
         
       </item>
@@ -435,8 +435,8 @@
 </description>
         
         <pubDate>Wed, 10 Dec 2014 00:00:00 +0100</pubDate>
-        <link>http://brianmaierjr.github.com/long-haul/2014/12/10/test-post/</link>
-        <guid isPermaLink="true">http://brianmaierjr.github.com/long-haul/2014/12/10/test-post/</guid>
+        <link>http://localhost:4000/2014/12/10/test-post/</link>
+        <guid isPermaLink="true">http://localhost:4000/2014/12/10/test-post/</guid>
         
         
       </item>
@@ -460,8 +460,8 @@
 </description>
         
         <pubDate>Sat, 20 Sep 2014 00:00:00 +0200</pubDate>
-        <link>http://brianmaierjr.github.com/long-haul/2014/09/20/git-empty-branch/</link>
-        <guid isPermaLink="true">http://brianmaierjr.github.com/long-haul/2014/09/20/git-empty-branch/</guid>
+        <link>http://localhost:4000/2014/09/20/git-empty-branch/</link>
+        <guid isPermaLink="true">http://localhost:4000/2014/09/20/git-empty-branch/</guid>
         
         <category>python</category>
         
