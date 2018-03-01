@@ -10,6 +10,11 @@
 
     <!-- Come and get me RSS readers -->
     <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}" />
+
+    <!-- Add AMP links -->
+    {% if page.path contains '_posts' %}
+    <link rel="amphtml" href="{{ page.id | prepend: '/YOURDIR' | prepend: site.baseurl | prepend: site.url | append: '.html' }}">
+    {% endif %}
     
     <!-- Stylesheet -->
     <link rel="stylesheet" href="{{ "/assets/css/style.css" | prepend: site.baseurl }}">
