@@ -1,7 +1,7 @@
 title: Preslav's Thoughts and Ramblings
 description: Long Form Jekyll theme built with SASS / COMPASS / SUSY
 
-url: http://brianmaierjr.github.com/long-haul
+url: https://preslavrachev.github.io
 baseurl: ""
 paginate_path: "blog/page:num/"
 permalink: :year/:month/:day/:title/

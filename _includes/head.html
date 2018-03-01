@@ -13,7 +13,7 @@
 
     <!-- Add AMP links -->
     {% if page.path contains '_posts' %}
-    <link rel="amphtml" href="{{ page.id | prepend: '/YOURDIR' | prepend: site.baseurl | prepend: site.url | append: '.html' }}">
+    <link rel="amphtml" href="{{ page.id | prepend: '/amp' | prepend: site.baseurl | prepend: site.url | append: '.html' }}">
     {% endif %}
     
     <!-- Stylesheet -->
