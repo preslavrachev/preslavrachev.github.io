@@ -13,7 +13,7 @@ setup_git() {
 }
 
 commit_website_files() {
-  git checkout -b gh-pages
+  git checkout build
   git add _site
   git commit --message "Site rebuild: $TRAVIS_BUILD_NUMBER"
 }
