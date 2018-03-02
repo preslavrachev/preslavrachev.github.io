@@ -19,7 +19,7 @@ commit_website_files() {
 }
 
 upload_files() {
-  git remote add origin-pages https://${GITHUB_TOKEN}@github.com/preslavrachev/preslavrachev.github.io.git > /dev/null 2>&1
+  git remote add origin-pages https://${GITHUB_TOKEN}@github.com/preslavrachev/preslavrachev.github.io.git
   git push --quiet --set-upstream origin-pages build
 }
 
