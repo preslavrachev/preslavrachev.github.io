@@ -12,6 +12,10 @@ plugins: [jekyll-paginate, amp-jekyll]
 paginate: 5
 ampdir: amp
 
+sass:
+  sass_dir: _sass
+  style: compressed
+
 navigation:
  - title: Home
    url: /index.html
