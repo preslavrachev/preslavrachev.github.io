@@ -1,8 +1,4 @@
 language: ruby
-before_install:
-- sudo apt-get install nodejs npm
-- npm install -g gulp
-- npm install
 script:
 - "./deploy.sh"
 env:

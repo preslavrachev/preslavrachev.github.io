@@ -3,7 +3,6 @@
 set -ex
 
 build_site() {
-  gulp sass
   bundle exec jekyll build
 }
 
