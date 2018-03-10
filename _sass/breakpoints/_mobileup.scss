@@ -13,24 +13,13 @@ body {
 	font-family: $serif;
 	line-height: 1.75;
 	font-size: 112.5%; // 18px base font size
-	color: $black;
+	color: $body-text-color;
 	overflow-x: hidden;
   margin: 0;
 
 	p , ul {
 		margin: 0 0 2rem;
 	}
-}
-
-// Text Selection Styling
-::-moz-selection {
-	background: $primary-color;
-	color: white;
-}
-
-::selection {
-	background: $primary-color;
-	color: white;
 }
 
 // Media Styling
@@ -52,10 +41,10 @@ LINK STYLING
 ***************/
 
 a {
-	color: $link-color;
+	color: $body-text-color;
 
 	&:hover {
-		color: darken($link-color, 15%);
+		color: lighten($body-text-color, 15%);
 	}
 }
 
@@ -195,10 +184,10 @@ HEADER STYLING
 		float: left;
 		padding-left: 2rem;
 		font-size: 1em;
-		line-height: 3em;
 		font-family: $sans-serif;
 		font-weight: 800;
 		text-transform: uppercase;
+    max-width: 80%;
 
 		a {
 			color: white;
