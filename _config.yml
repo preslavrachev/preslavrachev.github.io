@@ -1,5 +1,5 @@
 title: Preslav's Thoughts and Ramblings
-description: Long Form Jekyll theme built with SASS / COMPASS / SUSY
+description: Finding beauty in everyday things.
 
 url: https://preslavrachev.github.io
 baseurl: ""
@@ -25,9 +25,8 @@ navigation:
    url: /contact
 
 social:
-   github: brianmaierjr
-   twitter: brianmaierjr
-   facebook: brianmaierjr
-   email: brimaidesigns@gmail.com
+   github: preslavrachev
+   twitter: preslavrachev
+   stackoverflow: 1107412/preslavrachev
 
 google_analytics: "UA-58263416-1"
