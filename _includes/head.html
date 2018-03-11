@@ -1,15 +1,31 @@
 <head>
+    {% if page.path contains '_posts' %}
+      {% if page.description %}
+        {% assign description = page.description %}
+      {% else %}
+        {% assign description = page.content | strip_html | strip_newlines | truncate: 300 %}
+      {% endif %}
+    {% else %}
+      {% if page.description %}
+        {% assign description = page.description %}
+      {% else %}
+        {% assign description = site.description %}
+      {% endif %}
+    {% endif %}
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
+    <meta name="description" content="{{ description }}">
     <meta name="referrer" content="origin">
 
     <!-- Twitter Metadata -->
     <meta name="twitter:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
+    <meta name="twitter:description" content="{{ description }}">
 
     <!-- Facebook Metadata -->
     <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
+    <meta property="og:description" content="{{ description }}">
 
     <title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
 
