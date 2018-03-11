@@ -2,6 +2,7 @@
 layout: post
 title: Is Machine Learning with Python Easy?
 date: '2018-03-07 20:44:41'
+description: To say that solving ML problems using Python is easy, is the same like saying that developing Web applications or video games using Python is easier than when using other technologies. The answer will always be yes and no. There is nothing in the design of the language that makes it more suitable to solving these kinds of problems than other languages.
 tags:
 - python
 - machine-learning
