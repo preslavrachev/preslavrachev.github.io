@@ -8,7 +8,7 @@ permalink: :year/:month/:day/:title/
 
 markdown: kramdown
 highlighter: rouge
-plugins: [jekyll-paginate, amp-jekyll]
+plugins: [jekyll-paginate, amp-jekyll, jekyll-sitemap]
 paginate: 5
 ampdir: amp
 
