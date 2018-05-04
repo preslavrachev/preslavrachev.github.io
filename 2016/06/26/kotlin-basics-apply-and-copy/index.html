@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>Kotlin Basics: apply() and copy()</title>
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.css?v=f593a58c15" />
+
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="canonical" href="http://www.preslav.me/2016/06/26/kotlin-basics-apply-and-copy/" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    <link rel="amphtml" href="http://www.preslav.me/2016/06/26/kotlin-basics-apply-and-copy/amp/" />
+    
+    <meta property="og:site_name" content="Preslav&#x27;s Thoughts and Ramblings" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Kotlin Basics: apply() and copy()" />
+    <meta property="og:description" content="Without any doubt, Java is a verbose language. This verbosity of the language makes it easy to understand Java code by new programmers. It is though one of the reasons, why many Java programmers find writing Java code tedious. Kotlin brings a touch of succinctness in places, where even programmers" />
+    <meta property="og:url" content="http://www.preslav.me/2016/06/26/kotlin-basics-apply-and-copy/" />
+    <meta property="og:image" content="https://dl.dropboxusercontent.com/content_link/jdHNPawVIMIcYHfQnkydAuVVyxn5r3lhh63fktG6XKE5HgIaWTWxfGYTD8wMu3Ek/file" />
+    <meta property="article:published_time" content="2016-06-26T12:56:00.000Z" />
+    <meta property="article:modified_time" content="2016-07-15T13:03:17.000Z" />
+    <meta property="article:tag" content="Kotlin" />
+    
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Kotlin Basics: apply() and copy()" />
+    <meta name="twitter:description" content="Without any doubt, Java is a verbose language. This verbosity of the language makes it easy to understand Java code by new programmers. It is though one of the reasons, why many Java programmers find writing Java code tedious. Kotlin brings a touch of succinctness in places, where even programmers" />
+    <meta name="twitter:url" content="http://www.preslav.me/2016/06/26/kotlin-basics-apply-and-copy/" />
+    <meta name="twitter:image" content="https://dl.dropboxusercontent.com/content_link/jdHNPawVIMIcYHfQnkydAuVVyxn5r3lhh63fktG6XKE5HgIaWTWxfGYTD8wMu3Ek/file" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Preslav Rachev" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="Kotlin" />
+    <meta name="twitter:site" content="@preslavrachev" />
+    <meta name="twitter:creator" content="@preslavrachev" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Preslav&#x27;s Thoughts and Ramblings",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "http://www.preslav.me/favicon.ico",
+            "width": 60,
+            "height": 60
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Preslav Rachev",
+        "image": {
+            "@type": "ImageObject",
+            "url": "//www.gravatar.com/avatar/fd47e6bba1f42ecacf2e7af9e4c5fb52?s=250&d=mm&r=x",
+            "width": 250,
+            "height": 250
+        },
+        "url": "http://www.preslav.me/author/preslav/",
+        "sameAs": [
+            "https://twitter.com/preslavrachev"
+        ]
+    },
+    "headline": "Kotlin Basics: apply() and copy()",
+    "url": "http://www.preslav.me/2016/06/26/kotlin-basics-apply-and-copy/",
+    "datePublished": "2016-06-26T12:56:00.000Z",
+    "dateModified": "2016-07-15T13:03:17.000Z",
+    "image": "https://dl.dropboxusercontent.com/content_link/jdHNPawVIMIcYHfQnkydAuVVyxn5r3lhh63fktG6XKE5HgIaWTWxfGYTD8wMu3Ek/file",
+    "keywords": "Kotlin",
+    "description": "Without any doubt, Java is a verbose language. This verbosity of the language makes it easy to understand Java code by new programmers. It is though one of the reasons, why many Java programmers find writing Java code tedious. Kotlin brings a touch of succinctness in places, where even programmers",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://www.preslav.me/"
+    }
+}
+    </script>
+
+    <script type="text/javascript" src="/public/ghost-sdk.min.js?v=f593a58c15"></script>
+<script type="text/javascript">
+ghost.init({
+	clientId: "ghost-frontend",
+	clientSecret: "69f974d18b04"
+});
+</script>
+    <meta name="generator" content="Ghost 1.10" />
+    <link rel="alternate" type="application/rss+xml" title="Preslav&#x27;s Thoughts and Ramblings" href="http://www.preslav.me/rss/" />
+    <meta name="google-site-verification" content="VMxZ-AarPGjZ4X9IF5BEDXBi0hhGaj-S_Y_dj8WaAOE" />
+
+<style>
+    #disqus_thread {
+        width: 80%;
+        max-width: 710px;
+        margin: 3rem auto 0;
+    }
+    
+    #hellobar-bar .hb-close-wrapper {
+    	display: block #important;
+	}
+</style>
+
+</head>
+<body class="post-template tag-kotlin">
+
+    <div class="site-wrapper">
+
+        
+
+<header class="site-header outer">
+    <div class="inner">
+        <nav class="site-nav">
+    <div class="site-nav-left">
+                <a class="site-nav-logo" href="http://www.preslav.me">Preslav&#x27;s Thoughts and Ramblings</a>
+            <ul class="nav">
+    <li class="nav-home" role="presentation"><a href="http://www.preslav.me">Home</a></li>
+    <li class="nav-micro" role="presentation"><a href="http://micro.preslav.me/">Micro</a></li>
+    <li class="nav-about-me" role="presentation"><a href="http://www.preslav.me/about-me/">About Me</a></li>
+    <li class="nav-my-work" role="presentation"><a href="http://www.preslav.me/work/">My Work</a></li>
+    <li class="nav-contact" role="presentation"><a href="http://www.preslav.me/contact/">Contact</a></li>
+</ul>
+    </div>
+    <div class="site-nav-right">
+        <div class="social-links">
+                <a class="social-link social-link-tw" href="https://twitter.com/preslavrachev" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+</a>
+        </div>
+            <a class="subscribe-button" href="#subscribe">Subscribe</a>
+    </div>
+</nav>
+    </div>
+</header>
+
+
+<main id="site-main" class="site-main outer" role="main">
+    <div class="inner">
+
+        <article class="post-full post tag-kotlin ">
+
+            <header class="post-full-header">
+                <section class="post-full-meta">
+                    <time class="post-full-meta-date" datetime="2016-06-26">26 June 2016</time>
+                        <span class="date-divider">/</span> <a href="/tag/kotlin/">Kotlin</a>
+                </section>
+                <h1 class="post-full-title">Kotlin Basics: apply() and copy()</h1>
+            </header>
+
+            <figure class="post-full-image" style="background-image: url(https://dl.dropboxusercontent.com/content_link/jdHNPawVIMIcYHfQnkydAuVVyxn5r3lhh63fktG6XKE5HgIaWTWxfGYTD8wMu3Ek/file)">
+            </figure>
+
+            <section class="post-full-content">
+                <div class="kg-card-markdown"><p>Without any doubt, Java is a verbose language. This verbosity of the language makes it easy to understand Java code by new programmers. It is though one of the reasons, why many Java programmers find writing Java code tedious. Kotlin brings a touch of succinctness in places, where even programmers new to Java, may find code unnecessarily over-bloated.</p>
+<p>How many times have you had to do the same thing over and over again:</p>
+<pre><code class="language-java">private A updateA(A objA, B objB) {
+    objA.setC(objB.getC());
+    objA.setD(objB.getD());
+    return objA;
+}
+</code></pre>
+<p>Having an object, you want to modify some of its properties and simply return the same object. In Java, you can't do this in a single chained fashion. In Kotlin, you can squeeze the above method to the following single line of code:</p>
+<pre><code class="language-java">fun updateA(objA: A, objB: B): A = objA.apply { c = objB.c; d = objB.d }
+</code></pre>
+<h3 id="apply">apply()</h3>
+<p>By definition, <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/apply.html"><code>apply</code></a> accepts a function, and sets its scope to that of the object on which apply has been invoked. This means that no explicit reference to the object is needed. <code>Apply()</code> can do much more than simply setting properties of course. It is a transformation function, capable of evaluating complex logic before returning. At the end, the function simply returns the same object (with the added changes), so one can keep using it on the same line of code.</p>
+<p><strong>Note:</strong> Please, note as well the direct use of properties instead of explicitly calling getters and setters. This is not a bad practice, since Kotlin implicitly invokes provided getters and setters of a property, when working with the property (similar to C#).</p>
+<h3 id="copy">copy()</h3>
+<p>Please, remember that using apply on an object is NOT a thread-safe operation, and mutates the state of the object. If you want to retain the original object and return an immutable copy of it, you can use the function <a href="https://kotlinlang.org/docs/reference/data-classes.html#copying"><code>copy()</code></a>, provided in all instances of data classes.</p>
+<p>Assuming that your class contains only data (usually a good practice to separate logic from data), you can turn it into a <a href="https://kotlinlang.org/docs/reference/data-classes.html">data class</a>:</p>
+<pre><code class="language-java">data class User(val name: String, val age: Int)
+</code></pre>
+<p>Data classes have a few advantages, and one of them is definitely the <a href="https://kotlinlang.org/docs/reference/data-classes.html#copying"><code>copy()</code></a> function, provided to each and every instance. It not only provides a copy of the original object, leaving its state intact, but also allows setting new values to some of its properties at copy-time:</p>
+<pre><code class="language-java">val user1 = User(&quot;John Smith&quot;, 24)
+val user2 = user1.copy(age = 31)
+</code></pre>
+<p>Kotlin supports <a href="http://blog.preslav.me/2016/05/29/kotlin-tips-named-parameters-default-arguments/">named parameters</a>, known from other languages, such as Python and Scala. In this case, they make life much easier, as all you need to do, is specify the name of the particular property (or properties) you want to modify by copying.</p>
+<p>At the end you can combine the power and succinctness of both <code>apply()</code> and <code>copy()</code> by calling apply after copying:</p>
+<pre><code class="language-java">val user2 = user1.copy(age = 31).apply { // execute some logic here }
+</code></pre>
+</div>
+            </section>
+
+            <section class="subscribe-form">
+                <h3 class="subscribe-form-title">Subscribe to Preslav&#x27;s Thoughts and Ramblings</h3>
+                <p>Get the latest posts delivered right to your inbox</p>
+                <form method="post" action="/subscribe/" class="">
+    <input class="confirm" type="hidden" name="confirm"  /><input class="location" type="hidden" name="location"  /><input class="referrer" type="hidden" name="referrer"  />
+
+    <div class="form-group">
+        <input class="subscribe-email" type="email" name="email"  placeholder="youremail@example.com" />
+    </div>
+    <button class="" type="submit"><span>Subscribe</span></button>
+    <script type="text/javascript">(function(g,h,o,s,t){h[o]('.location')[s]=h[o]('.location')[s] || g.location.href;h[o]('.referrer')[s]=h[o]('.referrer')[s] || h.referrer;})(window,document,'querySelector','value');</script>
+</form>
+
+
+            </section>
+
+            <footer class="post-full-footer">
+
+                <section class="author-card">
+                        <img class="author-profile-image" src="//www.gravatar.com/avatar/fd47e6bba1f42ecacf2e7af9e4c5fb52?s&#x3D;250&amp;d&#x3D;mm&amp;r&#x3D;x" alt="Preslav Rachev" />
+                    <section class="author-card-content">
+                        <h4 class="author-card-name"><a href="/">Preslav Rachev</a></h4>
+                            <p>Read <a href="/">more posts</a> by this author.</p>
+                    </section>
+                </section>
+                <div class="post-full-footer-right">
+                    <a class="author-card-button" href="/">Read More</a>
+                </div>
+
+            </footer>
+
+
+        </article>
+
+    </div>
+</main>
+
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+                <article class="read-next-card"
+                        style="background-image: url(https://www.dropbox.com/s/qvwn6s7qm1j69jt/kotlin-collection-cover.jpg?raw&#x3D;1)"
+                >
+                    <header class="read-next-card-header">
+                        <small class="read-next-card-header-sitetitle">&mdash; Preslav&#x27;s Thoughts and Ramblings &mdash;</small>
+                        <h3 class="read-next-card-header-title"><a href="/tag/kotlin/">Kotlin</a></h3>
+                    </header>
+                    <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
+</div>
+                    <div class="read-next-card-content">
+                        <ul>
+                            <li><a href="/2018/03/19/weekly-notes-2/">Weekly Notes</a></li>
+                            <li><a href="/2018/03/18/platform-types-in-kotlin/">Platform Types in Kotlin</a></li>
+                            <li><a href="/2018/02/18/weekly-notes-feb-13-feb-19-2018/">Weekly Notes (Feb 13th / Feb 19th, 2018)</a></li>
+                        </ul>
+                    </div>
+                    <footer class="read-next-card-footer">
+                        <a href="/tag/kotlin/">See all 6 posts →</a>
+                    </footer>
+                </article>
+
+                <article class="post-card post tag-android featured">
+        <a class="post-card-image-link" href="/2016/07/02/android-links-july-2016/">
+            <div class="post-card-image" style="background-image: url(https://i.ytimg.com/vi/8bMbcNUM68U/maxresdefault.jpg)"></div>
+        </a>
+    <div class="post-card-content">
+        <a class="post-card-content-link" href="/2016/07/02/android-links-july-2016/">
+            <header class="post-card-header">
+                    <span class="post-card-tags">Android</span>
+                <h2 class="post-card-title">Android Developer Links (July 2016)</h2>
+            </header>
+            <section class="post-card-excerpt">
+                <p>Photo Credits: MKBHD 047: Custom Views &amp; ViewGroups with Huyen Tue Dao - Fragmented In this episode we talk to Trello engineer, GDE, YouTuber, Caster IO instructor and View magician Huyen about all</p>
+            </section>
+        </a>
+        <footer class="post-card-meta">
+                <img class="author-profile-image" src="//www.gravatar.com/avatar/fd47e6bba1f42ecacf2e7af9e4c5fb52?s&#x3D;250&amp;d&#x3D;mm&amp;r&#x3D;x" alt="Preslav Rachev" />
+            <span class="post-card-author"><a href="/author/preslav/">Preslav Rachev</a></span>
+        </footer>
+    </div>
+</article>
+
+                <article class="post-card post tag-tip tag-github tag-stackoverflow tag-ergonomics no-image">
+    <div class="post-card-content">
+        <a class="post-card-content-link" href="/2016/06/19/dev-ergonomics-tip-use-a-dark-style-github-stackoverflow-theme/">
+            <header class="post-card-header">
+                    <span class="post-card-tags">tip</span>
+                <h2 class="post-card-title">Dev Ergonomics Tip: Use a Dark-Style GitHub/StackOverflow Theme</h2>
+            </header>
+            <section class="post-card-excerpt">
+                <p>As many of the developers I know and have met, I am also used to using a dark colour theme on all of my IDEs and text editors, and the command-line terminal. In</p>
+            </section>
+        </a>
+        <footer class="post-card-meta">
+                <img class="author-profile-image" src="//www.gravatar.com/avatar/fd47e6bba1f42ecacf2e7af9e4c5fb52?s&#x3D;250&amp;d&#x3D;mm&amp;r&#x3D;x" alt="Preslav Rachev" />
+            <span class="post-card-author"><a href="/author/preslav/">Preslav Rachev</a></span>
+        </footer>
+    </div>
+</article>
+
+        </div>
+    </div>
+</aside>
+
+<div class="floating-header">
+    <div class="floating-header-logo">
+        <a href="http://www.preslav.me">
+            <span>Preslav&#x27;s Thoughts and Ramblings</span>
+        </a>
+    </div>
+    <span class="floating-header-divider">&mdash;</span>
+    <div class="floating-header-title">Kotlin Basics: apply() and copy()</div>
+    <div class="floating-header-share">
+        <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
+</svg>
+</div>
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=Kotlin%20Basics%3A%20apply()%20and%20copy()&amp;url=http://www.preslav.me/2016/06/26/kotlin-basics-apply-and-copy/"
+            onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+        </a>
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=http://www.preslav.me/2016/06/26/kotlin-basics-apply-and-copy/"
+            onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
+        </a>
+    </div>
+    <progress class="progress" value="0">
+        <div class="progress-container">
+            <span class="progress-bar"></span>
+        </div>
+    </progress>
+</div>
+
+
+
+
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="http://www.preslav.me">Preslav&#x27;s Thoughts and Ramblings</a> &copy; 2018</section>
+                <nav class="site-footer-nav">
+                    <a href="http://www.preslav.me">Latest Posts</a>
+                    
+                    <a href="https://twitter.com/preslavrachev" target="_blank">Twitter</a>
+                    <a href="https://ghost.org" target="_blank">Ghost</a>
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+
+    <div id="subscribe" class="subscribe-overlay">
+        <a class="subscribe-overlay-close" href="#"></a>
+        <div class="subscribe-overlay-content">
+            <h1 class="subscribe-overlay-title">Subscribe to Preslav&#x27;s Thoughts and Ramblings</h1>
+            <p class="subscribe-overlay-description">Stay up to date! Get all the latest &amp; greatest posts delivered straight to your inbox</p>
+            <form method="post" action="/subscribe/" class="">
+    <input class="confirm" type="hidden" name="confirm"  /><input class="location" type="hidden" name="location"  /><input class="referrer" type="hidden" name="referrer"  />
+
+    <div class="form-group">
+        <input class="subscribe-email" type="email" name="email"  placeholder="youremail@example.com" />
+    </div>
+    <button class="" type="submit"><span>Subscribe</span></button>
+    <script type="text/javascript">(function(g,h,o,s,t){h[o]('.location')[s]=h[o]('.location')[s] || g.location.href;h[o]('.referrer')[s]=h[o]('.referrer')[s] || h.referrer;})(window,document,'querySelector','value');</script>
+</form>
+
+
+        </div>
+    </div>
+
+    <script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js?v=f593a58c15"></script>
+
+
+    <script>
+
+// NOTE: Scroll performance is poor in Safari
+// - this appears to be due to the events firing much more slowly in Safari.
+//   Dropping the scroll event and using only a raf loop results in smoother
+//   scrolling but continuous processing even when not scrolling
+$(document).ready(function () {
+    // Start fitVids
+    var $postContent = $(".post-full-content");
+    $postContent.fitVids();
+    // End fitVids
+
+    var progressBar = document.querySelector('progress');
+    var header = document.querySelector('.floating-header');
+    var title = document.querySelector('.post-full-title');
+
+    var lastScrollY = window.scrollY;
+    var lastWindowHeight = window.innerHeight;
+    var lastDocumentHeight = $(document).height();
+    var ticking = false;
+
+    function onScroll() {
+        lastScrollY = window.scrollY;
+        requestTick();
+    }
+
+    function onResize() {
+        lastWindowHeight = window.innerHeight;
+        lastDocumentHeight = $(document).height();
+        requestTick();
+    }
+
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(update);
+        }
+        ticking = true;
+    }
+
+    function update() {
+        var trigger = title.getBoundingClientRect().top + window.scrollY;
+        var triggerOffset = title.offsetHeight + 35;
+        var progressMax = lastDocumentHeight - lastWindowHeight;
+
+        // show/hide floating header
+        if (lastScrollY >= trigger + triggerOffset) {
+            header.classList.add('floating-active');
+        } else {
+            header.classList.remove('floating-active');
+        }
+
+        progressBar.setAttribute('max', progressMax);
+        progressBar.setAttribute('value', lastScrollY);
+
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', onScroll, {passive: true});
+    window.addEventListener('resize', onResize, false);
+
+    update();
+});
+</script>
+
+
+    <!-- Matomo -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  setTimeout(function() {
+    var u="//preslavrachev.innocraft.cloud/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', '1']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  }, 5000);
+</script>
+<!-- End Matomo Code -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-40565485-7', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+<!-- disqus -->
+<script>
+    var article = $('.post-template main article');
+    var disqusSite = 'preslav';
+    if (article.length) {
+        article.after('<div id="disqus_thread"></div>');
+        (function() {
+            var d = document, s = d.createElement('script');
+            s.src = '//' + disqusSite + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    }
+</script>
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+</body>
+</html>

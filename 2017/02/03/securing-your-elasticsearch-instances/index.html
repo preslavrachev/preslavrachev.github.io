@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>Securing Your ElasticSearch Instances</title>
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.css?v=f593a58c15" />
+
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="canonical" href="http://www.preslav.me/2017/02/03/securing-your-elasticsearch-instances/" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    <link rel="amphtml" href="http://www.preslav.me/2017/02/03/securing-your-elasticsearch-instances/amp/" />
+    
+    <meta property="og:site_name" content="Preslav&#x27;s Thoughts and Ramblings" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Securing Your ElasticSearch Instances" />
+    <meta property="og:description" content="And keeping all the fun Often, we choose convenience over security. Many modern tools such as MongoDB and ElasticSearch, have grown in popularity, partly because of their easy-to-set-up-and-tinker-with nature. Just spin off an instance, point your browser to the right URL and you&#x27;re ready to start sending queries. Unfortunately, one" />
+    <meta property="og:url" content="http://www.preslav.me/2017/02/03/securing-your-elasticsearch-instances/" />
+    <meta property="article:published_time" content="2017-02-03T18:41:00.000Z" />
+    <meta property="article:modified_time" content="2017-04-14T18:51:57.000Z" />
+    <meta property="article:tag" content="DevOps" />
+    <meta property="article:tag" content="Programming" />
+    <meta property="article:tag" content="Tips" />
+    <meta property="article:tag" content="ElasticSearch" />
+    <meta property="article:tag" content="SSH" />
+    <meta property="article:tag" content="Docker" />
+    
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Securing Your ElasticSearch Instances" />
+    <meta name="twitter:description" content="And keeping all the fun Often, we choose convenience over security. Many modern tools such as MongoDB and ElasticSearch, have grown in popularity, partly because of their easy-to-set-up-and-tinker-with nature. Just spin off an instance, point your browser to the right URL and you&#x27;re ready to start sending queries. Unfortunately, one" />
+    <meta name="twitter:url" content="http://www.preslav.me/2017/02/03/securing-your-elasticsearch-instances/" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Preslav Rachev" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="DevOps, Programming, Tips, ElasticSearch, SSH, Docker" />
+    <meta name="twitter:site" content="@preslavrachev" />
+    <meta name="twitter:creator" content="@preslavrachev" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Preslav&#x27;s Thoughts and Ramblings",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "http://www.preslav.me/favicon.ico",
+            "width": 60,
+            "height": 60
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Preslav Rachev",
+        "image": {
+            "@type": "ImageObject",
+            "url": "//www.gravatar.com/avatar/fd47e6bba1f42ecacf2e7af9e4c5fb52?s=250&d=mm&r=x",
+            "width": 250,
+            "height": 250
+        },
+        "url": "http://www.preslav.me/author/preslav/",
+        "sameAs": [
+            "https://twitter.com/preslavrachev"
+        ]
+    },
+    "headline": "Securing Your ElasticSearch Instances",
+    "url": "http://www.preslav.me/2017/02/03/securing-your-elasticsearch-instances/",
+    "datePublished": "2017-02-03T18:41:00.000Z",
+    "dateModified": "2017-04-14T18:51:57.000Z",
+    "keywords": "DevOps, Programming, Tips, ElasticSearch, SSH, Docker",
+    "description": "And keeping all the fun Often, we choose convenience over security. Many modern tools such as MongoDB and ElasticSearch, have grown in popularity, partly because of their easy-to-set-up-and-tinker-with nature. Just spin off an instance, point your browser to the right URL and you&#x27;re ready to start sending queries. Unfortunately, one",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://www.preslav.me/"
+    }
+}
+    </script>
+
+    <script type="text/javascript" src="/public/ghost-sdk.min.js?v=f593a58c15"></script>
+<script type="text/javascript">
+ghost.init({
+	clientId: "ghost-frontend",
+	clientSecret: "69f974d18b04"
+});
+</script>
+    <meta name="generator" content="Ghost 1.10" />
+    <link rel="alternate" type="application/rss+xml" title="Preslav&#x27;s Thoughts and Ramblings" href="http://www.preslav.me/rss/" />
+    <meta name="google-site-verification" content="VMxZ-AarPGjZ4X9IF5BEDXBi0hhGaj-S_Y_dj8WaAOE" />
+
+<style>
+    #disqus_thread {
+        width: 80%;
+        max-width: 710px;
+        margin: 3rem auto 0;
+    }
+    
+    #hellobar-bar .hb-close-wrapper {
+    	display: block #important;
+	}
+</style>
+
+</head>
+<body class="post-template tag-devops tag-programming tag-tips tag-elasticsearch tag-ssh tag-docker">
+
+    <div class="site-wrapper">
+
+        
+
+<header class="site-header outer">
+    <div class="inner">
+        <nav class="site-nav">
+    <div class="site-nav-left">
+                <a class="site-nav-logo" href="http://www.preslav.me">Preslav&#x27;s Thoughts and Ramblings</a>
+            <ul class="nav">
+    <li class="nav-home" role="presentation"><a href="http://www.preslav.me">Home</a></li>
+    <li class="nav-micro" role="presentation"><a href="http://micro.preslav.me/">Micro</a></li>
+    <li class="nav-about-me" role="presentation"><a href="http://www.preslav.me/about-me/">About Me</a></li>
+    <li class="nav-my-work" role="presentation"><a href="http://www.preslav.me/work/">My Work</a></li>
+    <li class="nav-contact" role="presentation"><a href="http://www.preslav.me/contact/">Contact</a></li>
+</ul>
+    </div>
+    <div class="site-nav-right">
+        <div class="social-links">
+                <a class="social-link social-link-tw" href="https://twitter.com/preslavrachev" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+</a>
+        </div>
+            <a class="subscribe-button" href="#subscribe">Subscribe</a>
+    </div>
+</nav>
+    </div>
+</header>
+
+
+<main id="site-main" class="site-main outer" role="main">
+    <div class="inner">
+
+        <article class="post-full post tag-devops tag-programming tag-tips tag-elasticsearch tag-ssh tag-docker no-image">
+
+            <header class="post-full-header">
+                <section class="post-full-meta">
+                    <time class="post-full-meta-date" datetime="2017-02-03">3 February 2017</time>
+                        <span class="date-divider">/</span> <a href="/tag/devops/">DevOps</a>
+                </section>
+                <h1 class="post-full-title">Securing Your ElasticSearch Instances</h1>
+            </header>
+
+
+            <section class="post-full-content">
+                <div class="kg-card-markdown"><h6 id="andkeepingallthefun"><em>And keeping all the fun</em></h6>
+<p>Often, we choose convenience over security. Many modern tools such as MongoDB and ElasticSearch, have grown in popularity, partly because of their easy-to-set-up-and-tinker-with nature. Just spin off an instance, point your browser to the right URL and you're ready to start sending queries.</p>
+<p>Unfortunately, one thing comes for another, and as <a href="http://www.zdnet.com/article/elasticsearch-ransomware-attacks-now-number-in-the-thousands/">we have recently seen</a>, ElasticSearch left in the open can be a vulnerable target, same as MongoDB was in its heyday. In light of the <a href="http://www.zdnet.com/article/elasticsearch-ransomware-attacks-now-number-in-the-thousands/">recent attacks</a> on many open ElasticSearch instances across the world, I decided to share a quick tip on how to set remote ES instances, and keep them secure, by not compromising on its easy-to-play-with nature.</p>
+<h2 id="partonerestrictingtheaccesstoyourelasticsearchinstance">Part One: Restricting the access to your ElasticSearch instance</h2>
+<p>Let's start. The easiest way to setup an ElasticSearch instance is <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html">spinning up a container</a> off the default Docker image:</p>
+<pre><code class="language-bash">docker pull docker.elastic.co/elasticsearch/elasticsearch:&lt;VERSION&gt;
+
+docker run -p 9200:9200 -e &quot;http.host=0.0.0.0&quot; -e &quot;transport.host=127.0.0.1&quot; elasticsearch:&lt;VERSION&gt;
+</code></pre>
+<p>Running the above line, will create a portion mapping from 9200 within the container, to port 9200 on the host machine. One problem here, is that by doing so, it also exposes it to the outside world. This could easily be seen by running <code>iptables</code> against your host:</p>
+<pre><code class="language-bash">iptables -t nat -L -n
+
+# Outputs
+...
+target     prot opt source               destination 
+DNAT       tcp  --  0.0.0.0/0            0.0.0.0/0            tcp dpt:9200 to:XXX.XXX.XXX.XXX:9200
+...
+
+</code></pre>
+<p>Indeed, Docker takes the heavy-lifting of configuring your <code>iptables</code> firewall, but often, this may result in a configuration which is too permissive. What one should do instead, is provide a specific IP to the port mapping configuration. Thankfully, Docker supports this, so all we have to do is modify the above command, using the <code>IP:host_port:container_port</code> mapping:</p>
+<pre><code class="language-bash">docker run -p 127.0.0.1:9200:9200 -e &quot;http.host=0.0.0.0&quot; -e &quot;transport.host=127.0.0.1&quot; elasticsearch:&lt;VERSION&gt;
+</code></pre>
+<p>Perfect! Putting the <code>127.0.0.1</code> will guarantee that the container will be available inside the host machine, but not accessible outside. A quick proof of this is looking at iptables again:</p>
+<pre><code class="language-bash">target     prot opt source               destination 
+DNAT       tcp  --  0.0.0.0/0            127.0.0.1            tcp dpt:9200 to:XX.XXX.XXX.XXX:9200
+</code></pre>
+<p>if you point your browser to port 9200 you should not be able to see anything, but executing `curl 127.0.0.1:9200 from inside the host machine should work.</p>
+<h2 id="parttwoaccessingyourelasticsearchinstanceinasecuremanner">Part Two: Accessing your ElasticSearch instance in a secure manner</h2>
+<p>What we did was all fine, but how do access our ElasticSearch instance now, without losing the flexibility of quickly testing stuff on ES? Easy, using *NIX's Swiss Army Knife -  <code>SSH</code>. SSH is a tool most programmers use on a daily basis, but fewer of them are aware that SSH allows for local and remote port forwarding. What this means is that SSH can create an encrypted tunnel between your machine and your server, such that you can accesses services running remotely, as if they were running on loclahost (local forwarding). There is also remote forwarding, which alternatively, allows you to securely access locally running services from your remote server.</p>
+<p>While we are going to use local port forwarding in our case, both are analogous to each other:</p>
+<pre><code class="language-bash">ssh -L/-R &lt;PORT_ON_THE_LOCAL/REMOTE_MACHINE&gt;:&lt;HOST_TO_MAP_TO&gt;:&lt;PORT_ON_THE_REMOTE/LOCAL_MACHINE&gt; &lt;USERNAME&gt;@&lt;REMOTE_IP&gt;
+</code></pre>
+<p>In our particular case, this looks like this:</p>
+<pre><code class="language-bash">ssh -L 9200:127.0.0.1:9200  user@XX.XXX.XXX.XXX
+</code></pre>
+<p>This basically says: map my local port <code>9200</code> to a call to <code>127.0.0.1:9200</code> on the <code>XX.XXX.XXX.XXX</code> server. When you point your browser to <code>http://localhost:9200</code>, you should now see the familiar ElasticSearch output, even though, as before <code>XX.XXX.XXX.XXX:9200</code> returns nothing. You can let the above command run in the background and run as a daemon.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>These two steps are all you need, in order to keep enjoying the freedom of playing with ElasticSearch or MongoDB, but doing it in a fully secure manner. This recipe can be applied to just about any service. And you really don't need Docker even. The fact that I mentioned it in part one, is because it makes setting up easy, and also saves you from having to tinker with <code>iptables</code> yourselves.</p>
+<p><strong>NOTE:</strong> Please, keep in mind that while running a SSH tunnel is just about perfect for testing and development purposes, it may not be an optimal solution for production. The reason for this is the latency caused by en/decrypting the data and shuffling it through the tunnel. It may become a bottleneck with many incoming requests running in parallel. I am yet to stress-test this setup and will share my observations in a further post. I will also share some more ideas on how to access an ElasticSearch instance securely, but also in a productive manner.</p>
+</div>
+            </section>
+
+            <section class="subscribe-form">
+                <h3 class="subscribe-form-title">Subscribe to Preslav&#x27;s Thoughts and Ramblings</h3>
+                <p>Get the latest posts delivered right to your inbox</p>
+                <form method="post" action="/subscribe/" class="">
+    <input class="confirm" type="hidden" name="confirm"  /><input class="location" type="hidden" name="location"  /><input class="referrer" type="hidden" name="referrer"  />
+
+    <div class="form-group">
+        <input class="subscribe-email" type="email" name="email"  placeholder="youremail@example.com" />
+    </div>
+    <button class="" type="submit"><span>Subscribe</span></button>
+    <script type="text/javascript">(function(g,h,o,s,t){h[o]('.location')[s]=h[o]('.location')[s] || g.location.href;h[o]('.referrer')[s]=h[o]('.referrer')[s] || h.referrer;})(window,document,'querySelector','value');</script>
+</form>
+
+
+            </section>
+
+            <footer class="post-full-footer">
+
+                <section class="author-card">
+                        <img class="author-profile-image" src="//www.gravatar.com/avatar/fd47e6bba1f42ecacf2e7af9e4c5fb52?s&#x3D;250&amp;d&#x3D;mm&amp;r&#x3D;x" alt="Preslav Rachev" />
+                    <section class="author-card-content">
+                        <h4 class="author-card-name"><a href="/">Preslav Rachev</a></h4>
+                            <p>Read <a href="/">more posts</a> by this author.</p>
+                    </section>
+                </section>
+                <div class="post-full-footer-right">
+                    <a class="author-card-button" href="/">Read More</a>
+                </div>
+
+            </footer>
+
+
+        </article>
+
+    </div>
+</main>
+
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+
+                <article class="post-card post tag-longreads tag-lifehacking tag-tips no-image">
+    <div class="post-card-content">
+        <a class="post-card-content-link" href="/2017/02/24/the-simple-advice-to-mastering-reading-running-and-just-about-anything-in-life/">
+            <header class="post-card-header">
+                    <span class="post-card-tags">Longreads</span>
+                <h2 class="post-card-title">The Simple Advice to Mastering Reading, Running, and Just About Anything in Life</h2>
+            </header>
+            <section class="post-card-excerpt">
+                <p>I am a voracious reader, and by reading, I mean, reading real books. Lots of books. A week ago, I ended up discussing the benefits of reading with some guys I know, trying</p>
+            </section>
+        </a>
+        <footer class="post-card-meta">
+                <img class="author-profile-image" src="//www.gravatar.com/avatar/fd47e6bba1f42ecacf2e7af9e4c5fb52?s&#x3D;250&amp;d&#x3D;mm&amp;r&#x3D;x" alt="Preslav Rachev" />
+            <span class="post-card-author"><a href="/author/preslav/">Preslav Rachev</a></span>
+        </footer>
+    </div>
+</article>
+
+                <article class="post-card post tag-evernote tag-longreads">
+        <a class="post-card-image-link" href="/2017/01/12/this-is-why-i-am-not-leaving-evernote/">
+            <div class="post-card-image" style="background-image: url(/content/images/2017/04/4609012836_5884820d48_o.png)"></div>
+        </a>
+    <div class="post-card-content">
+        <a class="post-card-content-link" href="/2017/01/12/this-is-why-i-am-not-leaving-evernote/">
+            <header class="post-card-header">
+                    <span class="post-card-tags">evernote</span>
+                <h2 class="post-card-title">This Is Why I Am Not Leaving Evernote</h2>
+            </header>
+            <section class="post-card-excerpt">
+                <p>… and probably, you won't too That's it, I am leaving Evernote, and never coming back! If I had gotten a dime for every time I said that in my almost 10-year-old history with</p>
+            </section>
+        </a>
+        <footer class="post-card-meta">
+                <img class="author-profile-image" src="//www.gravatar.com/avatar/fd47e6bba1f42ecacf2e7af9e4c5fb52?s&#x3D;250&amp;d&#x3D;mm&amp;r&#x3D;x" alt="Preslav Rachev" />
+            <span class="post-card-author"><a href="/author/preslav/">Preslav Rachev</a></span>
+        </footer>
+    </div>
+</article>
+
+        </div>
+    </div>
+</aside>
+
+<div class="floating-header">
+    <div class="floating-header-logo">
+        <a href="http://www.preslav.me">
+            <span>Preslav&#x27;s Thoughts and Ramblings</span>
+        </a>
+    </div>
+    <span class="floating-header-divider">&mdash;</span>
+    <div class="floating-header-title">Securing Your ElasticSearch Instances</div>
+    <div class="floating-header-share">
+        <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
+</svg>
+</div>
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=Securing%20Your%20ElasticSearch%20Instances&amp;url=http://www.preslav.me/2017/02/03/securing-your-elasticsearch-instances/"
+            onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+        </a>
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=http://www.preslav.me/2017/02/03/securing-your-elasticsearch-instances/"
+            onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
+        </a>
+    </div>
+    <progress class="progress" value="0">
+        <div class="progress-container">
+            <span class="progress-bar"></span>
+        </div>
+    </progress>
+</div>
+
+
+
+
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="http://www.preslav.me">Preslav&#x27;s Thoughts and Ramblings</a> &copy; 2018</section>
+                <nav class="site-footer-nav">
+                    <a href="http://www.preslav.me">Latest Posts</a>
+                    
+                    <a href="https://twitter.com/preslavrachev" target="_blank">Twitter</a>
+                    <a href="https://ghost.org" target="_blank">Ghost</a>
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+
+    <div id="subscribe" class="subscribe-overlay">
+        <a class="subscribe-overlay-close" href="#"></a>
+        <div class="subscribe-overlay-content">
+            <h1 class="subscribe-overlay-title">Subscribe to Preslav&#x27;s Thoughts and Ramblings</h1>
+            <p class="subscribe-overlay-description">Stay up to date! Get all the latest &amp; greatest posts delivered straight to your inbox</p>
+            <form method="post" action="/subscribe/" class="">
+    <input class="confirm" type="hidden" name="confirm"  /><input class="location" type="hidden" name="location"  /><input class="referrer" type="hidden" name="referrer"  />
+
+    <div class="form-group">
+        <input class="subscribe-email" type="email" name="email"  placeholder="youremail@example.com" />
+    </div>
+    <button class="" type="submit"><span>Subscribe</span></button>
+    <script type="text/javascript">(function(g,h,o,s,t){h[o]('.location')[s]=h[o]('.location')[s] || g.location.href;h[o]('.referrer')[s]=h[o]('.referrer')[s] || h.referrer;})(window,document,'querySelector','value');</script>
+</form>
+
+
+        </div>
+    </div>
+
+    <script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js?v=f593a58c15"></script>
+
+
+    <script>
+
+// NOTE: Scroll performance is poor in Safari
+// - this appears to be due to the events firing much more slowly in Safari.
+//   Dropping the scroll event and using only a raf loop results in smoother
+//   scrolling but continuous processing even when not scrolling
+$(document).ready(function () {
+    // Start fitVids
+    var $postContent = $(".post-full-content");
+    $postContent.fitVids();
+    // End fitVids
+
+    var progressBar = document.querySelector('progress');
+    var header = document.querySelector('.floating-header');
+    var title = document.querySelector('.post-full-title');
+
+    var lastScrollY = window.scrollY;
+    var lastWindowHeight = window.innerHeight;
+    var lastDocumentHeight = $(document).height();
+    var ticking = false;
+
+    function onScroll() {
+        lastScrollY = window.scrollY;
+        requestTick();
+    }
+
+    function onResize() {
+        lastWindowHeight = window.innerHeight;
+        lastDocumentHeight = $(document).height();
+        requestTick();
+    }
+
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(update);
+        }
+        ticking = true;
+    }
+
+    function update() {
+        var trigger = title.getBoundingClientRect().top + window.scrollY;
+        var triggerOffset = title.offsetHeight + 35;
+        var progressMax = lastDocumentHeight - lastWindowHeight;
+
+        // show/hide floating header
+        if (lastScrollY >= trigger + triggerOffset) {
+            header.classList.add('floating-active');
+        } else {
+            header.classList.remove('floating-active');
+        }
+
+        progressBar.setAttribute('max', progressMax);
+        progressBar.setAttribute('value', lastScrollY);
+
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', onScroll, {passive: true});
+    window.addEventListener('resize', onResize, false);
+
+    update();
+});
+</script>
+
+
+    <!-- Matomo -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  setTimeout(function() {
+    var u="//preslavrachev.innocraft.cloud/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', '1']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  }, 5000);
+</script>
+<!-- End Matomo Code -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-40565485-7', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+<!-- disqus -->
+<script>
+    var article = $('.post-template main article');
+    var disqusSite = 'preslav';
+    if (article.length) {
+        article.after('<div id="disqus_thread"></div>');
+        (function() {
+            var d = document, s = d.createElement('script');
+            s.src = '//' + disqusSite + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    }
+</script>
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+</body>
+</html>

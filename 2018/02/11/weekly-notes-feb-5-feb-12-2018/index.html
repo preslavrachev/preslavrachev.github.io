@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>Weekly Notes (Feb 05th / Feb 12th, 2018)</title>
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.css?v=f593a58c15" />
+
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="canonical" href="http://www.preslav.me/2018/02/11/weekly-notes-feb-5-feb-12-2018/" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    <link rel="amphtml" href="http://www.preslav.me/2018/02/11/weekly-notes-feb-5-feb-12-2018/amp/" />
+    
+    <meta property="og:site_name" content="Preslav&#x27;s Thoughts and Ramblings" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Weekly Notes (Feb 05th / Feb 12th, 2018)" />
+    <meta property="og:description" content="A rather quiet week this time. I am happy that during the week, I managed to wake early enough every day, and add a bit of work to my personal projects. The Swift version of MediumReader slowly starts getting a shape. Every list item (a.k.a Medium article) now" />
+    <meta property="og:url" content="http://www.preslav.me/2018/02/11/weekly-notes-feb-5-feb-12-2018/" />
+    <meta property="article:published_time" content="2018-02-11T07:16:02.000Z" />
+    <meta property="article:modified_time" content="2018-02-14T06:02:57.000Z" />
+    <meta property="article:tag" content="Weekly Notes" />
+    <meta property="article:tag" content="iOS" />
+    
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Weekly Notes (Feb 05th / Feb 12th, 2018)" />
+    <meta name="twitter:description" content="A rather quiet week this time. I am happy that during the week, I managed to wake early enough every day, and add a bit of work to my personal projects. The Swift version of MediumReader slowly starts getting a shape. Every list item (a.k.a Medium article) now" />
+    <meta name="twitter:url" content="http://www.preslav.me/2018/02/11/weekly-notes-feb-5-feb-12-2018/" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Preslav Rachev" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="Weekly Notes, iOS" />
+    <meta name="twitter:site" content="@preslavrachev" />
+    <meta name="twitter:creator" content="@preslavrachev" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Preslav&#x27;s Thoughts and Ramblings",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "http://www.preslav.me/favicon.ico",
+            "width": 60,
+            "height": 60
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Preslav Rachev",
+        "image": {
+            "@type": "ImageObject",
+            "url": "//www.gravatar.com/avatar/fd47e6bba1f42ecacf2e7af9e4c5fb52?s=250&d=mm&r=x",
+            "width": 250,
+            "height": 250
+        },
+        "url": "http://www.preslav.me/author/preslav/",
+        "sameAs": [
+            "https://twitter.com/preslavrachev"
+        ]
+    },
+    "headline": "Weekly Notes (Feb 05th / Feb 12th, 2018)",
+    "url": "http://www.preslav.me/2018/02/11/weekly-notes-feb-5-feb-12-2018/",
+    "datePublished": "2018-02-11T07:16:02.000Z",
+    "dateModified": "2018-02-14T06:02:57.000Z",
+    "keywords": "Weekly Notes, iOS",
+    "description": "A rather quiet week this time. I am happy that during the week, I managed to wake early enough every day, and add a bit of work to my personal projects. The Swift version of MediumReader slowly starts getting a shape. Every list item (a.k.a Medium article) now",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://www.preslav.me/"
+    }
+}
+    </script>
+
+    <script type="text/javascript" src="/public/ghost-sdk.min.js?v=f593a58c15"></script>
+<script type="text/javascript">
+ghost.init({
+	clientId: "ghost-frontend",
+	clientSecret: "69f974d18b04"
+});
+</script>
+    <meta name="generator" content="Ghost 1.10" />
+    <link rel="alternate" type="application/rss+xml" title="Preslav&#x27;s Thoughts and Ramblings" href="http://www.preslav.me/rss/" />
+    <meta name="google-site-verification" content="VMxZ-AarPGjZ4X9IF5BEDXBi0hhGaj-S_Y_dj8WaAOE" />
+
+<style>
+    #disqus_thread {
+        width: 80%;
+        max-width: 710px;
+        margin: 3rem auto 0;
+    }
+    
+    #hellobar-bar .hb-close-wrapper {
+    	display: block #important;
+	}
+</style>
+
+</head>
+<body class="post-template tag-weekly-notes tag-ios">
+
+    <div class="site-wrapper">
+
+        
+
+<header class="site-header outer">
+    <div class="inner">
+        <nav class="site-nav">
+    <div class="site-nav-left">
+                <a class="site-nav-logo" href="http://www.preslav.me">Preslav&#x27;s Thoughts and Ramblings</a>
+            <ul class="nav">
+    <li class="nav-home" role="presentation"><a href="http://www.preslav.me">Home</a></li>
+    <li class="nav-micro" role="presentation"><a href="http://micro.preslav.me/">Micro</a></li>
+    <li class="nav-about-me" role="presentation"><a href="http://www.preslav.me/about-me/">About Me</a></li>
+    <li class="nav-my-work" role="presentation"><a href="http://www.preslav.me/work/">My Work</a></li>
+    <li class="nav-contact" role="presentation"><a href="http://www.preslav.me/contact/">Contact</a></li>
+</ul>
+    </div>
+    <div class="site-nav-right">
+        <div class="social-links">
+                <a class="social-link social-link-tw" href="https://twitter.com/preslavrachev" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+</a>
+        </div>
+            <a class="subscribe-button" href="#subscribe">Subscribe</a>
+    </div>
+</nav>
+    </div>
+</header>
+
+
+<main id="site-main" class="site-main outer" role="main">
+    <div class="inner">
+
+        <article class="post-full post tag-weekly-notes tag-ios no-image">
+
+            <header class="post-full-header">
+                <section class="post-full-meta">
+                    <time class="post-full-meta-date" datetime="2018-02-11">11 February 2018</time>
+                        <span class="date-divider">/</span> <a href="/tag/weekly-notes/">Weekly Notes</a>
+                </section>
+                <h1 class="post-full-title">Weekly Notes (Feb 05th / Feb 12th, 2018)</h1>
+            </header>
+
+
+            <section class="post-full-content">
+                <div class="kg-card-markdown"><p>A rather quiet week this time. I am happy that during the week, I managed to wake early enough every day, and add a bit of work to my personal projects.</p>
+<p>The Swift version of <a href="https://github.com/preslavrachev/medium-reader-swift">MediumReader</a> slowly starts getting a shape. Every list item (a.k.a Medium article) now has a “Play/Pause” button, tapping on which causes the content of the article to be fetched and ready for TTS. I had to work on a couple of different iterations to get the communication between the different article view table cells and the main view controller. At first, I let them all <a href="https://github.com/preslavrachev/medium-reader-swift/commit/e96ea1faf71e7881c1cabd9dd4601c5ec8f81e59">send and subscribe to</a> <code>NotificationCenter</code> events. It was obvious over-engineering for such a simple scenarios, so eventually, I <a href="https://github.com/preslavrachev/medium-reader-swift/commit/a955d7d0a4a779a347390882ad476fcbb0232d98">implemented</a> simple old-school delegation and now I am ready to move on. Along this journey, I rediscovered an old <a href="https://www.objc.io/issues/7-foundation/communication-patterns/">objc.io</a><a href="https://www.objc.io/issues/7-foundation/communication-patterns/">article</a>  on iOS communication design patterns, which I can't remember how many times I've already referred to, and hotly recommend to junior and expert iOS developers alike.</p>
+<hr>
+<p>On the topic of iOS development, my odyssey with AppCode has so far come to temporary peace. I decided to just stop nagging and see how it behaves throughout a day or two. The catch was kicking XCode completely. This improved build times significantly and my laptop's fan is no longer threatening to break loose. Having XCode lying around previously, resulted in it reindexing the project multiple times for every change I was making within AppCode. I know, having them both open sounds counter-intuitive but I'm sure that this is what most devs do all the time, due to Interface Builder etc.</p>
+<hr>
+<p>For much of the foray I've been doing into iOS, I can hardly say the same about my machine learning endeavors of the past week. Every time I get to convince myself that I know enough about one ML topic or another, the more experiments I keep running, the more the results of those experiments try to refute much of what I have learned. My favorite ML toy of recent - decision trees, are not an exception. Though the idea of a decision tree seems simple enough for starters, early results can be optimistically misleading. Accuracy high enough to make you believe you have discovered a statistical edge against the market. Hooked on early success? Now, run the same experiment 10 times with pretty much similar data, only to find results ranging from one end of the spectrum to the other. All of them with the same high levels of accuracy 🤦</p>
+<p>I have some assumptions as to why this might be happening and will be checking each of them out in the next days. Here are a few ideas as to what might be happening:</p>
+<ul>
+<li>High accuracy is almost always a sign of overfitting, and decision trees are very prone to it.
+<ul>
+<li>Keeping a balance between accuracy and tree size is important. <a href="https://en.wikipedia.org/wiki/Pruning_(decision_trees)">Proper pruning</a> is key.</li>
+</ul>
+</li>
+<li>Never share the same data in both training and testing! Much of the early excitement can come from the fact that you've been using the same data set the whole time. Measuring accuracy must always be done on data that the tree has not seen before</li>
+<li>Check out how the gini coeffiecent gets computed. The gini coefficient the main measurement which helps decide the order in which a decision tree gets built, as well as the thresholds for every split. It might well be the case that feature splitting is inefficient, which would require searching for better ones.</li>
+</ul>
+<p>I will stop here, because this might as well be a topic for a whole different post.</p>
+<hr>
+<p>For a change, I switched back to improving my old clustering algorithm. I reduced the number of clusters to 3 (from 9) and moved over to using the features I had previously discovered as part of my decision tree experiment. The result is a much nicer-looking portrayal of the different phases that prices switch between, as they move up and down.</p>
+<p>To illustrate the recent progress, I picked up one of my favorite altcoins, called Lisk (no trade recommendations given, always do your own research!), which has had a spectacular run to the top these past few days. One can clearly see the green segments at the bottom, which the algorithm has marked as good entry points for buying.</p>
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">What an incredible journey to the top it has been for Lisk ($LSK) lately! <a href="https://t.co/xMcwpJKbNm">pic.twitter.com/xMcwpJKbNm</a></p>&mdash; Preslav Rachev (@preslavrachev) <a href="https://twitter.com/preslavrachev/status/962386415664365570?ref_src=twsrc%5Etfw">February 10, 2018</a></blockquote>
+<hr>
+<h2 id="linksandotherresources">Links and other resources</h2>
+<h3 id="iosdevelopment">iOS Development</h3>
+<p><a href="https://www.objc.io/issues/7-foundation/communication-patterns/">Communication Patterns | ObjC.io</a><br>
+The aforementioned article. This one should be in the reference arsenal of every iOS developer.</p>
+<blockquote>
+<p>Every application consists of multiple more or less loosely coupled objects that need to communicate with each other to get the job done. In this article we will go through all the available options, look at examples how they are used within Apple’s frameworks, and extract some best-practice recommendations regarding when you should use which mechanism</p>
+</blockquote>
+<p><a href="https://www.natashatherobot.com/ios-weak-delegates-swift/">iOS: How To Make Weak Delegates In Swift | Natasha The Robot</a><br>
+By making references to delegates <strong>weak</strong> (where possible), we can avoid retain cycles and possible memory leaks</p>
+<h3 id="tweets">Tweets</h3>
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">This is Mr. Square, my custom Animoji built using AvatarKit. <a href="https://t.co/zKhTLBrH5v">pic.twitter.com/zKhTLBrH5v</a></p>&mdash; Simon B. Støvring (@simonbs) <a href="https://twitter.com/simonbs/status/962423836556910593?ref_src=twsrc%5Etfw">February 10, 2018</a></blockquote>
+</div>
+            </section>
+
+            <section class="subscribe-form">
+                <h3 class="subscribe-form-title">Subscribe to Preslav&#x27;s Thoughts and Ramblings</h3>
+                <p>Get the latest posts delivered right to your inbox</p>
+                <form method="post" action="/subscribe/" class="">
+    <input class="confirm" type="hidden" name="confirm"  /><input class="location" type="hidden" name="location"  /><input class="referrer" type="hidden" name="referrer"  />
+
+    <div class="form-group">
+        <input class="subscribe-email" type="email" name="email"  placeholder="youremail@example.com" />
+    </div>
+    <button class="" type="submit"><span>Subscribe</span></button>
+    <script type="text/javascript">(function(g,h,o,s,t){h[o]('.location')[s]=h[o]('.location')[s] || g.location.href;h[o]('.referrer')[s]=h[o]('.referrer')[s] || h.referrer;})(window,document,'querySelector','value');</script>
+</form>
+
+
+            </section>
+
+            <footer class="post-full-footer">
+
+                <section class="author-card">
+                        <img class="author-profile-image" src="//www.gravatar.com/avatar/fd47e6bba1f42ecacf2e7af9e4c5fb52?s&#x3D;250&amp;d&#x3D;mm&amp;r&#x3D;x" alt="Preslav Rachev" />
+                    <section class="author-card-content">
+                        <h4 class="author-card-name"><a href="/">Preslav Rachev</a></h4>
+                            <p>Read <a href="/">more posts</a> by this author.</p>
+                    </section>
+                </section>
+                <div class="post-full-footer-right">
+                    <a class="author-card-button" href="/">Read More</a>
+                </div>
+
+            </footer>
+
+
+        </article>
+
+    </div>
+</main>
+
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+                <article class="read-next-card"
+                            style="background-image: url(/content/images/2018/03/pablo-heimplatz-243278-unsplash.jpg)"
+                >
+                    <header class="read-next-card-header">
+                        <small class="read-next-card-header-sitetitle">&mdash; Preslav&#x27;s Thoughts and Ramblings &mdash;</small>
+                        <h3 class="read-next-card-header-title"><a href="/tag/weekly-notes/">Weekly Notes</a></h3>
+                    </header>
+                    <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
+</div>
+                    <div class="read-next-card-content">
+                        <ul>
+                            <li><a href="/2018/04/22/longest-running-distance-23-1km/">Longest Running Distance! (23.1km)</a></li>
+                            <li><a href="/2018/04/01/weekly-bits-and-pieces/">Weekly Bits and Pieces</a></li>
+                            <li><a href="/2018/03/19/weekly-notes-2/">Weekly Notes</a></li>
+                        </ul>
+                    </div>
+                    <footer class="read-next-card-footer">
+                        <a href="/tag/weekly-notes/">See all 8 posts →</a>
+                    </footer>
+                </article>
+
+                <article class="post-card post tag-tips tag-programming tag-python tag-pandas tag-data-science no-image">
+    <div class="post-card-content">
+        <a class="post-card-content-link" href="/2018/02/16/pandas-finding-a-row-where-one-of-its-values-is-at-a-minimum-maximum/">
+            <header class="post-card-header">
+                    <span class="post-card-tags">Tips</span>
+                <h2 class="post-card-title">[Pandas] Finding a Row Where One of Its Values Is at a Minimum/Maximum</h2>
+            </header>
+            <section class="post-card-excerpt">
+                <p>Often, we will want to get to get a specific row, which marks the minimum or maximum of one of its columns. Let's suppose we have the SF Salaries dataset from Kaggle. We</p>
+            </section>
+        </a>
+        <footer class="post-card-meta">
+                <img class="author-profile-image" src="//www.gravatar.com/avatar/fd47e6bba1f42ecacf2e7af9e4c5fb52?s&#x3D;250&amp;d&#x3D;mm&amp;r&#x3D;x" alt="Preslav Rachev" />
+            <span class="post-card-author"><a href="/author/preslav/">Preslav Rachev</a></span>
+        </footer>
+    </div>
+</article>
+
+                <article class="post-card post tag-weekly-notes no-image">
+    <div class="post-card-content">
+        <a class="post-card-content-link" href="/2018/02/04/weekly-notes-jan-29-feb-04-2018/">
+            <header class="post-card-header">
+                    <span class="post-card-tags">Weekly Notes</span>
+                <h2 class="post-card-title">Weekly Notes (Jan 29th / Feb 04th, 2018)</h2>
+            </header>
+            <section class="post-card-excerpt">
+                <p>It was quite an eventful week. On Thursday, I visited Elastic{ON} conference in Munich, organised by Elastic. It was a chance to meet like-minded people and see what the industry is up</p>
+            </section>
+        </a>
+        <footer class="post-card-meta">
+                <img class="author-profile-image" src="//www.gravatar.com/avatar/fd47e6bba1f42ecacf2e7af9e4c5fb52?s&#x3D;250&amp;d&#x3D;mm&amp;r&#x3D;x" alt="Preslav Rachev" />
+            <span class="post-card-author"><a href="/author/preslav/">Preslav Rachev</a></span>
+        </footer>
+    </div>
+</article>
+
+        </div>
+    </div>
+</aside>
+
+<div class="floating-header">
+    <div class="floating-header-logo">
+        <a href="http://www.preslav.me">
+            <span>Preslav&#x27;s Thoughts and Ramblings</span>
+        </a>
+    </div>
+    <span class="floating-header-divider">&mdash;</span>
+    <div class="floating-header-title">Weekly Notes (Feb 05th / Feb 12th, 2018)</div>
+    <div class="floating-header-share">
+        <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
+</svg>
+</div>
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=Weekly%20Notes%20(Feb%2005th%20%2F%20Feb%2012th%2C%202018)&amp;url=http://www.preslav.me/2018/02/11/weekly-notes-feb-5-feb-12-2018/"
+            onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+        </a>
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=http://www.preslav.me/2018/02/11/weekly-notes-feb-5-feb-12-2018/"
+            onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
+        </a>
+    </div>
+    <progress class="progress" value="0">
+        <div class="progress-container">
+            <span class="progress-bar"></span>
+        </div>
+    </progress>
+</div>
+
+
+
+
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="http://www.preslav.me">Preslav&#x27;s Thoughts and Ramblings</a> &copy; 2018</section>
+                <nav class="site-footer-nav">
+                    <a href="http://www.preslav.me">Latest Posts</a>
+                    
+                    <a href="https://twitter.com/preslavrachev" target="_blank">Twitter</a>
+                    <a href="https://ghost.org" target="_blank">Ghost</a>
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+
+    <div id="subscribe" class="subscribe-overlay">
+        <a class="subscribe-overlay-close" href="#"></a>
+        <div class="subscribe-overlay-content">
+            <h1 class="subscribe-overlay-title">Subscribe to Preslav&#x27;s Thoughts and Ramblings</h1>
+            <p class="subscribe-overlay-description">Stay up to date! Get all the latest &amp; greatest posts delivered straight to your inbox</p>
+            <form method="post" action="/subscribe/" class="">
+    <input class="confirm" type="hidden" name="confirm"  /><input class="location" type="hidden" name="location"  /><input class="referrer" type="hidden" name="referrer"  />
+
+    <div class="form-group">
+        <input class="subscribe-email" type="email" name="email"  placeholder="youremail@example.com" />
+    </div>
+    <button class="" type="submit"><span>Subscribe</span></button>
+    <script type="text/javascript">(function(g,h,o,s,t){h[o]('.location')[s]=h[o]('.location')[s] || g.location.href;h[o]('.referrer')[s]=h[o]('.referrer')[s] || h.referrer;})(window,document,'querySelector','value');</script>
+</form>
+
+
+        </div>
+    </div>
+
+    <script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js?v=f593a58c15"></script>
+
+
+    <script>
+
+// NOTE: Scroll performance is poor in Safari
+// - this appears to be due to the events firing much more slowly in Safari.
+//   Dropping the scroll event and using only a raf loop results in smoother
+//   scrolling but continuous processing even when not scrolling
+$(document).ready(function () {
+    // Start fitVids
+    var $postContent = $(".post-full-content");
+    $postContent.fitVids();
+    // End fitVids
+
+    var progressBar = document.querySelector('progress');
+    var header = document.querySelector('.floating-header');
+    var title = document.querySelector('.post-full-title');
+
+    var lastScrollY = window.scrollY;
+    var lastWindowHeight = window.innerHeight;
+    var lastDocumentHeight = $(document).height();
+    var ticking = false;
+
+    function onScroll() {
+        lastScrollY = window.scrollY;
+        requestTick();
+    }
+
+    function onResize() {
+        lastWindowHeight = window.innerHeight;
+        lastDocumentHeight = $(document).height();
+        requestTick();
+    }
+
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(update);
+        }
+        ticking = true;
+    }
+
+    function update() {
+        var trigger = title.getBoundingClientRect().top + window.scrollY;
+        var triggerOffset = title.offsetHeight + 35;
+        var progressMax = lastDocumentHeight - lastWindowHeight;
+
+        // show/hide floating header
+        if (lastScrollY >= trigger + triggerOffset) {
+            header.classList.add('floating-active');
+        } else {
+            header.classList.remove('floating-active');
+        }
+
+        progressBar.setAttribute('max', progressMax);
+        progressBar.setAttribute('value', lastScrollY);
+
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', onScroll, {passive: true});
+    window.addEventListener('resize', onResize, false);
+
+    update();
+});
+</script>
+
+
+    <!-- Matomo -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  setTimeout(function() {
+    var u="//preslavrachev.innocraft.cloud/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', '1']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  }, 5000);
+</script>
+<!-- End Matomo Code -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-40565485-7', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+<!-- disqus -->
+<script>
+    var article = $('.post-template main article');
+    var disqusSite = 'preslav';
+    if (article.length) {
+        article.after('<div id="disqus_thread"></div>');
+        (function() {
+            var d = document, s = d.createElement('script');
+            s.src = '//' + disqusSite + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    }
+</script>
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+</body>
+</html>
