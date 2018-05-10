@@ -35,3 +35,4 @@ theme: "long-haul"
 
 exclude:
   - "themes"
+  - "vendor"
