@@ -1,7 +1,7 @@
 title: Preslav's Thoughts and Ramblings
 description: Finding beauty in everyday things.
 
-url: https://preslavrachev.github.io
+url: https://preslav.me
 baseurl: ""
 paginate_path: "blog/page:num/"
 permalink: :year/:month/:day/:title/
