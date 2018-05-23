@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Live Reloading of Python Modules
+title: Live-reloading of Python Modules in the Python REPL / IPython / Jupyter Console
 date: 2018-04-22 16:17 +0200
 tags:
     - python
@@ -48,5 +48,6 @@ Jupyter comes with a set of extensions only applicable to the Jupyter/iPython se
 This way, as soon as you hit `Save` in your code editor, you should be able to re-run a Jupyter cell or an iPython line again, and if it is calling your  module, it should automatically call the latest version.
 
 ## Links
-[Jupyter / IPython: After editing a module, changes are not effective without kernel restart – Enthought Knowledge Base](https://support.enthought.com/hc/en-us/articles/204469240-Jupyter-IPython-After-editing-a-module-changes-are-not-effective-without-kernel-restart)
-[python - Reloading submodules in IPython - Stack Overflow](https://stackoverflow.com/questions/5364050/reloading-submodules-in-ipython#5399339)
+- [Jupyter / IPython: After editing a module, changes are not effective without kernel restart – Enthought Knowledge Base](https://support.enthought.com/hc/en-us/articles/204469240-Jupyter-IPython-After-editing-a-module-changes-are-not-effective-without-kernel-restart)
+
+- [python - Reloading submodules in IPython - Stack Overflow](https://stackoverflow.com/questions/5364050/reloading-submodules-in-ipython#5399339)
