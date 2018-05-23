@@ -19,10 +19,14 @@ sass:
 navigation:
  - title: Home
    url: /index.html
+ - title: Twitter
+   url: https://twitter.com/preslavrachev
+ - title: GitHub
+   url: https://github.com/preslavrachev  
  - title: About
    url: /about-me
  - title: Contact
-   url: /contact
+   url: https://twitter.com/messages/compose?recipient_id=14154587
 
 social:
    github: preslavrachev
