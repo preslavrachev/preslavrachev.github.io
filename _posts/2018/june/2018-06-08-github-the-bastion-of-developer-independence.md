@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "GitHub: The Bastion of Developer Independence"
-date: '2018-06-08 07:04:00'
+date: '2018-06-08 00:00:00'
 tags: ["GitHub", "Microsoft", "2Cents", "Startups"]
 ---
 
