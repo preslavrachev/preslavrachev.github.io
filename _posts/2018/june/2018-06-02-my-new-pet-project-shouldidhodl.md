@@ -2,7 +2,7 @@
 layout: post
 title: "Introducing My New Pet Project: Should I HODL"
 date: '2018-06-02 00:00:00'
-tags: ["Projects", "My Work", "Machine Learning", "Data Science", "Cryptocurrencies", "Bitcoin"]
+tags: ["Projects", "My Work", "Machine Learning", "Data Science", "Cryptocurrencies", "Bitcoin", "Python"]
 ---
 
 My crypto-obsession from last year might have died down a little, but I still remain a long-term investor and a believer of decentralization. Moreover, it was predicting the crypto market's next move that made dust off some of my old machine learning experiments and gave a fresh boost to my mission of becoming a data scientist. Though one could hardly hear me speak about this coin or that, I am still actively researching and building tools.
@@ -40,6 +40,7 @@ num_periods_in_7d = 2 * 24 * 7 # Once, every 30 min
 df['hilo_7d'] = df['low'].rolling(num_periods_in_7d).mean() /
 df['high].rolling(num_periods_in_7d).mean()
 ```
+
 
 ```python
 # Still volatile, but less so than the current price
@@ -141,7 +142,8 @@ for train_index test_index in KFold(n_splits=10, random_state=None, shuffle=Fals
 #### Note on Random Forests
 Another, perhaps even better option is to use random forests. A random forest is a collection of trees, generated using randomized hyperparameters (max depth, min split count, max number of leaf nodes, etc), to each of which different inputs are fed. When predictions are derived, each tree is asked to predict a result separately, and the majority vote is taken:
 
-![Random Forest Ensemble / Wikimedia](https://upload.wikimedia.org/wikipedia/commons/c/c7/Randomforests_ensemble.gif) Source: [Wikimedia](https://commons.wikimedia.org/wiki/File:Randomforests_ensemble.gif)
+![Random Forest Ensemble / Wikimedia](https://upload.wikimedia.org/wikipedia/commons/c/c7/Randomforests_ensemble.gif) 
+Source: [Wikimedia](https://commons.wikimedia.org/wiki/File:Randomforests_ensemble.gif)
 
 A random forest is trained and tested in pretty much the same way as a single decision tree:
 
