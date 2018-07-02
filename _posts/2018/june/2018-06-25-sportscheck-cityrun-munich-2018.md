@@ -2,8 +2,7 @@
 layout: post
 title: "SportsScheck CityRun Munich 2018 (21K)"
 date: '2018-06-25 00:00:00'
-tags: ["Running"]
-hidden: true
+tags: ["Running", "Munich"]
 ---
 
 For a second year in a row, on Sunday, I participated in a half-marathon organised by the sports retailer SportsScheck. It was also my second official half-marathon this year, after the excruciating run in Schliersee in May.
@@ -26,11 +25,11 @@ P.S. One person whose support has been instrumental for my running perseverance,
 
 ## Photos
 
-![](/assets/2018/june/sportscheck-1.jpg)
+![](/assets/img/2018/june/sportscheck-1.jpg)
 
-![](/assets/2018/june/sportscheck-2.jpg)
+![](/assets/img/2018/june/sportscheck-2.jpg)
 
-![](/assets/2018/june/sportscheck-3.jpg)
+![](/assets/img/2018/june/sportscheck-3.jpg)
 
 
 
