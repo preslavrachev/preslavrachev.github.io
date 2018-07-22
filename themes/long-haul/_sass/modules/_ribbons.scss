@@ -1,0 +1,76 @@
+/* Inspired by https://codepen.io/joeyhoer/pen/amhgz */
+
+@mixin ribbon (
+  $side: left,
+  $background: #000,
+  $padding: null,
+  $to-corner: false
+) {
+  
+  // Reset
+  background: 0 0;
+  padding: 0;
+  
+  // Positioning
+  position: absolute;
+  top: 0;
+  #{$side}: 0;
+  @if $side == 'left' {
+    transform: translatex(-50%) rotate(-45deg);
+  }
+  @elseif $side == 'right' {
+    transform: translatex(50%) rotate(45deg);
+  }
+  transform-origin: 50% 0%;
+  
+  &:before {
+    content: '';
+    display: block;
+    // The height of a right isosceles triangle, is equal to half the length of its base. This is because a right isosceles can be divided eqally into two smaller right isosceles.
+    // Here the base is 100%.
+    padding-top: 50%;
+  }
+  
+  span {
+    display: block;
+    margin-left:  -999px;
+    margin-right: -999px;
+    border-left:  999px solid rgba(0,0,0,0);
+    border-right: 999px solid rgba(0,0,0,0);
+    
+    @if $to-corner == true {
+      border-top: 999px solid rgba(0,0,0,0);
+      margin-top: -999px;
+    }
+    
+    padding: $padding;
+    
+    background: $background;
+  }
+}
+
+//////
+
+/* Make it only visible on tablets and desktop for now */
+@media (max-width: 800px) {
+  .ribbon {
+    display: none;
+  }
+}
+
+.ribbon {
+  @include ribbon($background: #000, $padding: 0.2em);
+  color: #fff;
+  font-family: $sans-serif;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.ribbon.right {
+  left: auto;
+  @include ribbon($side: right, $background: #000, $padding: 0.2em);
+}
+
+.ribbon.corner {
+  @include ribbon($to-corner: true);
+}
