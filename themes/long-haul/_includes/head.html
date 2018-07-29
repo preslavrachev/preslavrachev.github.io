@@ -45,21 +45,6 @@
     <!--[if IE 8]><link rel="stylesheet" href="{{ "/assets/css/ie.css" | prepend: site.baseurl }}"><![endif]-->
     <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
 
-  <script type="text/javascript">
-      // This should effectively disable all cookies being set on this site
-      // It is a bit of a crude measure, but I think it is necessary, having in mind how many seemingly innoncent
-      // 3rd-party scripts and embeds bring in tracking cookies with themselves
-      if(!document.__defineGetter__) {
-        Object.defineProperty(document, 'cookie', {
-            get: function(){return ''},
-            set: function(){return true},
-        });
-      } else {
-        document.__defineGetter__("cookie", function() { return '';} );
-        document.__defineSetter__("cookie", function() {} );
-      }
-  </script>
-
     <!-- Modernizr -->
   <script src="{{ " /assets/js/modernizr.custom.15390.js " | prepend: site.baseurl }}" type="text/javascript"></script>
 </head>
