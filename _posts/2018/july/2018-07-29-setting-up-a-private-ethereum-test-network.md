@@ -25,7 +25,7 @@ Once having Geth installed, we need to set up our genesis file.
 The genesis file is a JSON configuration file that Geth uses to create the [genesis block](https://en.bitcoin.it/wiki/Genesis_block). The purpose of this block is to define the rules of the game, and it looks pretty much like this (thanks, [pyethapp](https://github.com/ethereum/pyethapp/wiki/Custom-genesis)):
 
 ```json
-`{
+{
   "nonce": "0x0000000000000042",
   "difficulty": "0x200",
   "mixhash": "0x0000000000000000000000000000000000000000000000000000000000000000",
@@ -42,7 +42,7 @@ The genesis file is a JSON configuration file that Geth uses to create the [gene
       "balance": "229427000000000000000"
     }
   }
-}`
+}
 ```
 
 It sets up some pretty important basic values such as the starting `difficulty` and the `gas limit`. The difficulty, in PoW sense, dictates the entropy of every next hash, or in simpler terms, how much computational power is needed, in order to solve the next block and guess the combination of `mixhash` and `nonce`. We want it to be sufficiently low on our test net, so that we can “mine” using only a laptop, without waiting or melting it down.

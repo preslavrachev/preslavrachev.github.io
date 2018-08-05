@@ -21,6 +21,3 @@ This is where it all started from. Near the [Zoo in Thalkirchen](https://en.wiki
 ![](/assets/img/2018/august/21kno4-3.jpg)
 And this is how it ended. With my feet dipped into the fresh cold [Eisbach](https://en.wikipedia.org/wiki/Eisbach_(Isar)) water.
 
-
-
-
