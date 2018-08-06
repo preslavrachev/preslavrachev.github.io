@@ -17,6 +17,9 @@ layout: default
   
   {{ content }}
 
+  <hr/>
+  <div id="disqus_thread"></div>
+
   <!-- POST NAVIGATION -->
   <div class="postNav clearfix">
     {% if page.previous.url %} 
@@ -35,3 +38,18 @@ layout: default
     {% endif %} 
   </div>
 </div>
+
+<script>
+  function loadComments() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://{{ site.disqus }}.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    s.setAttribute("async", "");
+    (d.head || d.body).appendChild(s);
+    console.log("Loading the comments");
+    window.removeEventListener("scroll", loadComments);
+  };
+
+  window.addEventListener("scroll", loadComments);
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
