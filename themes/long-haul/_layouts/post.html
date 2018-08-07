@@ -9,7 +9,7 @@ layout: default
   {% endif %}
   <h1 class="postTitle">{{ page.title }}</h1>
   <p class="meta">
-    {{ page.date | date: '%B %d, %Y' }} | <span class="time">{{ page.content | number_of_words | divided_by:180 }}</span> Minute Read
+    {{ page.date | date: '%B %d, %Y' }} | <span class="time">{{ page.content | number_of_words | divided_by:180 }}</span> Minute Read | <a href="#disqus_thread">Comments</a>
     <iframe id="twitter-widget-0" scrolling="no" frameborder="0" allowtransparency="true"
     class="twitter-share-button twitter-share-button-rendered twitter-tweet-button" title="Twitter Tweet Button" src="https://platform.twitter.com/widgets/tweet_button.ed3aa96ee3d5c426af8aa717469ea983.en.html#dnt=false&amp;id=twitter-widget-0&amp;lang=en&amp;size=m&amp;text={{ page.title | append: ' by @preslavrachev' | uri_escape }}&amp;type=share&amp;url={{page.url |absolute_url | uri_escape }}" 
     style="position: static; visibility: visible; width: 61px; height: 20px; margin-top: 0.5rem"></iframe>
