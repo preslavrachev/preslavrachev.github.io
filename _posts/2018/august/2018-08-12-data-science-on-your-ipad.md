@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Data Science on Your iPad"
-date: '2018-08-12 18:00:00'
+date: '2018-08-12 00:00:00'
 tags: ["Programming", "Data Science", "Presentation", "iOS", "iPad", "Meetup", "Munich"]
 image: 2018/august/ipad-header.jpg
 ---
