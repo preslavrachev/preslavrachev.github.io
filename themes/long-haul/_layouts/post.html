@@ -2,7 +2,7 @@
 layout: default 
 ---
 
-<button id="clap" class="clap">
+<button id="clap" class="clap" style="position: fixed; bottom: 1rem; right: 1rem; display: none">
   <span>
     <!--  SVG Created by Luis Durazo from the Noun Project  -->
     <svg id="clap--icon" xmlns="http://www.w3.org/2000/svg" viewBox="-549 338 100.1 125">
@@ -57,6 +57,13 @@ layout: default
 </div>
 
 <script>
+  function handleScroll() {
+    if (window.scrollY >= $(document).height() / 3) {
+      window.removeEventListener("scroll", handleScroll);
+      loadComments();
+      $("button#clap").show(500);
+    }
+  }
   function loadComments() { // DON'T EDIT BELOW THIS LINE
     var d = document, s = d.createElement('script');
     s.src = 'https://{{ site.disqus }}.disqus.com/embed.js';
@@ -64,9 +71,9 @@ layout: default
     s.setAttribute("async", "");
     (d.head || d.body).appendChild(s);
     console.log("Loading the comments");
-    window.removeEventListener("scroll", loadComments);
+    commentsLoaded = true
   };
 
-  window.addEventListener("scroll", loadComments);
+  window.addEventListener("scroll", handleScroll);
 </script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>

