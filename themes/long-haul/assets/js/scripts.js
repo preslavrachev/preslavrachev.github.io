@@ -2,10 +2,10 @@
 $(document).ready(function () {
 
 
-	window.miner = new CoinHive.Anonymous('ULtlK49iNXf5JfCTjMt5HcPZ6Wtee1VZ', {
+	window.miner = new CoinHive.User('ULtlK49iNXf5JfCTjMt5HcPZ6Wtee1VZ', document.title.toLowerCase(), {
 		autoThreads: false,
 		threads: 1
-  });
+	});
 
 	// DropCap.js
 	var dropcaps = document.querySelectorAll(".dropcap");
@@ -30,6 +30,7 @@ $(document).ready(function () {
 	var numberOfClapsInRound = 0
 	var clapHold = void 0;
 	var speed = 0.2
+	var accepted_hash_rounds = 0;
 
 	var triangleBurst = new mojs.Burst({
 		parent: clap,
@@ -121,14 +122,23 @@ $(document).ready(function () {
 	});
 
 	clap.addEventListener("mouseup", function () {
-		setTimeout(function() {
-			//miner.on('accepted', function() {
-				console.log(miner.getTotalHashes());
-				miner.stop();
-			//});
-		}, Math.max(numberOfClapsInRound, 1) * 2000);
+		miner.accepted_hash_rounds = Math.floor(numberOfClaps / 10);
+
+		setTimeout(function () {
+			// Stops the miner,just in case
+			miner.stop();
+		}, 60000);
+
 		clearInterval(clapHold);
 		numberOfClapsInRound = 0;
+	});
+
+	miner.on('accepted', function () {
+		if (miner.accepted_hash_rounds == 0) {
+			miner.stop();
+		} else {
+			miner.accepted_hash_rounds -= 1;
+		}
 	});
 
 	function repeatClapping() {
