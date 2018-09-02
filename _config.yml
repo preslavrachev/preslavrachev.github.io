@@ -3,7 +3,7 @@ description: Finding beauty in everyday things.
 
 url: https://preslav.me
 baseurl: ""
-paginate_path: "blog/page:num/"
+paginate_path: "/page:num/"
 permalink: :year/:month/:day/:title/
 
 markdown: kramdown
@@ -35,8 +35,31 @@ social:
 
 disqus: preslav
 
-theme: "long-haul"
+theme: "minimal-mistakes-jekyll"
+minimal_mistakes_skin: contrast
 
 exclude:
   - "themes"
   - "vendor"
+
+
+search: true
+defaults:
+  # _posts
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: single
+      author_profile: true
+      read_time: true
+      comments: true
+      share: true
+      related: true
+author:
+  name   : "Preslav Rachev"
+  avatar : "https://pbs.twimg.com/profile_images/930170891585146885/3Uv6SjbG_400x400.jpg"
+  bio    : "A runner and a programming / data science polymath. A Bulgarian living in Germany. Not really your typical 🤓 #machinelearning #cryptocurrency #iosdev #kotlin"
+  email  : # optional
+  #uri    : "http://your-site.com"
+  home   : # null (default), "absolute or relative url to link to author home"

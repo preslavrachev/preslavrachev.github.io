@@ -1,24 +1,15 @@
 ---
-layout: default
+layout: home
+author_profile: true
+excerpt: The mind ramblings of a genuinely curious individual
+header:
+  overlay_image: https://images.unsplash.com/photo-1535469145415-8e49c30eae75?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=70d7e4b770c0869c422d2b97fb17a138&auto=format&fit=crop&w=1280&q=80
+  overlay_filter: 0.5
+  caption: "Photo credit: [**@behzen / Unsplash**](https://unsplash.com/photos/x86l1G0G4BQ)"
 ---
-
-<div class="home" id="home">
-  <ul class="posts noList">
-    {% for post in paginator.posts %}
-      <li>
-        <span class="date">{{ post.date | date: '%B %d, %Y' }}</span>
-        <h3><a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></h3>
-        <p class="description">{% if post.description %}{{ post.description | strip_html | strip_newlines | truncate: 300 }}{% else %}{{ post.content | strip_html | strip_newlines | truncate: 300 }}{% endif %}</p>
-      </li>
-    {% endfor %}
-  </ul>
-  <!-- Pagination links -->
-  <div class="pagination">
-    {% if paginator.previous_page %}
-      <a href="{{ paginator.previous_page_path | prepend: site.baseurl }}" class="previous button__outline">Newer Posts</a> 
-    {% endif %}
-    {% if paginator.next_page %}
-      <a href="{{ paginator.next_page_path | prepend: site.baseurl }}" class="next button__outline">Older Posts</a>
-    {% endif %}
-  </div>
-</div>
+Testit
+<style>
+  .page__hero--overlay {
+    height: 300px !important;
+  }
+</style>
