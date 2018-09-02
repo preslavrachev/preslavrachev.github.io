@@ -1,0 +1,64 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+---
+
+@charset "utf-8";
+
+$serif              : "PT Serif", Georgia, Times, serif;
+//$sans-serif-narrow  : "PT Sans Narrow", -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", Arial, sans-serif;
+
+$global-font-family : $serif;
+//$header-font-family : $sans-serif-narrow;
+
+$right-sidebar-width-narrow: 150px;
+$right-sidebar-width: 250px;
+$right-sidebar-width-wide: 350px;
+
+@import "minimal-mistakes/variables";
+@import "minimal-mistakes/vendor/breakpoint/breakpoint";
+
+//@import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
+@import "minimal-mistakes"; // main partials
+
+html {
+    /* apply a natural box layout model to all elements */
+    box-sizing: border-box;
+    background-color: $background-color;
+    font-size: 16px;
+  
+    @include breakpoint($medium) {
+      font-size: 18px;
+    }
+  
+    @include breakpoint($large) {
+      font-size: 19px;
+    }
+  
+    @include breakpoint($x-large) {
+      font-size: 20px;
+    }
+}
+
+body {
+    line-height: 1.6em;
+}
+
+iframe {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.page__lead {
+    font-family: $sans-serif
+}
+
+.notice {
+    font-family: $sans-serif
+}
+
+.archive__item-excerpt {
+    line-height: 1.2em;
+}
+
+

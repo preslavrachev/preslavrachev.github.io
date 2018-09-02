@@ -1,15 +1,18 @@
 ---
-layout: post
+layout: single
 title: "Xamarin Impressions"
 date: '2018-08-27 00:00:00'
 tags: ["iOS", "Programming", "Xamarin", "Microsoft"]
+toc: true
 ---
 
-###### NOTE: The following post discusses the impressions I got with the [Xamarin.iOS](https://docs.microsoft.com/en-us/xamarin/ios/) framework alone. It was intended to discuss only the iOS development support and not the cross-platform capabilities of the Xamarin suite. It is also worth mentioning that Xamarin.iOS has nothing to do with [Xamarin.Forms](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/), a ver different beast focusing on cross-platform development, and a point of lots of online debating.
+**NOTE:** The following post discusses the impressions I got with the [Xamarin.iOS](https://docs.microsoft.com/en-us/xamarin/ios/) framework alone. It was intended to discuss only the iOS development support and not the cross-platform capabilities of the Xamarin suite. It is also worth mentioning that Xamarin.iOS has nothing to do with [Xamarin.Forms](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/), a ver different beast focusing on cross-platform development, and a point of lots of online debating. 
+{: .notice}
 
 Yes, you heard it right. I tried Xamarin this weekend. I got an idea for a new app a few weeks ago, and I was interested to try something different. Plus, for those that have read my [recent post about React Native](https://preslav.me/2018/07/20/dont-throw-react-native-away-just-yet/), I am always on the hunt for ways to avoid Apple's prescribed choice of language or tooling, so Xamarin seemed like a nice opportunity to do so.
 
-###### SIDENOTE: There is no such thing like avoiding Apple's tech or tooling, but one can abstract it away as much as possible, in the name a better and faster developer experience.
+**SIDENOTE:** There is no such thing like avoiding Apple's tech or tooling, but one can abstract it away as much as possible, in the name a better and faster developer experience.
+{: .notice}
 
 ## Basic Info
 Xamarin dates back to 2011, originally developed by [@migueldeicaza](https://twitter.com/migueldeicaza) and his team, who also brought [Mono](https://en.wikipedia.org/wiki/Mono_(software)), Mono for Android and MonoTouch to the world, and was later bought by Microsoft in 2016. Currently, Xamarin gets shipped together with every version of Visual Studio, including the [VS Community Edition](https://visualstudio.microsoft.com/vs/community/), allowing [individuals or small non-enterprise teams](https://visualstudio.microsoft.com/license-terms/mlt553321/) to create mobile apps and distribute across the app stores, free of charge.
@@ -22,7 +25,8 @@ In short, Xamarin facilitates the development of cross-platform applications usi
 
 As for iOS, Xamarin actually impressed me from the get go. It is hard to believe it for someone who has not tried Xamarin, but developing an iOS app does not differ much syntactically from using Swift. On top, one gets to use C#, a very mature and elegant language, albeit somewhat restricted by the platform availability that the .NET framework gets to run on.
 
-###### SIDENOTE: During and shortly after my Undergraduate years about a decade ago, I spent a significant part of my programming practice writing C# and working with the .NET. My opinion can thus be a little bit biased, due to my nostalgia of that time. 
+**SIDENOTE:** During and shortly after my Undergraduate years about a decade ago, I spent a significant part of my programming practice writing C# and working with the .NET. My opinion can thus be a little bit biased, due to my nostalgia of that time.
+{: .notice}
 
 A Xamarin developer has the entire CocoaTouch SDK at their disposal, plus a fairly good deal of the .NET framework. Bringing-in new .NET libraries is a piece of cake, and as long as they don't rely on any platform or OS-specific SDKs, they work out of the box. Bridging to 3rd-party Objective-C libraries is also not a problem. There is a tool made available from Microsoft, called [Objective Sharipie](https://docs.microsoft.com/en-us/xamarin/cross-platform/macios/binding/objective-sharpie/), which facilitates the bridging, by parsing Objective-C headers and creating a C# bridge. Bridging to Swift libraries is not officially supported for various reasons, but also not impossible. There are a [few caveats](https://medium.com/@Flash3001/binding-swift-libraries-xamarin-ios-ff32adbc7c76) to keep in mind before bridging a Swift library, so I can't be 100% certain that the bridging effort will be always worth it. It's ... just there for those who are ready to spend some effort and take advantage of it. 
 

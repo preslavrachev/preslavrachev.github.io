@@ -1,6 +1,5 @@
 ---
-layout: default
-title: About Me
+layout: single
 ---
 
 ## Hi there 👋🏼 My name is Preslav.

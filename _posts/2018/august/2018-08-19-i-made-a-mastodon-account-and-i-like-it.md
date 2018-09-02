@@ -1,9 +1,11 @@
 ---
-layout: post
+layout: single
 title: "I Made a Mastodon Account and so Far I like It"
 date: '2018-08-19 00:00:00'
 tags: ["Mastodon", "Twitter", "Social Media", "Social Networking", "2Cents"]
 image: 2018/august/mastodon-wallpaper.png
+toc: true
+wide: true
 ---
 
 So, you might have heard about [Mastodon](https://joinmastodon.org/). A micro-blogging alternative to Twitter, boasting itself for being 100% open-source, and for its decentralised nature.
@@ -24,7 +26,10 @@ The last 24 hours of being on Mastodon feel very much like the early days of Twi
 
 With the frequent downtimes and shakes inside the team, something else slowly started going away - the community spirit of the early days. Don't get me wrong, I still use Twitter on a daily basis, though somewhat automatically. The community is still there, it is just that the bond and the friendly chatter of the early days is gone. It got replaced by incessant advertising (which I fervently mute on every occasion) and a stream of posts clearly optimised to target eyeballs and clicks. And of course, the clear statement to third-party app developers. I still remember the early days, when budding app or Web developers would use the developer-friendly Twitter API and boast with the client they developed. In no small terms, it was the developers who helped Twitter reach mainstream fame, and it is just sad that things had to reach their current state. Looks like my thoughts are being shared by the community as well:
 
-<iframe src="https://mastodon.social/@bastianallgeier/100577435213222907/embed" class="mastodon-embed" style="max-width: 100%; border: 0" width="400"></iframe><script src="https://mastodon.social/embed.js" async="async"></script>
+<figure>
+    <iframe src="https://mastodon.social/@bastianallgeier/100577435213222907/embed" class="mastodon-embed" style="max-width: 100%; border: 0" width="400"></iframe><script src="https://mastodon.social/embed.js" async="async"></script>
+</figure>
+
 
 
 Back to Mastodon, during my first 24 hours, I spent an hour browsing among the many available alternative clients for both iOS and macOS. I spent another couple of hours waiting for the instance to go back up after a maintenance downtime that took longer than expected. Everyone else in my place would have backed off and left, but this just raised my level of excitement. It showed me that there is some actual work needed, and that the community is working hard to put things where they should be. I can but clap in respect to the efforts that the maintainers of my instance put yesterday, in order to ensure its stability in the upcoming days and weeks. During the hours when the instance was online, I managed to set up a few friendships and engaged in some interesting discussions. It seems like a bunch fo the early spirit is back. People reply more often, and others join in to the chat. I have the feeling that conversations flow more easily.
