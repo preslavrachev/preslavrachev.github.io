@@ -6,3 +6,5 @@ fields:
 - type: boolean
   name: share
   label: Share on social media
+pages:
+- _posts/forestry-post.md
