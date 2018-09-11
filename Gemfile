@@ -8,3 +8,4 @@ gem "support-for"
 gem "amp-jekyll"
 #gem "long-haul", :path => "themes/long-haul"
 gem "minimal-mistakes-jekyll"
+gem 'jekyll-archives', group: [:jekyll_plugins]

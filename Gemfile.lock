@@ -43,6 +43,8 @@ GEM
       pathutil (~> 0.9)
       rouge (>= 1.7, < 4)
       safe_yaml (~> 1.0)
+    jekyll-archives (2.1.1)
+      jekyll (>= 2.4)
     jekyll-compose (0.8.0)
       jekyll (~> 3.0)
     jekyll-data (1.0.0)
@@ -113,6 +115,7 @@ PLATFORMS
 DEPENDENCIES
   amp-jekyll
   jekyll
+  jekyll-archives
   jekyll-compose
   jekyll-paginate
   jekyll-sitemap
