@@ -1,4 +1,6 @@
 language: ruby
+before_script:
+- export TZ=Europe/Berlin
 script:
 - "./deploy.sh"
 env:
