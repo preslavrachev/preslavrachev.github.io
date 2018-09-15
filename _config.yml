@@ -47,6 +47,11 @@ comments:
   disqus:
     shortname: "preslav"
 
+collections:
+  micro:
+    output: true
+    permalink: /:collection/:path/    
+
 search: true
 defaults:
   # _posts
@@ -64,6 +69,15 @@ defaults:
         overlay_filter: 0.5
         show_overlay_excerpt: false
         overlay_image: https://source.unsplash.com/collection/1922729/1280x400
+  # _micro
+  - scope:
+      path: ""
+      type: micro
+    values:
+      layout: single_micro
+      author_profile: true
+      share: true
+      title: ""    
 
 author:
   name   : "Preslav Rachev"
