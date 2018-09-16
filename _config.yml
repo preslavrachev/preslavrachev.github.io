@@ -105,3 +105,8 @@ jekyll-archives:
   permalinks:
     category: /categories/:name/
     tag: /tags/:name/
+
+feed:
+  collections:
+    micro:
+      path: "/micro.xml"    
