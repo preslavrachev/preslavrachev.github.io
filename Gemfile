@@ -9,3 +9,4 @@ gem "amp-jekyll"
 #gem "long-haul", :path => "themes/long-haul"
 gem "minimal-mistakes-jekyll"
 gem 'jekyll-archives', group: [:jekyll_plugins]
+gem "jekyll-feed", "~> 0.11.0", group: [:jekyll_plugins]
