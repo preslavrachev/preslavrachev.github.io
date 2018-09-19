@@ -1,5 +1,7 @@
 main:
   - title: "About"
     url: /about-me
+  - title: "Microblog"
+    url: /micro  
   - title: "Archive"
     url: /archive

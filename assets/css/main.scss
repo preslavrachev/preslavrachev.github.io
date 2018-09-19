@@ -61,4 +61,13 @@ iframe, twitterwidget {
     line-height: 1.2em;
 }
 
-
+/* 
+* This is a workaround to preserve the original color of the theme, as I had installed it
+* In the current version (4.13.0), the following piece of code is no loger present
+* https://github.com/mmistakes/minimal-mistakes/commit/9c657249555b82d85ff32757f4479b0c299ffecb#diff-df2ef02f87a2779d3af52ab701838406
+*/
+.archive__item-title {
+    a {	
+        color: inherit;	
+    }
+}
