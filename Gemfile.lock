@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/preslavrachev/minimal-mistakes.git
-  revision: e8548c159bc3d56f9f811440f840f85b47252028
+  revision: f86ecbfa62a8dede7a0ce414d08502d252db7071
   branch: microformats
   specs:
     minimal-mistakes-jekyll (4.13.0)
