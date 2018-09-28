@@ -7,7 +7,8 @@ read_time: true
 comments: true
 share: true
 related: true
-tags: ["Programming", "Java", "Tips"]
+category: "Programming"
+tags: ["Java", "Tips"]
 header:
   show_overlay_excerpt: true
 ---
