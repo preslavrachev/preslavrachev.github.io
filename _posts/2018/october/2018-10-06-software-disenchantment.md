@@ -23,7 +23,7 @@ Why stuff became so bloated, can be partially traced to the fact that hardware h
 This has a lot more to do with our evolution as humans, rather than with anything else. If you have ever seen or studied Maslow’s *Hierarchy of Needs*, you’ll know exactly what I mean. As organisms begin to evolve, their priorities shift away from the basics (food, toilet, reproduction, etc) to more abstract and higher-level goals. Having found a way to satisfy their basic needs, humanity started looking beyond the individual, and into the surrounding world. Having somewhat become the masters of their surroundings, humans started looking even further - into the deep unknowns of the Universe. All with one goal in mind - discovering who they are and what their purpose in life really is.
 
 
-![Maslow’s Hierarchy of Needs](https://en.m.wikipedia.org/wiki/File:MaslowsHierarchyOfNeeds.svg)
+![Maslow’s Hierarchy of Needs](https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/MaslowsHierarchyOfNeeds.svg/800px-MaslowsHierarchyOfNeeds.svg.png)
 {: .align-center.u-photo}
 source [Wikipedia](https://en.wikipedia.org/wiki/Maslow%27s_hierarchy_of_needs)
 
