@@ -29,4 +29,10 @@ But the journey does not stop here. The following couple of days, I took the ear
 
 ![](/assets/img/2018/10072056-5.jpeg)
 
-Only a day after my return to Munich, I visited a concert by [Maluma](https://en.wikipedia.org/wiki/Maluma_(singer)
+Only a day after my return to Munich, I visited a concert by [Maluma](https://bit.ly/2y5QyCW), a Colombian reggaeton singer, who, as I heard from my fiancée, is quite the thing these days. Long story short, I went with her and wasn’t disappointed. I have to admit, despite his music being directed at ladies (who represented roughly 80% of the audience yesterday) the guy is quite a good performer.
+
+![](/assets/img/2018/10072056-1.jpeg)
+
+So this was, in short, my crazy week on the road. I did not manage to run while on the go, but I walked quite significantly. According to my watch, I have managed to walk between 13km and 14km per day, on average. Today, I topped the distance with a 10km run.
+
+That said, the week is finally about to end.
