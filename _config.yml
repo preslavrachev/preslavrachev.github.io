@@ -69,6 +69,9 @@ defaults:
         overlay_filter: 0.5
         show_overlay_excerpt: false
         overlay_image: https://source.unsplash.com/collection/1922729/1280x400
+        actions:
+          - label: "Discuss this post on Twitter"
+            url: "https://twitter.com/intent/tweet?text=Hey%2C%20%40preslavrachev%2C%20I%20have%20been%20reading%20your%20blog%3A%20https%3A%2F%2Fpreslav.me%2F"
   # _micro
   - scope:
       path: ""
