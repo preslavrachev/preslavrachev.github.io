@@ -7,4 +7,5 @@ fields:
   name: share
   label: Share on social media
 pages:
+- _posts/2018/november/kotlinconf-2018-recap.md
 - _posts/forestry-post.md
