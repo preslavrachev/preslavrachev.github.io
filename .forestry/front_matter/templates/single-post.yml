@@ -3,9 +3,17 @@ label: Single Post
 hide_body: false
 is_partial: false
 fields:
+- type: datetime
+  name: date
+  label: Pub Date
+  config:
+    required: true
 - type: boolean
   name: share
   label: Share on social media
+- type: blocks
+  label: Header
+  name: header
 pages:
 - _posts/2018/november/2018-11-01-kotlinconf-2018-recap.md
 - _posts/forestry-post.md
