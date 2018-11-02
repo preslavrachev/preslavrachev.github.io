@@ -11,6 +11,7 @@ fields:
 - type: boolean
   name: share
   label: Share on social media
+- type: tag_list
 - type: blocks
   template_types:
   - header
