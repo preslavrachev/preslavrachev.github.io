@@ -11,6 +11,11 @@ fields:
 - type: boolean
   name: share
   label: Share on social media
+- type: blocks
+  template_types:
+  - header
+  label: Header
+  name: header
 pages:
 - _posts/2018/november/2018-11-01-kotlinconf-2018-recap.md
 - _posts/forestry-post.md
