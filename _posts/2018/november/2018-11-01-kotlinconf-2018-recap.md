@@ -18,10 +18,14 @@ The long-awaited [Kotlin 1.3](https://blog.jetbrains.com/kotlin/2018/10/kotlin-1
 
 Best of all, we can finally use one IDE to develop on Kotlin for all platforms. We no longer need to jump back and forth over to CLion or AppCode, unless we really want to. Otherwise, IntelliJ (incl. the free Community Edition) should be more than sufficient. For finalizing the iOS builds, we ultimately still need XCode, but that’s not something under JetBrains’ control.
 
+## The Topics
 > There is a DSL for that…
 
 Of course, topics revolved mainly around the major announcements, including, but not limited to, the development of DSLs (domain-specific languages) for solving just about any problem, multi-platform development (for the JVM, JavaScript, or natively on iOS, macOS, Linux, etc), server-side, data science and machine learning, and of course, many, many sessions targeting Android.
 
+### Kotlin on the Server
 I was happy to see the [involvement of Google into Kotlin](https://cloud.google.com/kotlin/), beyond Android. In fact, there was quite a Google presence from the Cloud Platform team. Other companies, well-known using Kotlin on the server-side, such as German online-bank [N26](https://n26.com/), were there to inspire the community.
 
 If you are interested into trying out Kotlin on the server, I recommend these three talks straight out of KotlinConf:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/8xfQA10Cd7g" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
