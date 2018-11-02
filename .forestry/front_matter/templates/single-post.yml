@@ -7,6 +7,11 @@ fields:
   label: Layout
   name: layout
   default: post
+  hidden: true
+  config:
+    wysiwyg: false
+    schema:
+      format: markdown
 - type: datetime
   name: date
   label: Pub Date
