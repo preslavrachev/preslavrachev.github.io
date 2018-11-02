@@ -15,7 +15,14 @@ fields:
 - type: boolean
   name: share
   label: Share on social media
+- type: text
+  name: category
+  label: Category
+  config:
+    required: true
 - type: tag_list
+  label: Tags
+  name: tags
 - type: blocks
   template_types:
   - header
