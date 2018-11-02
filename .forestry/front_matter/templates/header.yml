@@ -2,4 +2,8 @@
 label: Header
 hide_body: false
 is_partial: true
-fields: []
+fields:
+- type: number
+  name: overlay_filter
+  label: Overlay Filter
+  default: '1.0'
