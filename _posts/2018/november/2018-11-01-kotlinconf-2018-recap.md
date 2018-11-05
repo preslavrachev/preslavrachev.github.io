@@ -45,3 +45,19 @@ I was happy to see the [involvement of Google into Kotlin](https://cloud.google.
 If you are interested into trying out Kotlin on the server, I recommend these three talks straight out of KotlinConf:
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/8xfQA10Cd7g" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+for a quick overview, before checking out [http4k](https://www.http4k.org/)
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/vdxBNh1qx1Q" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+and, of course, [Ktor](https://ktor.io/)
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/V4PS3IjIzlw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+### Kotlin for Data Science
+Ever since I tried Kotlin for the first time, I was convinced that it has the potential to outpace Scala, and stand shoulder to shoulder with Python and R, as the dominant programming language trio of data science. Although we are still far from this moment of ultimate bliss, the efforts of folks like [Holger Brand](https://twitter.com/holgerbrandl) l and [Thomas Nield](https://twitter.com/thomasnield9727) (and to some limited extend, my humble self) can only help reassure that there is a serious potential, which is about to unroll in the coming months.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/yjVW6uCmVBA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/-zTqtEcnM7A" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
