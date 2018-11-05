@@ -44,7 +44,4 @@ I was happy to see the [involvement of Google into Kotlin](https://cloud.google.
 
 If you are interested into trying out Kotlin on the server, I recommend these three talks straight out of KotlinConf:
 
-<figure>
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/8xfQA10Cd7g" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-  <figcaption>Komparing Kotlin Server Frameworks | Ken Yee</figcaption>
-</figure>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/8xfQA10Cd7g" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
