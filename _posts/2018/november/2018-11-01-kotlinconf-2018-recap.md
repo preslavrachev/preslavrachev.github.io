@@ -63,3 +63,8 @@ Ever since I tried Kotlin for the first time, I was convinced that it has the po
 
 ### Kotlin … Everywhere (Even on iOS)
 Yes, the big keyword of KotlinConf 2018 was */multi-platform/*. Although not a silver bullet, and definitely not a write-once-deploy-everywhere proposition, multi-platform has the potential to help developers organize big projects around modules that can be shared across platforms. Kotlin/Native makes this possible. Unlike Flutter or React Native, however, the idea is not to overtake the UI development of each platform, but rather, deliver the native look-and-experience, by sharing the shared business logic across.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/UyTBXEZ983g" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Dul17VSiejo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
