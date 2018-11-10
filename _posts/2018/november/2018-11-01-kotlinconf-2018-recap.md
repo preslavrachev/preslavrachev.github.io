@@ -85,3 +85,5 @@ Of course, all of these things are normal for such a big conference, and compare
 ***
 
 **KotlinConf 2018 through the eyes of others**
+
+[KotlinConf 18 | Zsmb](https://zsmb.co/kotlinconf-18)
