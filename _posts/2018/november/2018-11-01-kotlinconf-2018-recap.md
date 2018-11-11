@@ -2,10 +2,7 @@
 title: KotlinConf 2018 Recap
 date: 2018-11-01 20:17
 share: true
-header:
-- template: header
-  overlay_filter: '1.0'
-  overlay_image: "/assets/img/2018/november/TJ1QL%KsR8evl5H0LZjn4Q_thumb_14ca.jpg"
+header: []
 undefined:
 - Kotlin
 - Conference
