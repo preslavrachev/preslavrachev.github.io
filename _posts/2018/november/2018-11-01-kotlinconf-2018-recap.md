@@ -86,4 +86,6 @@ Of course, all of these things are normal for such a big conference, and compare
 **KotlinConf 2018 through the eyes of others**
 
 [KotlinConf 18 | Zsmb](https://zsmb.co/kotlinconf-18)
+
+
 [Krazy KotlinConf 2018 in Amsterdam](https://developer.epages.com/blog/events/krazy-kotlinconf-2018-in-amsterdam/)
