@@ -16,18 +16,6 @@ sass:
   sass_dir: _sass
   style: compressed
 
-navigation:
- - title: Home
-   url: /index.html
- - title: Twitter
-   url: https://twitter.com/preslavrachev
- - title: GitHub
-   url: https://github.com/preslavrachev  
- - title: About
-   url: /about-me
- - title: Contact
-   url: https://twitter.com/messages/compose?recipient_id=14154587
-
 social:
    github: preslavrachev
    twitter: preslavrachev
@@ -72,6 +60,8 @@ defaults:
         actions:
           - label: "Discuss this post on Twitter"
             url: "https://twitter.com/intent/tweet?text=Hey%2C%20%40preslavrachev%2C%20I%20have%20been%20reading%20your%20blog%3A%20https%3A%2F%2Fpreslav.me%2F"
+          - label: "Contact me"
+            url: "/contact"  
   # _micro
   - scope:
       path: ""
