@@ -5,3 +5,5 @@ main:
     url: /micro  
   - title: "Archive"
     url: /archive
+  - title: "Contact"
+    url: /contact  
