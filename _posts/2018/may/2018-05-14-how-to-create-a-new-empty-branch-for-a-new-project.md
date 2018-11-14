@@ -23,4 +23,5 @@ This will create a **new branch with no parents**. You can then clean the workin
 ```bash
 git rm --cached -r .
 ```
-and add the new files you only want to have there
+
+and add the new files you only want to have there.
