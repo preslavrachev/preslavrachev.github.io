@@ -35,6 +35,6 @@ fields:
   label: Header
   name: header
 pages:
-- _posts/2018/may/how-to-create-a-new-empty-branch-for-a-new-project.md
+- _posts/2018/may/2018-05-14-how-to-create-a-new-empty-branch-for-a-new-project.md
 - _posts/2018/november/2018-11-01-kotlinconf-2018-recap.md
 - _posts/forestry-post.md
