@@ -20,3 +20,5 @@ _NOTE: TWIL (This Week I Learned) is a collection of interesting findings I disc
 > Package for interpreting scikit-learn's decision tree and random forest predictions. Allows decomposing each prediction into bias and feature contribution components as described in [http://blog.datadive.net/interpreting-random-forests/](http://blog.datadive.net/interpreting-random-forests/ "http://blog.datadive.net/interpreting-random-forests/"). For a dataset with `n` features, each prediction on the dataset is decomposed as `prediction = bias + feature_1_contribution + ... + feature_n_contribution`.
 
 [Interpreting random forests](https://blog.datadive.net/interpreting-random-forests/ "Interpreting random forests")
+
+[Intuitive Interpretation of Random Forest](https://medium.com/usf-msds/intuitive-interpretation-of-random-forest-2238687cae45)
