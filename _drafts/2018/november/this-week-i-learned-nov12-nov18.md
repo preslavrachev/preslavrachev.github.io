@@ -15,4 +15,4 @@ _NOTE: TWIL (This Week I Learned) is a collection of interesting findings I disc
 
 ### Interpreting Random Forests
 
-[https://github.com/andosa/treeinterpreter](https://github.com/andosa/treeinterpreter "andosa/treeinterpreter")
+[andosa/treeinterpreter](https://github.com/andosa/treeinterpreter "andosa/treeinterpreter")
