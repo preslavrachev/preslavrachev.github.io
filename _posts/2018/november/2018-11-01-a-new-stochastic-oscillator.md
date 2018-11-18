@@ -19,7 +19,7 @@ In most domains of science (and I dare consider market technical analysis a form
 
 There is a popular belief that regularly investing small sums of money over a longer period of time (also known as Dollar-Cost-Averaging) is a relatively low-risk way of beating the market. I decided to try and use machine learning to beat DCA, by keeping the same manner of investing small amounts of money over time.
 
-### Stochastic Oscillator
+## Stochastic Oscillator
 
 The Stochastic Oscillator (STOCH) is a momentum indicator, which compares the current price of an asset to the minimum and maximum price of the same asset over a period of time (usually, 14 or 30 days). The formula for calculating STOCH is very simple:
 
@@ -41,7 +41,7 @@ I calculated both for a 3-month period of the price Bitcoin/Euro. My version (bl
 
 Comparing my version of STOCH with what should be its correct calculation
 
-### Trading Performance
+## Trading Performance
 
 I would not have started writing about this, if it weren’t for the interesting trading performance I got from this supposedly “wrong” STOCH indicator. Let’s put this into perspective. I tested four different strategies on the Bitcoin/Euro price starting from Jan 01, 2018. All the strategies involved investing EUR 50 at the beginning of each month, and except DCA (the blue line), all others included selling of Bitcoin at various points and in varying magnitudes. This is what I got:
 
@@ -63,7 +63,7 @@ Coincidence? Yet, stretching the start of the trading period as far back as the 
 
 Comparing trading strategy performance: Jan 2016 — Nov 2018
 
-### Conclusion
+## Conclusion
 
 Whether this is a good strategy or not, it is hard for me to judge, based on only the limited data I used. Frankly, as mentioned at the top of the article, its goal is to share some of my learning with the community, and not to give trading advice of any sort.
 
