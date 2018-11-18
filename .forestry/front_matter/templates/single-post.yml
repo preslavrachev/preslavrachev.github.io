@@ -30,7 +30,6 @@ fields:
   label: Tags
   name: tags
 pages:
-- _posts/2018/november/this-week-i-learned-nov12-nov18.md
 - _posts/2018/may/2018-05-14-how-to-create-a-new-empty-branch-for-a-new-project.md
 - _posts/2018/november/2018-11-01-kotlinconf-2018-recap.md
 - _posts/forestry-post.md
