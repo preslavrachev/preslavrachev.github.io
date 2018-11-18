@@ -25,9 +25,7 @@ The Stochastic Oscillator (STOCH) is a momentum indicator, which compares the cu
 
     current_price - min_price / max_price - min_price
 
-![](https://cdn-images-1.medium.com/max/1600/0*4GYfb9dMM0CGxKgA.gif)
-
-source: [Investopedia](https://www.investopedia.com/terms/s/stochasticoscillator.asp)
+{% include figure image_path="https://cdn-images-1.medium.com/max/1600/0*4GYfb9dMM0CGxKgA.gif" alt="this is a placeholder image" caption="source: Investopedia" %}
 
 By giving out a ratio between 0 and 100 (or 0 and 1, depending on how you frame it), STOCH is a simple way of identifying if the market has been _oversold_(perhaps, time to buy), or _overbought_ (perhaps, time to sell). There are many who believe that the oversold threshold should be 20, and the overbought one around 80.
 
