@@ -74,7 +74,7 @@ defaults:
 
 author:
   name   : "Preslav Rachev"
-  avatar : "https://pbs.twimg.com/profile_images/1044556606460100623/ukmK4mgY_400x400.jpg"
+  avatar : "/assets/img/avatar.jpg"
   bio    : "A runner and a programming / data science polymath. A Bulgarian living in Germany. Not really your typical 🤓 #machinelearning #cryptocurrency #iosdev #kotlin"
   email  : # optional
   #uri    : "http://your-site.com"
