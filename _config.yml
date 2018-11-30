@@ -16,18 +16,6 @@ sass:
   sass_dir: _sass
   style: compressed
 
-navigation:
- - title: Home
-   url: /index.html
- - title: Twitter
-   url: https://twitter.com/preslavrachev
- - title: GitHub
-   url: https://github.com/preslavrachev  
- - title: About
-   url: /about-me
- - title: Contact
-   url: https://twitter.com/messages/compose?recipient_id=14154587
-
 social:
    github: preslavrachev
    twitter: preslavrachev
@@ -72,6 +60,8 @@ defaults:
         actions:
           - label: "Discuss this post on Twitter"
             url: "https://twitter.com/intent/tweet?text=Hey%2C%20%40preslavrachev%2C%20I%20have%20been%20reading%20your%20blog%3A%20https%3A%2F%2Fpreslav.me%2F"
+          - label: "Contact me"
+            url: "/contact"  
   # _micro
   - scope:
       path: ""
@@ -84,11 +74,12 @@ defaults:
 
 author:
   name   : "Preslav Rachev"
-  avatar : "https://pbs.twimg.com/profile_images/1044556606460100623/ukmK4mgY_400x400.jpg"
-  bio    : "A runner and a programming / data science polymath. A Bulgarian living in Germany. Not really your typical 🤓 #machinelearning #cryptocurrency #iosdev #kotlin"
+  avatar : "/assets/img/avatar.jpg"
+  bio    : "A runner and a programming / data science polymath. A Bulgarian living in Germany. Bridging the gap between software engineering and data science." 
   email  : # optional
   #uri    : "http://your-site.com"
   home   : # null (default), "absolute or relative url to link to author home"
+  location: "Munich, Germany"
 
 teaser: https://source.unsplash.com/collection/1922729/400x300
 

@@ -1,0 +1,15 @@
+---
+label: Header
+hide_body: false
+is_partial: true
+fields:
+- type: number
+  name: overlay_filter
+  label: Overlay Filter
+  default: '1.0'
+- type: text
+  name: overlay_image
+  label: Overlay Image
+- type: file
+  name: overlay_image_upload
+  label: Overlay Image Upload
