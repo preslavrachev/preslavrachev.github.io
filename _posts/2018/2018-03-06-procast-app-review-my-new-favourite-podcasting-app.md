@@ -8,6 +8,8 @@ tags:
 - podcasting
 ---
 
+<a href="https://itunes.apple.com/de/app/procast-die-podcast-app/id1215380730?mt=8" style="display:block;overflow:hidden;background:url(https://linkmaker.itunes.apple.com/en-us/badge-lrg.svg?releaseDate=2017-10-10&kind=iossoftware&bubble=ios_apps) no-repeat;width:135px;height:40px; border-bottom:none; margin-bottom: 1rem"></a>
+
 I am a podcast addict. Unlike the typical podcast listener, I spend a good portion of my day (mostly while commuting, walking, running, doing house chores, etc) listening to one of the close to a hundred different podcasts I’m subscribed to. When you get to that state of heavy podcast listening, you quickly realize that you need something more out of the stock Podcasts app. 
 
 For a very long while, I have used an app called [Pocket Casts](http://www.shiftyjelly.com/android/pocketcasts). It is a major podcast player on both Android and iOS. Besides seamless syncing across platforms, Pocket Casts offers the more advanced listener features such as:
