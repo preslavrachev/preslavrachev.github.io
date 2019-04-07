@@ -1,0 +1,808 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.13.0 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>TWIL Jul30-Aug05 2018 - Preslav Rachev</title>
+<meta name="description" content="NOTE: TWIL (This Week I Learned) is a collection of interesting findings I discover on a week-by-week basis. Hosted and curated entirely on GitHub.">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Preslav Rachev">
+<meta property="og:title" content="TWIL Jul30-Aug05 2018">
+<meta property="og:url" content="https://preslav.me/2018/08/05/twil/">
+
+
+  <meta property="og:description" content="NOTE: TWIL (This Week I Learned) is a collection of interesting findings I discover on a week-by-week basis. Hosted and curated entirely on GitHub.">
+
+
+
+  <meta property="og:image" content="https://source.unsplash.com/collection/1922729/1280x400">
+
+
+
+
+
+  <meta property="article:published_time" content="2018-08-05T13:40:00+02:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://preslav.me/2018/08/05/twil/">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "Your Name",
+      "url": "https://preslav.me",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Preslav Rachev Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    
+    <link rel="amphtml" href="https://preslav.me/amp/2018/08/05/twil.html">
+
+
+<link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700|PT+Serif:400,700,400italic" rel="stylesheet" type="text/css">
+<link href="https://micro.blog/preslavrachev" rel="me" />
+  </head>
+
+  <body class="layout--post">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/">Preslav Rachev</a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/about-me" >About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/micro" >Microblog</a>
+            </li><li class="masthead__menu-item">
+              <a href="/archive" >Archive</a>
+            </li><li class="masthead__menu-item">
+              <a href="/contact" >Contact</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style=" background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://source.unsplash.com/collection/1922729/1280x400');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          TWIL Jul30-Aug05 2018
+
+        
+      </h1>
+      
+      
+        <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  6 minute read
+</p>
+      
+      
+      
+        <p>
+        
+          
+          <a href="https://twitter.com/intent/tweet?text=Hey%2C%20%40preslavrachev%2C%20I%20have%20been%20reading%20your%20blog%3A%20https%3A%2F%2Fpreslav.me%2F" class="btn btn--light-outline btn--large">Discuss this post on Twitter</a>
+        
+          
+          <a href="/contact" class="btn btn--light-outline btn--large">Contact me</a>
+        
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div class="h-card" itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img class="u-photo" src="/assets/img/avatar.jpg" alt="Preslav Rachev" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Preslav Rachev</h3>
+    
+    
+      <p class="author__bio p-note" itemprop="description">
+        A runner and a programming / data science polymath. A Bulgarian living in Germany. Bridging the gap between software engineering and data science.
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Munich, Germany</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li>
+  <a href="https://twitter.com/preslavrachev" itemprop="sameAs">
+    <i class="fab fa-fw fa-twitter" aria-hidden="true"></i> Twitter
+  </a>
+  <a href="https://github.com/preslavrachev" itemprop="sameAs">
+    <i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub
+  </a>
+  <a href="https://www.linkedin.com/in/preslavrachev/" itemprop="sameAs">
+    <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn
+  </a>
+  <a href="https://mastodon.technology/@preslavrachev" itemprop="sameAs">
+    <i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon
+  </a>
+</li>
+
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="TWIL Jul30-Aug05 2018">
+    <meta itemprop="description" content="NOTE: TWIL (This Week I Learned) is a collection of interesting findings I discover on a week-by-week basis. Hosted and curated entirely on GitHub.">
+    <meta itemprop="datePublished" content="August 05, 2018">
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p><em>NOTE: TWIL (This Week I Learned) is a collection of interesting findings I discover on a week-by-week basis. Hosted and curated entirely on <a href="https://github.com/preslavrachev/twil">GitHub</a>.</em></p>
+
+<hr />
+
+<h1 id="programming">Programming</h1>
+<h2 id="articles">Articles</h2>
+<h3 id="teenager-finds-classical-alternative-to-quantum-recommendation-algorithm"><a href="https://www.quantamagazine.org/teenager-finds-classical-alternative-to-quantum-recommendation-algorithm-20180731/">Teenager Finds Classical Alternative to Quantum Recommendation Algorithm</a></h3>
+<blockquote>
+  <p>A teenager from Texas has taken quantum computing down a notch. In a paper posted <a href="https://arxiv.org/abs/1807.04271">online</a> earlier this month, 18-year-old Ewin Tang proved that ordinary computers can solve an important computing problem with performance potentially <a href="https://www.quantamagazine.org/quantum-computers-struggle-against-classical-algorithms-20180201/">comparable to that of a quantum computer</a>.</p>
+</blockquote>
+
+<p>An interesting thing to read on my next commute. I have built one or two recommender systems before, but none of them has ever reached such a scale, as to need a quantum computer.</p>
+
+<p>Be sure to check out the <a href="https://www.reddit.com/r/programming/comments/93tpbn/18yearold_ewin_tang_has_proven_that_classical/">comment thread on Reddit</a> too.</p>
+
+<h3 id="javascript--more-puppy-love-less-fatigue"><a href="https://christianheilmann.com/2018/07/30/javascript-more-puppy-love-less-fatigue/">JavaScript : more puppy love, less fatigue</a></h3>
+<blockquote>
+  <p>instead of showing people the current form of JavaScript as a matured, highly domesticated and fierce animal, we should get people to know it as a puppy. That’s how I got to know it. Instead of wondering what packages to install and how to set up my server to run it, I wanted to grab it, cuddle it, play with it and — above all — protect it and its surroundings from harm.</p>
+</blockquote>
+
+<blockquote>
+  <p>[…]</p>
+</blockquote>
+
+<blockquote>
+  <p>JavaScript these days has matured a lot and will become even better. It can not, though, when we hide its inner workings away from the next generation of developers. You don’t need to be a JavaScript language expert to use it. But it may be a good idea to tell the story how we got to where we are rather than asking people to blindly use what’s on offer right now. It is easy to get disappointed, discouraged and overwhelmed by something new when you use it without understanding it. You also don’t dare to say you don’t get it when your peers all stroke their chins pretending to know everything.</p>
+</blockquote>
+
+<p>I try to approach every new technology the same way - starting from a small subset of the core features, and MVP of sorts. I gradually expand my comprehension of the technology as I move along. If you start the opposite way, you risk approaching the so called phase of “fatigue” that burns many neophyte programmers out.</p>
+
+<h2 id="data-science">Data Science</h2>
+<p>This photo here is a good example that no data should be thrown away as useless, before looking at the whole picture:
+<img src="https://i.redd.it/t3nr9mlmpod11.png" alt="" />
+It might as well be the case that a perfectly classifiable dimension lies hidden away from our eyes, we just have to discover it. This is why proper visualisation and dimensionality reduction techniques such as PCA are so important.</p>
+
+<p>via <a href="https://kyso.io/Don/a-journey-to-the-tip-of-neural-networks">A Journey to the Tip of Neural Networks</a></p>
+
+<p>P.S: I also opened a <a href="https://www.reddit.com/r/learnmachinelearning/comments/93zez7/before_you_claim_that_your_data_is_not_worth/">Reddit thread</a> for a further discussion on this topic.</p>
+
+<h2 id="ios-development">iOS Development</h2>
+<h3 id="articles-1">Articles</h3>
+<h4 id="stop-using-nsnotificationcenter--david-nixs-blog"><a href="https://davidnix.io/post/stop-using-nsnotificationcenter/">Stop Using NSNotificationCenter | David Nix’s Blog</a></h4>
+<p>A good article discussing <code class="highlighter-rouge">NSNotificationCenter</code> and why it’s use throughout our iOS apps should be reduced. It presents a serious dependency on the underlying imlementation of the OS, can become a performance bottleneck, and also makes the flow of data difficult to follow, especially in bigger iOS projects. The author gives a few alternatives, starting from basic DI (dependency injection), DI with delegation, and KVO (ky-value observables).</p>
+
+<h3 id="github-projects">GitHub Projects</h3>
+<h4 id="willowtreeappshyperion-ios"><a href="https://github.com/willowtreeapps/Hyperion-iOS">willowtreeapps/Hyperion-iOS</a></h4>
+<blockquote>
+  <p>Hyperion is a hidden plugin drawer that can easily be integrated into any app. The drawer sits discreetly 🙊 under the app so that it is there when you need it and out of the way when you don’t. Hyperion plugins are designed to make inspection of your app quick and simple.</p>
+</blockquote>
+
+<p><img src="https://camo.githubusercontent.com/8cb3bb1c3e575c5f2c9e93bca3958e315f874d4d/68747470733a2f2f6d656469612e67697068792e636f6d2f6d656469612f6c344570324a4a32374f6e674b4f726d4d2f67697068792e676966" alt="" /></p>
+
+<h3 id="scoremediafisticuffs"><a href="https://github.com/scoremedia/Fisticuffs">scoremedia/Fisticuffs</a></h3>
+<p>Fisticuffs is a data binding framework for Swift, inspired by <a href="http://knockoutjs.com">Knockout</a> and shares many of the same concepts</p>
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">observable</span> <span class="o">=</span> <span class="kt">Observable</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="p">(</span><span class="s">""</span><span class="p">)</span>
+
+<span class="n">observable</span><span class="o">.</span><span class="n">subscribe</span> <span class="p">{</span> <span class="n">oldValue</span><span class="p">,</span> <span class="n">newValue</span> <span class="k">in</span>
+  <span class="nf">print</span><span class="p">(</span><span class="n">newValue</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="n">observable</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s">"Hello, world"</span>
+<span class="c1">// prints "Hello, world"</span>
+</code></pre></div></div>
+
+<h2 id="python">Python</h2>
+<p>As of v.3.8, Euclidean distance was included in the standard Math library <a href="https://docs.python.org/3.8/library/math.html#math.dist">(<code class="highlighter-rouge">Math.dist</code>)</a>. With that, something like k-nearest neighbours boils down to:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">nsmallest</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">training_data</span><span class="p">,</span> <span class="n">partial</span><span class="p">(</span><span class="n">dist</span><span class="p">,</span> <span class="n">new_point</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p><a href="https://twitter.com/raymondh/status/1025252216985346048">Source: Raymond Hettinger</a></p>
+
+<h2 id="javascript">JavaScript</h2>
+<p><a href="https://medium.com/ft-product-technology/this-one-line-of-javascript-made-ft-com-10-times-slower-5afb02bfd93f">FT.com changed one line in their JavaScript code</a>, and this made the site 10x faster. The culprit was this line of code:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">return</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_data</span><span class="p">));</span>
+</code></pre></div></div>
+
+<p>which is actually not as lame as it looks. It is <a href="https://stackoverflow.com/a/5344074">actually a standard practice</a> on many occasions. The problem is, cloning is synchronous, and when called a few times per page render, it quickly adds up.</p>
+
+<h2 id="misc">Misc</h2>
+<h3 id="googlefilament"><a href="https://github.com/google/filament">google/filament</a></h3>
+<p>Filament is a physically based rendering engine for Android, Linux, macOS and Windows. This rendering engine was designed to be as small as possible and as efficient as possible on Android. Filament is currently used in the Sceneform library both at runtime on Android devices and as the renderer inside the Android Studio plugin.</p>
+
+<h1 id="psychology">Psychology</h1>
+<h2 id="why-does-walking-through-doorways-make-us-forget"><a href="http://www.bbc.com/future/story/20160307-why-does-walking-through-doorways-make-us-forget">Why does walking through doorways make us forget?</a></h2>
+<p>Have you ever crosse th eentire house, entering the living room in a rush, only to reliaze what you were looking for? Yes, you are not alone. In fact, I thought for quite some time that this kind of stuff could happen only to me, and that it was probably caused by some physical malfunction of my body. Turned out that is some pretty normal behaviour, and is what scientists call “The Doorway Effect”. Forgetting about the minor details (e.g. the car keys you were lookign for until about a minute ago), is a natural reaction of the brain trying to cope with the grand masterplan it is working on, called life.</p>
+
+<blockquote>
+  <p>The Doorway Effect occurs because we change both the physical and mental environments, moving to a different room and thinking about different things. That hastily thought up goal, which was probably only one plate among the many we’re trying to spin, gets forgotten when the context changes.</p>
+</blockquote>
+
+<blockquote>
+  <p>It’s a window into how we manage to coordinate complex actions, matching plans with actions in a way that – most of the time – allows us to put the right bricks in the right place to build the cathedral of our lives.</p>
+</blockquote>
+
+<h1 id="books">Books</h1>
+<h2 id="the-lean-startup">The Lean Startup</h2>
+<p>I am currently reading Eric Ries’ <a href="https://amzn.to/2vefp67">“The Lean Startup”</a> and got these two quotes about early adopters, which I wanted to share:</p>
+<blockquote>
+  <p>Early adopters are suspicious of something that is too polished: if it’s ready for everyone to adopt, how much advantage can one get by being early? As a result, additional features or polish beyond what early adopters demand is a form of wasted resources and time.</p>
+</blockquote>
+
+<blockquote>
+  <p>Early adopters use their imagination to fill in what a product is missing. They prefer that state of affairs, because what they care about above all is being the firs</p>
+</blockquote>
+
+<p>Some more notes from the book <a href="https://sivers.org/book/LeanStartup">here</a>.</p>
+
+<h1 id="misc-1">Misc</h1>
+<h2 id="music">Music</h2>
+<blockquote>
+  <p>TIL the first <a href="https://en.wikipedia.org/wiki/Avedis_Zildjian_Company">Zildjian cymbals</a> were created in 1618 by Avedis Zildjian, an alchemist who was looking for a way to turn base metal into gold. He made an alloy of tin, copper, and silver into a sheet of metal, which could make musical sounds without shattering.</p>
+</blockquote>
+
+<p>via <a href="https://www.reddit.com/r/todayilearned/comments/94fvfs/til_the_first_zildjian_cymbals_were_created_in/">Reddit</a></p>
+
+<h2 id="diy">DIY</h2>
+<blockquote>
+  <p>TIL to fight illegal logging of their land, an indigenous community of 9000 members in Guyana built a drone by watching DIY videos on YouTube, to film the illegal activities and report the footage to Guyanese authorities.</p>
+</blockquote>
+
+<p>via <a href="https://www.reddit.com/r/todayilearned/comments/949qyy/til_to_fight_illegal_logging_of_their_land_an/">Reddit</a> and <a href="https://www.atlasobscura.com/articles/how-a-tribe-is-fighting-off-loggers-with-a-drone-they-built-watching-youtube">Atlas Obscura</a></p>
+
+<hr />
+
+<h1 id="final-notes">Final Notes</h1>
+<p>For last, I have reserved a small shameless plug. Last week, I started writing on <a href="https://steemit.com">Steemit</a> and so far, I have posted a couple of things <a href="https://steemit.com/@preslavrachev">on my Steemit blog</a>. So far, I do not want to say whether I like it or not. It’s an interesting medium, but way too dominated by the crypto peeps, hungry for tokens more than for quality content. I am not seeing this as a way of monetising my writing at the moment, just as a crude, early version of Reddit/Twitter/Medium/Tumblr that is worth exploring. That’s it.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/books" class="page__taxonomy-item" rel="tag">Books</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/programming" class="page__taxonomy-item" rel="tag">Programming</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/twil" class="page__taxonomy-item" rel="tag">TWIL</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2018-08-05T13:40:00+02:00">August 05, 2018</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=TWIL+Jul30-Aug05+2018%20https%3A%2F%2Fpreslav.me%2F2018%2F08%2F05%2Ftwil%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fpreslav.me%2F2018%2F08%2F05%2Ftwil%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=https%3A%2F%2Fpreslav.me%2F2018%2F08%2F05%2Ftwil%2F" class="btn btn--google-plus" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Google Plus"><i class="fab fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fpreslav.me%2F2018%2F08%2F05%2Ftwil%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2018/08/04/21k_no_4_self_organized/" class="pagination--pager" title="21K #4 (Self-Organized)
+">Previous</a>
+    
+    
+      <a href="/2018/08/12/data-science-on-your-ipad/" class="pagination--pager" title="Data Science on Your iPad
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+  
+      <h4 class="page__comments-title">Leave a comment</h4>
+      <section id="disqus_thread"></section>
+    
+</div>
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://source.unsplash.com/collection/1922729/400x300"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2018/12/02/designing-well-structured-rest-apis-with-flask-restplus-part-1/" rel="permalink">Designing Well-Structured REST APIs with Flask-RestPlus: Part 1
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  7 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">This is the first part of a two-part series. In this post, I will introduce Flask-RestPlus and demonstrate how to start organising APIs around its simple REST-based conventions. Next time, I will address the topic of request/response marshalling (serialisation) and validation.
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://source.unsplash.com/collection/1922729/400x300"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2018/11/01/kotlinconf-2018-recap/" rel="permalink">KotlinConf 2018 Recap
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">KotlinConf 2018 took place in beautiful Amsterdam at the beginning of October, and this year, I had the chance to attend. Though only the second edition, KotlinConf has already become something of an institution within the developer community. Events like these help you meet the people whose work you admire, but would otherwise not be able to meet in person.
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://source.unsplash.com/collection/1922729/400x300"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2018/11/01/a-new-stochastic-oscillator/" rel="permalink">A New Stochastic Oscillator?
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Disclaimer: None of what follows is an actual trading advice. It was meant to educate and share my learning experience with the community, and should not be used as-is for making assumptions about the future direction of any market asset. Always do your own research!
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://source.unsplash.com/collection/1922729/400x300"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2018/10/07/photo-recap/" rel="permalink">A Photo Recap of the Past Week
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  1 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Wow, it has been quite a week! It is time for a quick photo recap.
+
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><input type="text" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+    <div id="results" class="results"></div></div>
+      </div>
+    
+
+    <div class="page__footer">
+      <footer>
+        <script type="text/javascript">
+  var clicky_custom = clicky_custom || {};
+  clicky_custom.cookies_disable = 1;
+</script>
+<script src="//static.getclicky.com/js" type="text/javascript"></script>
+<script type="text/javascript">try { clicky.init(101131786); } catch (e) { }</script>
+<noscript><p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/101131786ns.gif" /></p></noscript>
+
+<script type="text/javascript">
+  // This should effectively disable all cookies being set on this site
+  // It is a bit of a crude measure, but I think it is necessary, having in mind how many seemingly innoncent
+  // 3rd-party scripts and embeds bring in tracking cookies with themselves
+  if (!document.__defineGetter__) {
+    Object.defineProperty(document, 'cookie', {
+      get: function () { return '' },
+      set: function () { return true },
+    });
+  } else {
+    document.__defineGetter__("cookie", function () { return ''; });
+    document.__defineSetter__("cookie", function () { });
+  }
+</script>
+
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2019 Your Name. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://preslav.me/2018/08/05/twil/";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "/2018/08/05/twil"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://preslav.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+  </body>
+</html>

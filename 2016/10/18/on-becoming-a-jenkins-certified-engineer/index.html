@@ -1,0 +1,701 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.13.0 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>On Becoming a Jenkins Certified Engineer - Preslav Rachev</title>
+<meta name="description" content="A few days ago, I took and successfully passed the first ever Jenkins certification exam designed by CloudBees and administered by Prometric. My interest in DevOps, and especially continuous integration techniques had already grown significantly during the last couple of years. That’s why, when a colleague of mine sent me a link about the certification exam a few months ago, I did not hesitate, but signed up right away. This post describes my personal motivation to go through the certification, and shares a couple of study tips, in case you decide to go through it as well.">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Preslav Rachev">
+<meta property="og:title" content="On Becoming a Jenkins Certified Engineer">
+<meta property="og:url" content="https://preslav.me/2016/10/18/on-becoming-a-jenkins-certified-engineer/">
+
+
+  <meta property="og:description" content="A few days ago, I took and successfully passed the first ever Jenkins certification exam designed by CloudBees and administered by Prometric. My interest in DevOps, and especially continuous integration techniques had already grown significantly during the last couple of years. That’s why, when a colleague of mine sent me a link about the certification exam a few months ago, I did not hesitate, but signed up right away. This post describes my personal motivation to go through the certification, and shares a couple of study tips, in case you decide to go through it as well.">
+
+
+
+  <meta property="og:image" content="https://source.unsplash.com/collection/1922729/1280x400">
+
+
+
+
+
+  <meta property="article:published_time" content="2016-10-18T14:46:00+02:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://preslav.me/2016/10/18/on-becoming-a-jenkins-certified-engineer/">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "Your Name",
+      "url": "https://preslav.me",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Preslav Rachev Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    
+    <link rel="amphtml" href="https://preslav.me/amp/2016/10/18/on-becoming-a-jenkins-certified-engineer.html">
+
+
+<link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700|PT+Serif:400,700,400italic" rel="stylesheet" type="text/css">
+<link href="https://micro.blog/preslavrachev" rel="me" />
+  </head>
+
+  <body class="layout--post">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/">Preslav Rachev</a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/about-me" >About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/micro" >Microblog</a>
+            </li><li class="masthead__menu-item">
+              <a href="/archive" >Archive</a>
+            </li><li class="masthead__menu-item">
+              <a href="/contact" >Contact</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style=" background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://source.unsplash.com/collection/1922729/1280x400');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          On Becoming a Jenkins Certified Engineer
+
+        
+      </h1>
+      
+      
+        <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+</p>
+      
+      
+      
+        <p>
+        
+          
+          <a href="https://twitter.com/intent/tweet?text=Hey%2C%20%40preslavrachev%2C%20I%20have%20been%20reading%20your%20blog%3A%20https%3A%2F%2Fpreslav.me%2F" class="btn btn--light-outline btn--large">Discuss this post on Twitter</a>
+        
+          
+          <a href="/contact" class="btn btn--light-outline btn--large">Contact me</a>
+        
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div class="h-card" itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img class="u-photo" src="/assets/img/avatar.jpg" alt="Preslav Rachev" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Preslav Rachev</h3>
+    
+    
+      <p class="author__bio p-note" itemprop="description">
+        A runner and a programming / data science polymath. A Bulgarian living in Germany. Bridging the gap between software engineering and data science.
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Munich, Germany</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li>
+  <a href="https://twitter.com/preslavrachev" itemprop="sameAs">
+    <i class="fab fa-fw fa-twitter" aria-hidden="true"></i> Twitter
+  </a>
+  <a href="https://github.com/preslavrachev" itemprop="sameAs">
+    <i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub
+  </a>
+  <a href="https://www.linkedin.com/in/preslavrachev/" itemprop="sameAs">
+    <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn
+  </a>
+  <a href="https://mastodon.technology/@preslavrachev" itemprop="sameAs">
+    <i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon
+  </a>
+</li>
+
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="On Becoming a Jenkins Certified Engineer">
+    <meta itemprop="description" content="A few days ago, I took and successfully passed the first ever Jenkins certification exam designed by CloudBees and administered by Prometric. My interest in DevOps, and especially continuous integration techniques had already grown significantly during the last couple of years. That’s why, when a colleague of mine sent me a link about the certification exam a few months ago, I did not hesitate, but signed up right away. This post describes my personal motivation to go through the certification, and shares a couple of study tips, in case you decide to go through it as well.">
+    <meta itemprop="datePublished" content="October 18, 2016">
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>A few days ago, I took and <a href="https://certificates.cloudbees.com/10368095">successfully passed</a> the first ever <a href="https://www.cloudbees.com/jenkins/jenkins-certification">Jenkins certification exam</a> designed by <a href="https://www.cloudbees.com/">CloudBees</a> and administered by <a href="http://www.prometric.com/">Prometric</a>. My interest in DevOps, and especially continuous integration techniques had already grown significantly during the last couple of years. That’s why, when a colleague of mine sent me a link about the certification exam a few months ago, I did not hesitate, but signed up right away. This post describes my personal motivation to go through the certification, and shares a couple of study tips, in case you decide to go through it as well.</p>
+
+<p>First and foremost, I took the exam as an opportunity to learn a bit more about what the technology offers, and potentially, bring in a few ideas for improving our existing pipelines. IMHO, even in large teams nowadays, setting up and maintaining a CI pipeline is still considered something of a “nice-to-have” activity. Everyone in the team is convinced in the benefits of having a CI infrastructure, but time and developer effort constraints often prevail. As a result, usually only a couple of teammates get to work on it, mostly as a side activity. Typically, much of the early work is experimental. It ends up setting a basic pipeline which meets the requirements of the team, but over time, becomes difficult to maintain and extend.</p>
+
+<p>By studying for the exam, I was actually forced to study the (sometimes tedious, but useful) internals of the Jenkins ecosystem. It seems to me that extensibility via third-party plugins is one of the things that still make the already antiquated-looking-like Jenkins, stand apart form the competitors. Taking away the CI server, the bulk of what comprises the Jenkins Universe, are the thousands of open-source and proprietary plugins available. Having so many possible extensions to choose from, can oftentimes be confusing or lead to a system that is impossible to manage. Therefore, a large portion of the exam actually revolves around getting to know some of the tried and proven extensions that most teams might find useful. Among those, I found quite a few, which having really known about them earlier, I’d have saved myself a few roadblocks later on.</p>
+
+<h3 id="is-this-stuff-for-you">Is this stuff for you?</h3>
+
+<p>I can’t really tell you that. For one, you have to have a passion for tinkering with servers and low-level OS administration. This is usually beyond the scope of what developers nowadays are dealing with. My impression so far has been that only a few developers like to mess with stuff which has been traditionally done by system administrators. Based on my experience, you can’t really force developers to like this kind of stuff.</p>
+
+<p>Will this have a direct impact on your salary? Probably not in the moment. As said, if you have been doing this kind of stuff all along already, a certificate will not automatically create a new position for you, making you your own boss or something. That said though, assuming that the number of developers interested in doing DevOps is still quite small, I am sure that the market demand will keep getting stronger in the upcoming years.</p>
+
+<h3 id="a-few-final-tips-and-study-materials">A few final tips and study materials</h3>
+
+<p>Without getting into further details, here are a couple of tips and materials which have helped me get through the exam:</p>
+
+<h4 id="read-some-basic-devops-theory">Read some basic DevOps theory</h4>
+<p>A thing to point out is that although this is a Jenkins certification, it will most likely fit people interested in DevOps. Therefore, one should certainly expect a few more questions testing the theory, so please take look at <a href="https://stackoverflow.com/questions/28608015/continuous-integration-vs-continuous-delivery-vs-continuous-deployment">Continuous Integration vs. Continuous Delivery vs. Continuous Deployment - Stack Overflow</a></p>
+
+<h4 id="instead-of-just-reading-about-jenkins-play-with-it">Instead of just reading about Jenkins, play with it</h4>
+<p>Especially, if you are new to it. Jenkins is free, relatively easy to install and does not consume a lot of resources. Try to install a fresh instance early on and play with, rather than simply memorise the book. Avoid experimenting on a production instance,  because Jenkins could be a bit unforgiving at times - like the one time, I was setting up my permissions, and ended up not being able to log in again. Rookie mistake!  Having your own fresh instance of Jenkins will help learn by crashing as much as you want.</p>
+
+<h4 id="dont-go-to-the-exam-without-having-set-up-at-least-one-pipeline">Don’t go to the exam without having set up at least one pipeline</h4>
+<p>Deployment pipelines are what it is all about in big companies, so you should know, even vaguely how they are set up. Create one the old way (using a graph of connected tasks), and one using the <a href="https://wiki.jenkins.io/display/JENKINS/Pipeline+Plugin">Pipeline plugin</a> (which has become the /defacto/ standard during recent years).</p>
+
+<h4 id="some-materials">Some materials…</h4>
+<p><a href="http://wakaleo.com/books/jenkins-the-definitive-guide">Jenkins: The Definitive Guide</a>: The main book whose content the exam has chosen to follow. This should be your #1 study source. The book is also freely available as a <a href="http://wakaleo.com/books/jenkins-the-definitive-guide/download-jtdg-pdf">PDF</a> copy in the same site.</p>
+
+<p><a href="https://www.selikoff.net/2016/02/27/jeannes-experiences-with-the-jenkins-certification-beta-exam/">jeanne’s experiences with the jenkins certification beta exam / Down Home Country Coding With Scott Selikoff and Jeanne Boyarsky</a> - Jeanne is known to the Java developer community as a programmer and author of many Java certification books. She was also one of the first people to pass the beta of the Jenkins certification exam. It was her <a href="https://www.selikoff.net/wp-content/uploads/2016/02/Study-Notes.docx">study notes</a> and <a href="https://ankiweb.net/shared/info/1993369597">flash cards</a> that I consulted most of the time.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/jenkins" class="page__taxonomy-item" rel="tag">jenkins</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2016-10-18T14:46:00+02:00">October 18, 2016</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=On+Becoming+a+Jenkins+Certified+Engineer%20https%3A%2F%2Fpreslav.me%2F2016%2F10%2F18%2Fon-becoming-a-jenkins-certified-engineer%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fpreslav.me%2F2016%2F10%2F18%2Fon-becoming-a-jenkins-certified-engineer%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=https%3A%2F%2Fpreslav.me%2F2016%2F10%2F18%2Fon-becoming-a-jenkins-certified-engineer%2F" class="btn btn--google-plus" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Google Plus"><i class="fab fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fpreslav.me%2F2016%2F10%2F18%2Fon-becoming-a-jenkins-certified-engineer%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2016/08/07/munich-startup-meetups-ringside-talk-2/" class="pagination--pager" title="Munich Startup Meetups: Ringside Talk #2
+">Previous</a>
+    
+    
+      <a href="/2017/01/12/this-is-why-i-am-not-leaving-evernote/" class="pagination--pager" title="This Is Why I Am Not Leaving Evernote
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+  
+      <h4 class="page__comments-title">Leave a comment</h4>
+      <section id="disqus_thread"></section>
+    
+</div>
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://source.unsplash.com/collection/1922729/400x300"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2018/12/02/designing-well-structured-rest-apis-with-flask-restplus-part-1/" rel="permalink">Designing Well-Structured REST APIs with Flask-RestPlus: Part 1
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  7 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">This is the first part of a two-part series. In this post, I will introduce Flask-RestPlus and demonstrate how to start organising APIs around its simple REST-based conventions. Next time, I will address the topic of request/response marshalling (serialisation) and validation.
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://source.unsplash.com/collection/1922729/400x300"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2018/11/01/kotlinconf-2018-recap/" rel="permalink">KotlinConf 2018 Recap
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">KotlinConf 2018 took place in beautiful Amsterdam at the beginning of October, and this year, I had the chance to attend. Though only the second edition, KotlinConf has already become something of an institution within the developer community. Events like these help you meet the people whose work you admire, but would otherwise not be able to meet in person.
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://source.unsplash.com/collection/1922729/400x300"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2018/11/01/a-new-stochastic-oscillator/" rel="permalink">A New Stochastic Oscillator?
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Disclaimer: None of what follows is an actual trading advice. It was meant to educate and share my learning experience with the community, and should not be used as-is for making assumptions about the future direction of any market asset. Always do your own research!
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://source.unsplash.com/collection/1922729/400x300"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2018/10/07/photo-recap/" rel="permalink">A Photo Recap of the Past Week
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  1 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Wow, it has been quite a week! It is time for a quick photo recap.
+
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><input type="text" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+    <div id="results" class="results"></div></div>
+      </div>
+    
+
+    <div class="page__footer">
+      <footer>
+        <script type="text/javascript">
+  var clicky_custom = clicky_custom || {};
+  clicky_custom.cookies_disable = 1;
+</script>
+<script src="//static.getclicky.com/js" type="text/javascript"></script>
+<script type="text/javascript">try { clicky.init(101131786); } catch (e) { }</script>
+<noscript><p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/101131786ns.gif" /></p></noscript>
+
+<script type="text/javascript">
+  // This should effectively disable all cookies being set on this site
+  // It is a bit of a crude measure, but I think it is necessary, having in mind how many seemingly innoncent
+  // 3rd-party scripts and embeds bring in tracking cookies with themselves
+  if (!document.__defineGetter__) {
+    Object.defineProperty(document, 'cookie', {
+      get: function () { return '' },
+      set: function () { return true },
+    });
+  } else {
+    document.__defineGetter__("cookie", function () { return ''; });
+    document.__defineSetter__("cookie", function () { });
+  }
+</script>
+
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2019 Your Name. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://preslav.me/2016/10/18/on-becoming-a-jenkins-certified-engineer/";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "/2016/10/18/on-becoming-a-jenkins-certified-engineer"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://preslav.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+  </body>
+</html>

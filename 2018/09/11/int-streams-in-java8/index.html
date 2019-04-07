@@ -1,0 +1,728 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.13.0 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Revisiting IntStreams in Java8+ - Preslav Rachev</title>
+<meta name="description" content="This post is mainly a reiteration of an article, I found online. As of Java 8, we have had the ability to replace looping operations on collections with streams and functional operations. This applies to situations where we don’t have an up-front collection to iterate upon.">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Preslav Rachev">
+<meta property="og:title" content="Revisiting IntStreams in Java8+">
+<meta property="og:url" content="https://preslav.me/2018/09/11/int-streams-in-java8/">
+
+
+  <meta property="og:description" content="This post is mainly a reiteration of an article, I found online. As of Java 8, we have had the ability to replace looping operations on collections with streams and functional operations. This applies to situations where we don’t have an up-front collection to iterate upon.">
+
+
+
+  <meta property="og:image" content="https://source.unsplash.com/collection/1922729/1280x400">
+
+
+
+
+
+  <meta property="article:published_time" content="2018-09-11T19:00:00+02:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://preslav.me/2018/09/11/int-streams-in-java8/">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "Your Name",
+      "url": "https://preslav.me",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Preslav Rachev Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    
+    <link rel="amphtml" href="https://preslav.me/amp/2018/09/11/int-streams-in-java8.html">
+
+
+<link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700|PT+Serif:400,700,400italic" rel="stylesheet" type="text/css">
+<link href="https://micro.blog/preslavrachev" rel="me" />
+  </head>
+
+  <body class="layout--post">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/">Preslav Rachev</a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/about-me" >About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/micro" >Microblog</a>
+            </li><li class="masthead__menu-item">
+              <a href="/archive" >Archive</a>
+            </li><li class="masthead__menu-item">
+              <a href="/contact" >Contact</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style=" background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://source.unsplash.com/collection/1922729/1280x400');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          Revisiting IntStreams in Java8+
+
+        
+      </h1>
+      
+        <p class="page__lead">This post is mainly a reiteration of <a href="http://www.deadcoderising.com/2015-05-19-java-8-replace-traditional-for-loops-with-intstreams/">an article</a>, I found online. As of Java 8, we have had the ability to replace looping operations on collections with streams and functional operations. This applies to situations where we don’t have an up-front collection to iterate upon.
+
+</p>
+      
+      
+        <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  1 minute read
+</p>
+      
+      
+      
+        <p>
+        
+          
+          <a href="https://twitter.com/intent/tweet?text=Hey%2C%20%40preslavrachev%2C%20I%20have%20been%20reading%20your%20blog%3A%20https%3A%2F%2Fpreslav.me%2F" class="btn btn--light-outline btn--large">Discuss this post on Twitter</a>
+        
+          
+          <a href="/contact" class="btn btn--light-outline btn--large">Contact me</a>
+        
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div class="h-card" itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img class="u-photo" src="/assets/img/avatar.jpg" alt="Preslav Rachev" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Preslav Rachev</h3>
+    
+    
+      <p class="author__bio p-note" itemprop="description">
+        A runner and a programming / data science polymath. A Bulgarian living in Germany. Bridging the gap between software engineering and data science.
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Munich, Germany</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li>
+  <a href="https://twitter.com/preslavrachev" itemprop="sameAs">
+    <i class="fab fa-fw fa-twitter" aria-hidden="true"></i> Twitter
+  </a>
+  <a href="https://github.com/preslavrachev" itemprop="sameAs">
+    <i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub
+  </a>
+  <a href="https://www.linkedin.com/in/preslavrachev/" itemprop="sameAs">
+    <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn
+  </a>
+  <a href="https://mastodon.technology/@preslavrachev" itemprop="sameAs">
+    <i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon
+  </a>
+</li>
+
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Revisiting IntStreams in Java8+">
+    <meta itemprop="description" content="This post is mainly a reiteration of an article, I found online. As of Java 8, we have had the ability to replace looping operations on collections with streams and functional operations. This applies to situations where we don’t have an up-front collection to iterate upon.">
+    <meta itemprop="datePublished" content="September 11, 2018">
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>This post is mainly a reiteration of <a href="http://www.deadcoderising.com/2015-05-19-java-8-replace-traditional-for-loops-with-intstreams/">an article</a>, I found online. As of Java 8, we have had the ability to replace looping operations on collections with streams and functional operations. This applies to situations where we don’t have an up-front collection to iterate upon.</p>
+
+<p>What traditionally would have been solved by a <code class="highlighter-rouge">for-loop</code>:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+
+<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+    <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"Username"</span> <span class="o">+</span> <span class="n">i</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="c1">// we can now use list</span>
+</code></pre></div></div>
+
+<p>can be replaced by the much more elegant-looking <a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/IntStream.html"><code class="highlighter-rouge">IntStream</code></a>:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">final</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="n">IntStream</span><span class="o">.</span><span class="na">range</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">100</span><span class="o">)</span>
+	<span class="o">.</span><span class="na">mapToObj</span><span class="o">(</span><span class="n">it</span> <span class="o">-&gt;</span> <span class="s">"Username"</span> <span class="o">+</span> <span class="n">it</span><span class="o">)</span>
+	<span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">toList</span><span class="o">());</span>
+</code></pre></div></div>
+
+<p>It is a matter of taste, but I prefer the functional approach from the latter example. A nice advantage of using <code class="highlighter-rouge">IntStream</code> are the reducing helper methods coming from <code class="highlighter-rouge">Stream</code>, such as <code class="highlighter-rouge">allMatch</code>, <code class="highlighter-rouge">anyMatch</code>, <code class="highlighter-rouge">noneMatch</code>, or even <code class="highlighter-rouge">reduce</code> itself. This is helpful when testing multiple conditions and need a single answer at the end:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">boolean</span> <span class="n">allMatch</span> <span class="o">=</span> <span class="kd">final</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="n">IntStream</span><span class="o">.</span><span class="na">range</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">100</span><span class="o">)</span>
+	<span class="o">.</span><span class="na">allMatch</span><span class="o">(</span><span class="n">it</span> <span class="o">-&gt;</span> <span class="n">booleanTestOn</span><span class="o">(</span><span class="n">it</span><span class="o">))</span>
+</code></pre></div></div>
+
+<p>This is really nothing special that the <code class="highlighter-rouge">IntStream</code> class itself brings on the table, but functionality that it inherits from <a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html"><code class="highlighter-rouge">Stream</code></a>.</p>
+
+<p>Analogous to the <code class="highlighter-rouge">IntStream</code> class, alternatives exist for handling Long (https://docs.oracle.com/javase/8/docs/api/java/util/stream/LongStream.html) and Double (<a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/DoubleStream.html"><code class="highlighter-rouge">DoubleStream</code></a>) values.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/java" class="page__taxonomy-item" rel="tag">Java</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/tips" class="page__taxonomy-item" rel="tag">Tips</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/programming" class="page__taxonomy-item" rel="tag">Programming</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2018-09-11T19:00:00+02:00">September 11, 2018</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Revisiting+IntStreams+in+Java8%2B%20https%3A%2F%2Fpreslav.me%2F2018%2F09%2F11%2Fint-streams-in-java8%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fpreslav.me%2F2018%2F09%2F11%2Fint-streams-in-java8%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=https%3A%2F%2Fpreslav.me%2F2018%2F09%2F11%2Fint-streams-in-java8%2F" class="btn btn--google-plus" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Google Plus"><i class="fab fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fpreslav.me%2F2018%2F09%2F11%2Fint-streams-in-java8%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2018/09/05/medium-walled-garden/" class="pagination--pager" title="Medium Is Turning into the Walled Garden It Did Not Want to Be
+">Previous</a>
+    
+    
+      <a href="/2018/09/22/python-automatic-argument-unpacking/" class="pagination--pager" title="Python: Automatic Argument Unpacking from a Dictionary
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+  
+      <h4 class="page__comments-title">Leave a comment</h4>
+      <section id="disqus_thread"></section>
+    
+</div>
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://source.unsplash.com/collection/1922729/400x300"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2018/12/02/designing-well-structured-rest-apis-with-flask-restplus-part-1/" rel="permalink">Designing Well-Structured REST APIs with Flask-RestPlus: Part 1
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  7 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">This is the first part of a two-part series. In this post, I will introduce Flask-RestPlus and demonstrate how to start organising APIs around its simple REST-based conventions. Next time, I will address the topic of request/response marshalling (serialisation) and validation.
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://source.unsplash.com/collection/1922729/400x300"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2018/11/01/kotlinconf-2018-recap/" rel="permalink">KotlinConf 2018 Recap
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">KotlinConf 2018 took place in beautiful Amsterdam at the beginning of October, and this year, I had the chance to attend. Though only the second edition, KotlinConf has already become something of an institution within the developer community. Events like these help you meet the people whose work you admire, but would otherwise not be able to meet in person.
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://source.unsplash.com/collection/1922729/400x300"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2018/11/01/a-new-stochastic-oscillator/" rel="permalink">A New Stochastic Oscillator?
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Disclaimer: None of what follows is an actual trading advice. It was meant to educate and share my learning experience with the community, and should not be used as-is for making assumptions about the future direction of any market asset. Always do your own research!
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://source.unsplash.com/collection/1922729/400x300"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2018/10/07/photo-recap/" rel="permalink">A Photo Recap of the Past Week
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  1 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Wow, it has been quite a week! It is time for a quick photo recap.
+
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><input type="text" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+    <div id="results" class="results"></div></div>
+      </div>
+    
+
+    <div class="page__footer">
+      <footer>
+        <script type="text/javascript">
+  var clicky_custom = clicky_custom || {};
+  clicky_custom.cookies_disable = 1;
+</script>
+<script src="//static.getclicky.com/js" type="text/javascript"></script>
+<script type="text/javascript">try { clicky.init(101131786); } catch (e) { }</script>
+<noscript><p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/101131786ns.gif" /></p></noscript>
+
+<script type="text/javascript">
+  // This should effectively disable all cookies being set on this site
+  // It is a bit of a crude measure, but I think it is necessary, having in mind how many seemingly innoncent
+  // 3rd-party scripts and embeds bring in tracking cookies with themselves
+  if (!document.__defineGetter__) {
+    Object.defineProperty(document, 'cookie', {
+      get: function () { return '' },
+      set: function () { return true },
+    });
+  } else {
+    document.__defineGetter__("cookie", function () { return ''; });
+    document.__defineSetter__("cookie", function () { });
+  }
+</script>
+
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2019 Your Name. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://preslav.me/2018/09/11/int-streams-in-java8/";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "/2018/09/11/int-streams-in-java8"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://preslav.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+  </body>
+</html>

@@ -1,0 +1,725 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.13.0 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>My Thoughts on React Native - Preslav Rachev</title>
+<meta name="description" content="Much like my electric guitar, React Native is a well-designed tool. It can serve you well and be your best friend if you use it appropriately. On the other hand, false expectations might lead you to frustration and headaches. I decided to share what I’ve learned from my brief experience with React Native, and give you my (slightly opinionated) view of how to you use it to your advantage. Perhaps, I would rather start with what it isn’t.">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Preslav Rachev">
+<meta property="og:title" content="My Thoughts on React Native">
+<meta property="og:url" content="https://preslav.me/2018/01/07/my-thoughts-on-react-native/">
+
+
+  <meta property="og:description" content="Much like my electric guitar, React Native is a well-designed tool. It can serve you well and be your best friend if you use it appropriately. On the other hand, false expectations might lead you to frustration and headaches. I decided to share what I’ve learned from my brief experience with React Native, and give you my (slightly opinionated) view of how to you use it to your advantage. Perhaps, I would rather start with what it isn’t.">
+
+
+
+  <meta property="og:image" content="https://source.unsplash.com/collection/1922729/1280x400">
+
+
+
+
+
+  <meta property="article:published_time" content="2018-01-07T00:00:00+01:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://preslav.me/2018/01/07/my-thoughts-on-react-native/">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "Your Name",
+      "url": "https://preslav.me",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Preslav Rachev Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    
+    <link rel="amphtml" href="https://preslav.me/amp/2018/01/07/my-thoughts-on-react-native.html">
+
+
+<link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700|PT+Serif:400,700,400italic" rel="stylesheet" type="text/css">
+<link href="https://micro.blog/preslavrachev" rel="me" />
+  </head>
+
+  <body class="layout--post">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/">Preslav Rachev</a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/about-me" >About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/micro" >Microblog</a>
+            </li><li class="masthead__menu-item">
+              <a href="/archive" >Archive</a>
+            </li><li class="masthead__menu-item">
+              <a href="/contact" >Contact</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style=" background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://source.unsplash.com/collection/1922729/1280x400');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          My Thoughts on React Native
+
+        
+      </h1>
+      
+      
+        <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  8 minute read
+</p>
+      
+      
+      
+        <p>
+        
+          
+          <a href="https://twitter.com/intent/tweet?text=Hey%2C%20%40preslavrachev%2C%20I%20have%20been%20reading%20your%20blog%3A%20https%3A%2F%2Fpreslav.me%2F" class="btn btn--light-outline btn--large">Discuss this post on Twitter</a>
+        
+          
+          <a href="/contact" class="btn btn--light-outline btn--large">Contact me</a>
+        
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div class="h-card" itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img class="u-photo" src="/assets/img/avatar.jpg" alt="Preslav Rachev" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Preslav Rachev</h3>
+    
+    
+      <p class="author__bio p-note" itemprop="description">
+        A runner and a programming / data science polymath. A Bulgarian living in Germany. Bridging the gap between software engineering and data science.
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Munich, Germany</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li>
+  <a href="https://twitter.com/preslavrachev" itemprop="sameAs">
+    <i class="fab fa-fw fa-twitter" aria-hidden="true"></i> Twitter
+  </a>
+  <a href="https://github.com/preslavrachev" itemprop="sameAs">
+    <i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub
+  </a>
+  <a href="https://www.linkedin.com/in/preslavrachev/" itemprop="sameAs">
+    <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn
+  </a>
+  <a href="https://mastodon.technology/@preslavrachev" itemprop="sameAs">
+    <i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon
+  </a>
+</li>
+
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="My Thoughts on React Native">
+    <meta itemprop="description" content="UPDATE Feb 17th, 2018: Though not a part of this article, it is worth noting that Facebook changed the licensing of React Native to MIT yesterday. This should come as a relief to many and would certainly increase the library’s commercial adoption even further:">
+    <meta itemprop="datePublished" content="January 07, 2018">
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p><strong>UPDATE Feb 17th, 2018:</strong> Though not a part of this article, it is worth noting that Facebook changed the licensing of React Native to MIT yesterday. This should come as a relief to many and would certainly increase the library’s commercial adoption even further:</p>
+
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">We&#39;re relicensing React Native (including Fresco, Metro, and Yoga) under the MIT license to match React. <a href="https://t.co/Ypg7ozX958">https://t.co/Ypg7ozX958</a></p>&mdash; React (@reactjs) <a href="https://twitter.com/reactjs/status/964689022747475968?ref_src=twsrc%5Etfw">February 17, 2018</a></blockquote>
+
+<p>When I was younger (and way out of money), I dreamed of having a slick, brand new electric guitar. Every day, I was checking it out, hoping for the moment, when I would finally be able to afford it and tour the world, like most of my teenage idols. Eventually, the day came, and exalted, I headed home, imagining the endless solos I would finally be able to play on it. Much to my surprise at the time, the guitar sounded incredibly crappy. Moreover, the more I forced myself to play it, the crappier it sounded. Frustrated, I tucked it in a dark corner of my room, where it stood for more than a year. Eventually, I picked it up and we have been best buddies ever since, but by this time, I had realized that the guitar was just a tool. Even the best tool in the world can’t help you if you are using it for the wrong job.</p>
+
+<p>Much like my electric guitar, React Native is a well-designed tool. It can serve you well and be your best friend if you use it appropriately. On the other hand, false expectations might lead you to frustration and headaches. I decided to share what I’ve learned from my brief experience with React Native, and give you my (slightly opinionated) view of how to you use it to your advantage. Perhaps, I would rather start with what it isn’t.</p>
+
+<h2 id="react-native-is-not-a-web-technology">React Native is not a Web technology…</h2>
+
+<p>…as much as you want to believe it is. Indeed, React Native uses a JavaScript runtime and follows the conventions laid out by React and the JS programming community. You can integrate most of the available JavaScript libraries as part of your apps, and use the same tools for dependency management, testing, and building, which a Web developer might be familiar with. Boy, even StyleSheet can make you feel at home with its CSS-like syntax. However, this is pretty much the point where React Native’s resemblance to the Web ends.</p>
+
+<blockquote>
+  <p>Indeed, it is JavaScript, but without the DOM</p>
+</blockquote>
+
+<p>It is important to note that React Native is not a full-fledged framework, but a library used by, and wrapped inside a native mobile application. There’s this notion around RN, perhaps driven by the ease of use of its CLI toolkit, that it can be used for generating cross-platform apps per button click. This is misleading. At the end of the day, React Native is a library which can be integrated into every existing iOS or Android project, and used just like any other library the project depends on. Correct me if I am wrong, but the whole idea about the creation of the library, was to share some of the boilerplate code between the Android and iOS versions of Facebook and Instagram, wasn’t it. The fact that one could create entire apps where React Native is sort of the main actor, was more of an afterthought at the time.</p>
+
+<p>This should come to confirm the point that using React Native does not mean you can escape native app development completely. React Native has been created to augment the current state of app development and reduce boilerplate, but it was never meant to replace it. You have to have to have an understanding of the underlying intricacies of the mobile platform you are building for. Move two steps away from a basic To-Do app, and you end up reading about linking C libraries and fixing Gradle bugs. And this is all perfectly fine. Because, this is what a mobile developer does for a living. Did you expect something else? I am sorry to have disappointed you, but that’s not what RN will solve for you. At least, it did not for me.</p>
+
+<p>This leads to my second point, which is that the build-it-once-use-it-everywhere approach won’t work. You can absolutely share 100% of your React Native codebase between iOS and Android. You should however also keep in mind the fact that your app might end up looking like a poor compromise on any of them, unless you work on the native-level polish. What some developers coming from the Web fail to understand, is that every mobile platform has its intricacies and what works on one platform, may not work on the other and vice versa. While perfectly OK for prototyping an idea and quickly bringing an MVP to the users, when an app project grows, the different platform versions of it, will eventually diverge.</p>
+
+<h2 id="where-react-native-shines">Where React Native Shines</h2>
+
+<p>Having emphasized enough on the fact that React Native is not a sort of magic box that makes an app ready out of nothing, but rather, a helper library, let’s see what we can use it for. IMHO, the two biggest selling points about integrating React Native into your project, are:</p>
+
+<ul>
+  <li>Cross-platform rapid prototyping of a new app idea (with all the caveats that this brings, of course)</li>
+  <li>sharing a balanced subset of your code base between different mobile platforms (let’s stick to iOS and Android for now).</li>
+  <li>updating your apps more frequently, by downloading the shared JavaScript part directly from a server.</li>
+</ul>
+
+<p>Point one is where most people get excited when they hear about React Native for the first time. Indeed, in spite of everything I have written so far, if this is what you want, <strong>yes, RN can help you achieve it</strong>. That is, assuming that you are OK with using common UI components present across all platforms, and not care much about performance and native touch and feel. To be honest, for testing out quick and dirty prototypes, why should you? Grab a copy of the RN starter kit and sketch out your idea! I am not going to go into further details on this point, because there are thousands of resources on the Web, illustrating how to make a cross-platform app in less than an hour. This is generally not the point of this article.</p>
+
+<p>For anything other than a prototype, one should assume that active native development is needed, and React Native is primarily used to help reduce the boilerplate between the different platforms. There are two ways to approach integrating React Native into a native app shell. The one is the <strong>top-down</strong>, where one would design the rough skeleton and workflow of the entire app using RN, but bridge to components developed natively for each platform. This includes bridging both UI (native views, assets, etc) and non-UI components (state managers, network handlers, event bus, concurrency management, persistence, etc). For a large chunk of those, the library already provides reasonable default bridges, for the rest, creating custom bridges between the Js runtime and the native platform is doable, though at the cost of some additional work. The benefit of using React Native as a top-down solution is a shared copy of the entire business logic and app workflow, without compromising on the native look and feel.</p>
+
+<p>The opposite of the top-down approach, would be a <strong>bottom-up</strong> one. This one would be more appropriate for apps that have been in development for quite a while and already have established native codebases. Imagine a company, willing to introduce customisable widgets inside of its Android and iOS apps. A good example are CTA-s (call-to-actions) and other marketing gimmicks that often need easy customisation, in order to match to the individual user. The cost of developing and maintaining such components natively would increase with time, so sharing their codebase using React Native an embedding inside of native apps may prove to be quite cost-effective, without compromising on the native look and performance. This is for example, how <a href="https://engineering.instagram.com/react-native-at-instagram-dd828a9a90c7">Instagram has been using React Native</a>.</p>
+
+<p>Perhaps the one hidden gem feature that often gets added to the last-but-not-least section (see, even I did it), has in fact  little to do with React Native as a library, but with JavaScript’s interpretative nature. This allows essentially on-the-fly updates of the shared codebase, and skipping Apple/Google’s app store approvals and waiting times. Of course, providing dynamic content is nothing new, and the majority of apps have so far achieve by mixing in a couple of WebViews pulling in actual Web pages from a server. Of course, with React Native one gets the benefit that the rendered content will have a native look and feel, but this does not come without a couple of challenges. To address a few, pulling the JS bundle off of a server, would require actually maintaining one in the first place, guaranteeing low latency, making sure that each new version can actually make use of what the native shell has (version can be an issue), etc.</p>
+
+<p>So, that’s it! My relatively opinionated, but hopefully realistic take on React Native. I think it is a great library, certainly one developers should keep in their tool-belts as a Joker card. Every project is different and the decision whether to use React Native for it, should be taken after carefully understanding the project’s requirements. Some projects would love to adopt RN ob-board as it is. For others, customization will be needed. For third yet, React Native might be out of question, due to specific platform requirements. Hopefully, my post has helped bring some light to the question. Or, even if it has confused you even more, it has at least opened up some new, more concrete questions, the answers to which will help you make the right choice.</p>
+
+<p>As always, the reader’s opinion is very important. Do not hesitate to send me feedback and ask those questions. I will try to shed some further light in follow-up posts. Till the next post!</p>
+
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Fun fact: the official Olympics mobile app is built 100% with React Native!</p>&mdash; Spencer Carli (@spencer_carli) <a href="https://twitter.com/spencer_carli/status/962147322745491457?ref_src=twsrc%5Etfw">February 10, 2018</a></blockquote>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/2-cents" class="page__taxonomy-item" rel="tag">2 Cents</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/programming" class="page__taxonomy-item" rel="tag">Programming</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/react-native" class="page__taxonomy-item" rel="tag">React Native</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2018-01-07T00:00:00+01:00">January 07, 2018</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=My+Thoughts+on+React+Native%20https%3A%2F%2Fpreslav.me%2F2018%2F01%2F07%2Fmy-thoughts-on-react-native%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fpreslav.me%2F2018%2F01%2F07%2Fmy-thoughts-on-react-native%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=https%3A%2F%2Fpreslav.me%2F2018%2F01%2F07%2Fmy-thoughts-on-react-native%2F" class="btn btn--google-plus" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Google Plus"><i class="fab fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fpreslav.me%2F2018%2F01%2F07%2Fmy-thoughts-on-react-native%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2017/12/31/build-to-last/" class="pagination--pager" title="Build to Last (End of the Year Musings)
+">Previous</a>
+    
+    
+      <a href="/2018/01/28/weekly-notes-jan-21-28-2018/" class="pagination--pager" title="Weekly Notes (Jan 21 / Jan 28, 2018)
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+  
+      <h4 class="page__comments-title">Leave a comment</h4>
+      <section id="disqus_thread"></section>
+    
+</div>
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://source.unsplash.com/collection/1922729/400x300"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2018/12/02/designing-well-structured-rest-apis-with-flask-restplus-part-1/" rel="permalink">Designing Well-Structured REST APIs with Flask-RestPlus: Part 1
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  7 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">This is the first part of a two-part series. In this post, I will introduce Flask-RestPlus and demonstrate how to start organising APIs around its simple REST-based conventions. Next time, I will address the topic of request/response marshalling (serialisation) and validation.
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://source.unsplash.com/collection/1922729/400x300"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2018/11/01/kotlinconf-2018-recap/" rel="permalink">KotlinConf 2018 Recap
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">KotlinConf 2018 took place in beautiful Amsterdam at the beginning of October, and this year, I had the chance to attend. Though only the second edition, KotlinConf has already become something of an institution within the developer community. Events like these help you meet the people whose work you admire, but would otherwise not be able to meet in person.
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://source.unsplash.com/collection/1922729/400x300"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2018/11/01/a-new-stochastic-oscillator/" rel="permalink">A New Stochastic Oscillator?
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Disclaimer: None of what follows is an actual trading advice. It was meant to educate and share my learning experience with the community, and should not be used as-is for making assumptions about the future direction of any market asset. Always do your own research!
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://source.unsplash.com/collection/1922729/400x300"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2018/10/07/photo-recap/" rel="permalink">A Photo Recap of the Past Week
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  1 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Wow, it has been quite a week! It is time for a quick photo recap.
+
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><input type="text" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+    <div id="results" class="results"></div></div>
+      </div>
+    
+
+    <div class="page__footer">
+      <footer>
+        <script type="text/javascript">
+  var clicky_custom = clicky_custom || {};
+  clicky_custom.cookies_disable = 1;
+</script>
+<script src="//static.getclicky.com/js" type="text/javascript"></script>
+<script type="text/javascript">try { clicky.init(101131786); } catch (e) { }</script>
+<noscript><p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/101131786ns.gif" /></p></noscript>
+
+<script type="text/javascript">
+  // This should effectively disable all cookies being set on this site
+  // It is a bit of a crude measure, but I think it is necessary, having in mind how many seemingly innoncent
+  // 3rd-party scripts and embeds bring in tracking cookies with themselves
+  if (!document.__defineGetter__) {
+    Object.defineProperty(document, 'cookie', {
+      get: function () { return '' },
+      set: function () { return true },
+    });
+  } else {
+    document.__defineGetter__("cookie", function () { return ''; });
+    document.__defineSetter__("cookie", function () { });
+  }
+</script>
+
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2019 Your Name. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://preslav.me/2018/01/07/my-thoughts-on-react-native/";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "/2018/01/07/my-thoughts-on-react-native"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://preslav.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+  </body>
+</html>

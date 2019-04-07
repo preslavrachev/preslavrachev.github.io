@@ -1,384 +1,747 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Preslav's Thoughts and Ramblings</title>
-    <description>Long Form Jekyll theme built with SASS / COMPASS / SUSY</description>
-    <link>https://preslavrachev.github.io/</link>
-    <atom:link href="https://preslavrachev.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 03 Mar 2018 23:03:41 +0000</pubDate>
-    <lastBuildDate>Sat, 03 Mar 2018 23:03:41 +0000</lastBuildDate>
-    <generator>Jekyll v3.7.3</generator>
+    <title>Preslav Rachev</title>
+    <description>Finding beauty in everyday things.</description>
+    <link>https://preslav.me/</link>
+    <atom:link href="https://preslav.me/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Sun, 07 Apr 2019 22:27:37 +0200</pubDate>
+    <lastBuildDate>Sun, 07 Apr 2019 22:27:37 +0200</lastBuildDate>
+    <generator>Jekyll v3.8.3</generator>
     
       
       <item>
-        <title>Essential Python Libraries for Machine Learning and Data Science</title>
-        <description>&lt;p&gt;Whether new to Python, or simply coming from a different domain,  the data science enthusiast’s foray into the field can be intimidating.  From entering the door,  one gets overwhelmed with a bunch of unfamiliar libraries, one would need for their daily work:&lt;/p&gt;
+        <title>Designing Well-Structured REST APIs with Flask-RestPlus: Part 1</title>
+        <description>&lt;p&gt;This is the first part of a two-part series. In this post, I will introduce &lt;a href=&quot;https://flask-restplus.readthedocs.io/en/stable/&quot;&gt;Flask-RestPlus&lt;/a&gt; and demonstrate how to start organising APIs around its simple REST-based conventions. Next time, I will address the topic of request/response marshalling (serialisation) and validation.&lt;/p&gt;
 
-&lt;p&gt;NumPy, SciPy, SciKit, Matplotlib,  Pandas, Theano, Tensorflow, Keras, CNTK, just to name a few …&lt;/p&gt;
+&lt;hr /&gt;
 
-&lt;p&gt;In this article, I am going to list some of the fundamental libraries every data scientist working with Python should know of. I will also provide a human-readable, brief description as to what each of these libraries does, how it is used, and how it fits in the overall picture.&lt;/p&gt;
+&lt;p&gt;A seasoned Spring developer, I felt a bit uneasy when designing and future-proofing a &lt;a href=&quot;http://flask.pocoo.org/&quot;&gt;Flask&lt;/a&gt;-based API for the first time. I have recently started using Python way beyond my original intention to just play with data, and found Flask to be a super-easy micro-service alternative to &lt;a href=&quot;https://spring.io/projects/spring-boot&quot;&gt;Spring Boot&lt;/a&gt; or &lt;a href=&quot;https://ktor.io/&quot;&gt;Ktor&lt;/a&gt;. The one thing I was really concerned about, was making sure that the API  request/response format was standardised (think, providing a Swagger schema), well-documented, and validated. While working with Java, much of this would come straight from the compiler itself, due to the static-type nature of the language. When you combine this with a couple of great libraries like &lt;a href=&quot;https://github.com/FasterXML/jackson&quot;&gt;Jackson&lt;/a&gt; and &lt;a href=&quot;http://springfox.github.io/springfox/&quot;&gt;SpringFox&lt;/a&gt;, the API communication gets documented and validated with minimal intrusion to the actual code. In Python, this would require tedious &lt;code class=&quot;highlighter-rouge&quot;&gt;if-else&lt;/code&gt; checks all over the place … or so I thought.&lt;/p&gt;
 
-&lt;h3 id=&quot;overview-of-the-python-data-science-ecosystem&quot;&gt;Overview of the Python Data Science Ecosystem&lt;/h3&gt;
-&lt;p&gt;The diagram below creates a map of the libraries, most widely used within the data science and machine learning community:&lt;/p&gt;
+&lt;h2 id=&quot;flask-restplus-to-the-rescue&quot;&gt;Flask-RestPlus to the Rescue&lt;/h2&gt;
 
-&lt;figure&gt;
-    &lt;img src=&quot;/assets/img/2017/5B4D5F7C-8465-4ACD-989C-9E6874178AAA.png&quot; alt=&quot;&quot; /&gt; 
-    &lt;figcaption&gt;Fig1. - an overview of the Python data science ecosystem &lt;a href=&quot;/assets/img/2017/5B4D5F7C-8465-4ACD-989C-9E6874178AAA.png&quot;&gt;(hi-res version here)&lt;/a&gt; &lt;/figcaption&gt;
-&lt;/figure&gt;
+&lt;p&gt;Unlike &lt;a href=&quot;https://www.djangoproject.com/&quot;&gt;Django&lt;/a&gt;, Flask does not come with batteries included, but there is a whole ecosystem of open-source libraries and extensions contributed by the community. One of these is called &lt;a href=&quot;https://flask-restplus.readthedocs.io/en/stable/&quot;&gt;Flask-RestPlus&lt;/a&gt; and it is the absolute dream-come-true for every Flask API designer. Flask-RestPlus is a &lt;a href=&quot;http://flask.pocoo.org/docs/1.0/extensiondev/&quot;&gt;Flask extension&lt;/a&gt; library, and as the name suggests, it helps ease the building of structured RESTful APIs with minimal setup, and encourages best practices. Flask RestPlus follows certain conventions, but does not insist on them, the way Django does.  In a way, Flask-RestPlus tries to help organise a growing Flask project, but without it losing its minimal overhead, which is the greatest charm of Flask.&lt;/p&gt;
 
-&lt;p&gt;One thing becomes immediately evident from this diagram. In the center of the entire Python data science universe stays one library - NumPy. Its use is so widespread that it has become a de facto standard and a required foundation for pretty much any Python library which contributes to the field.  Not surprisingly, it will be the first library we’ll have a look at in our list.&lt;/p&gt;
+&lt;p&gt;The goal of this series is to start with a simple Flask app, and try to address the following points with a bit of Flask-RestPlus at a time:&lt;/p&gt;
 
-&lt;h3 id=&quot;numpy&quot;&gt;NumPy&lt;/h3&gt;
-&lt;p&gt;&lt;a href=&quot;http://www.numpy.org/&quot;&gt;NumPy — NumPy&lt;/a&gt; is at the bottom of the Python scientific computing ecosystem. It provides powerful N-dimensional array data structures. Unlike a Python list, NumPy’s &lt;code class=&quot;highlighter-rouge&quot;&gt;ndarray&lt;/code&gt; is way more memory and CPU-efficient, able to pack billions of data points into a fraction of the memory footprint of a comparable Python list. Less flexible than a Python list, an &lt;code class=&quot;highlighter-rouge&quot;&gt;ndarray&lt;/code&gt; is optimised for storing single and double-precision numbers, and executing fast numeric operations on them. NumPy’s &lt;code class=&quot;highlighter-rouge&quot;&gt;ndarray&lt;/code&gt; structures are perfectly suitable for storing vector and matrix data. On top, NumPy provides a myriad of statistics and linear algebra functions for handling vector and matrix manipulations, which are extremely fast and with a scientific level of precision.  What follows are a few examples, I shamelessly borrowed from a &lt;a href=&quot;https://docs.scipy.org/doc/numpy-dev/user/quickstart.html&quot;&gt;SciPy tutorial&lt;/a&gt;. Feel free to check out there rest them &lt;a href=&quot;https://docs.scipy.org/doc/numpy-dev/user/quickstart.html&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Structure and auto-document an API &lt;strong&gt;(Part 1)&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;Ensure request/response payload validation &lt;strong&gt;(Part 2)&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
 
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# lots of examples inspired by https://docs.scipy.org/doc/numpy-dev/user/quickstart.html&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# you can create an ndarray out of an existing list&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+&lt;h3 id=&quot;demo-app&quot;&gt;Demo App&lt;/h3&gt;
 
-&lt;span class=&quot;c&quot;&gt;# or multiple dimensions out of lists&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]])&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;#array([[1 2 3]&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;#         [4 5 6]&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;#         [7 8 9]])&lt;/span&gt;
+&lt;p&gt;Let’s start with a simple Flask-based API for a conference management application:&lt;/p&gt;
 
-&lt;span class=&quot;c&quot;&gt;# or use one of NumPy's many generator functions, ideal for initialization purposes&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# np.zeros(...), np.ones(...), np.random.random(...), np.arange(...) etc&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;zeros&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
-&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([[&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;mf&quot;&gt;0.&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;mf&quot;&gt;0.&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;mf&quot;&gt;0.&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-          &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;mf&quot;&gt;0.&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;mf&quot;&gt;0.&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;mf&quot;&gt;0.&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-          &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;mf&quot;&gt;0.&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;mf&quot;&gt;0.&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;mf&quot;&gt;0.&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]])&lt;/span&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;flask&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Flask&lt;/span&gt;
 
-&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arange&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.3&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;mf&quot;&gt;0.3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;mf&quot;&gt;0.6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;mf&quot;&gt;0.9&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;mf&quot;&gt;1.2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;mf&quot;&gt;1.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;mf&quot;&gt;1.8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Flask&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;__name__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
-&lt;span class=&quot;c&quot;&gt;# you can reshape arrays in whatever ways you like, also slice, iterate, etc&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arange&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;24&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reshape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[[[&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;  &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;  &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;  &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;  &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;  &lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;  &lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;  &lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;11&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]&lt;/span&gt;
-   &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;12&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;13&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;14&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;15&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;17&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;18&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;19&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;21&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;22&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;23&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]]&lt;/span&gt;
 
-&lt;span class=&quot;c&quot;&gt;# NumPy also allows fast computations on entire arrays:&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ones&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dtype&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-         &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]])&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@app.route&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/conferences/&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;get_all__conferences&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;
+    returns a list of conferences
+    &quot;&quot;&quot;&lt;/span&gt;
 
-&lt;span class=&quot;c&quot;&gt;# and many many more ...&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-</description>
-        
-          <description>&lt;p&gt;Whether new to Python, or simply coming from a different domain,  the data science enthusiast’s foray into the field can be intimidating.  From entering the door,  one gets overwhelmed with a bunch of unfamiliar libraries, one would need for their daily work:&lt;/p&gt;
+&lt;span class=&quot;nd&quot;&gt;@app.route&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/conferences/&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;methods&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'POST'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;add_conference&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;
+    Adds a new conference to the list
+    &quot;&quot;&quot;&lt;/span&gt;
 
-</description>
-        
-        <pubDate>Sat, 01 Jul 2017 00:00:00 +0000</pubDate>
-        <link>https://preslavrachev.github.io/2017/07/01/essential-python-libraries-machine-learning-data-science/</link>
-        <guid isPermaLink="true">https://preslavrachev.github.io/2017/07/01/essential-python-libraries-machine-learning-data-science/</guid>
-        
-        
-      </item>
-      
-    
-      
-      <item>
-        <title>Testing React Native Applications Part I: Jest</title>
-        <description>&lt;p&gt;When I started with React Native not long ago I was frustrated by the overwhelming amount of irrelevant information on how to test React applications. React is known to evolve fast, often introducing breaking changes, so this should not be surprising to most developers. Still, the amount of deprecated content out there leaves a sort of a bad feeling, especially among developers who have just started working with React or RN.&lt;/p&gt;
+&lt;span class=&quot;nd&quot;&gt;@app.route&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/conferences/&amp;lt;int:id&amp;gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;get_conference&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;
+    Displays a conference's details
+    &quot;&quot;&quot;&lt;/span&gt;
 
-&lt;p&gt;Having spent a few days, breaking walls down on my own, I decided to document the current state of testing affairs, with the hope that my post won’t become obsolete by the time it comes out.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Though I initially wanted to write a big post describing RN testing in detail, I decided to split it up into manageable chunks. This post will talk about Jest, what it is, and why it is useful.&lt;/p&gt;
-
-&lt;h2 id=&quot;jest&quot;&gt;Jest&lt;/h2&gt;
-&lt;p&gt;When you create a new React or React Native application via one of the provided CLI tools, it automatically creates a sample unit test using a framework called &lt;a href=&quot;https://facebook.github.io/jest/&quot;&gt;Jest&lt;/a&gt;. I have to say upfront. You don’t necessarily have to use Jest for your RN tests, but it definitely brings a few interesting features to the table.&lt;/p&gt;
-
-&lt;p&gt;Similar to Mocha, Jest is an opininionated test runner and assertion framework, which uses the familiar BDD syntax of describing and asserting tests:&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;describe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'calculator'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;describe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'add()'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;it&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'should add 2 numbers togoether'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;nx&quot;&gt;expect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;calculator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toEqual&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@app.route&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/conferences/&amp;lt;int:id&amp;gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;edit_conference&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;
+    Edits a selected conference
+    &quot;&quot;&quot;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;setting-up&quot;&gt;Setting up&lt;/h3&gt;
-&lt;p&gt;Setting Jest up and writing your first test is fairly easy, due to its ‘convention-over-configuration’ approach. Though fine-tuning the Jest config is totally possible, there are predefined defaults for everything. In fact, all you need to do is place your tests under &lt;code class=&quot;highlighter-rouge&quot;&gt;__tests__&lt;/code&gt;, and mock modules under &lt;code class=&quot;highlighter-rouge&quot;&gt;__mocks__&lt;/code&gt; and Jest will find them automatically.&lt;/p&gt;
+&lt;p&gt;Installing Flask-RestPlus is easy&lt;/p&gt;
 
-&lt;h3 id=&quot;mocking&quot;&gt;Mocking&lt;/h3&gt;
-
-&lt;p&gt;On top of that though, Jest provides a few interesting features on its own. One is its aggressive approach to mocking. Up to a few versions, ago, Jest’s &lt;code class=&quot;highlighter-rouge&quot;&gt;automock&lt;/code&gt; option was set to &lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt; by default. This meant that unless it were explicitly configured not to do so, Jest would create a mock out of every library and dependancy relevant to your code. The development team &lt;a href=&quot;https://facebook.github.io/jest/blog/2016/09/01/jest-15.html&quot;&gt;realized&lt;/a&gt; though that this is one idea too aggressive, and though the option is still there, it is set to &lt;code class=&quot;highlighter-rouge&quot;&gt;false&lt;/code&gt; by default:&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;We introduced automocking at Facebook and it worked great for us when unit testing was adopted in a large existing code base with few existing tests, but over time it felt like people spent more time fighting with mocked/unmocked modules than it would have taken them to write a test normally. We also noticed that library authors often require a huge number of basic modules that always have to be manually unmocked.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Still, with automocking turned off, you could pretty easily mock entire modules, or just a few functions whose calls are expensive or unnecessary (HTTP requests, disk read/writes etc).&lt;/p&gt;
-
-&lt;h4 id=&quot;jest-mocking-cheatsheet&quot;&gt;Jest Mocking Cheatsheet&lt;/h4&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Mock-related functions available via the global Jest object&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;jest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;resetAllMocks&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;jest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;clearAllTimers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;jest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;disableAutomock&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;jest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;enableAutomock&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;jest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(?&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;implementation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;jest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;isMockFunction&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;jest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;genMockFromModule&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;moduleName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;jest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;mock&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;moduleName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;factory&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;jest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;resetModules&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;jest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;setMock&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;moduleName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;moduleExports&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;jest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;unmock&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;moduleName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;jest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;spyOn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;// Mock functions available to every mock&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;mockFn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;mock&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;calls&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;mockFn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;mock&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;instances&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;mockFn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;mockClear&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;mockFn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;mockReset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;mockFn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;mockRestore&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;mockFn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;mockImplementation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;mockFn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;mockImplementationOnce&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;mockFn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;mockReturnThis&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;mockFn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;mockReturnValue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;mockFn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;mockReturnValueOnce&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pip &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;Flask-RestPlus
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;snapshotting&quot;&gt;Snapshotting&lt;/h3&gt;
-&lt;p&gt;Besides mocking, snapshotting is the other big feature that Jest provides. If you are using the React or React Native CLI, you must have already seen this line of code in your tests:&lt;/p&gt;
+&lt;p&gt;Let’s simply introduce an &lt;code class=&quot;highlighter-rouge&quot;&gt;Api&lt;/code&gt; object for now, try to wrap our app instance with it, replace the routing decorators, and see what happens:&lt;/p&gt;
 
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;expect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;tree&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toMatchSnapshot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;flask&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Flask&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;flask_restplus&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Api&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Flask&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;__name__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;api&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Api&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+
+&lt;span class=&quot;nd&quot;&gt;@api.route&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/conferences/&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;get_all__conferences&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;pass&lt;/span&gt;
+
+
+&lt;span class=&quot;nd&quot;&gt;@api.route&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/conferences/&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;methods&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'POST'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;add_conference&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;
+    Adds a new conference to the list
+    &quot;&quot;&quot;&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;@api.route&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/conferences/&amp;lt;int:id&amp;gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;get_conference&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;
+    Displays a conference's details
+    &quot;&quot;&quot;&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;@api.route&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/conferences/&amp;lt;int:id&amp;gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;edit_conference&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;
+    Edits a selected conference
+    &quot;&quot;&quot;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;When asserting against a snapshot, Jest will look for an existing one in the &lt;code class=&quot;highlighter-rouge&quot;&gt;__snapshots__&lt;/code&gt; directory, and if none were found, will save the current one there. The next time the test gets run, the current one gets compared to the existing one, and if there is a change, the test will break.&lt;/p&gt;
+&lt;p&gt;As soon as the app starts, we will get the following error:&lt;/p&gt;
 
-&lt;p&gt;Snapshotting comes super useful when testing the integration of multiple components, where the result is usually a heavily neseted structure. The way developers write such tests is either using many assertions, writing portions of the expected output by hand, or use a few, but very shallow assertions (like &lt;code class=&quot;highlighter-rouge&quot;&gt;toContain&lt;/code&gt;). Snapshotting, therefore, helps save a lot of time writing all this tedious assertion code by hand.&lt;/p&gt;
-
-&lt;p&gt;This example out of the &lt;a href=&quot;https://facebook.github.io/jest/blog/2016/07/27/jest-14.html&quot;&gt;official Jest blog&lt;/a&gt; uses the rendered output of a React component to illustrate snapshotting:&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;renderer&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'react-test-renderer'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;nx&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Link renders correctly'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;tree&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;renderer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;create&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Link&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;page&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;http://www.facebook.com&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Facebook&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/Link&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;
-&lt;/span&gt;  &lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toJSON&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;expect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;tree&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toMatchSnapshot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;AttributeError: 'function' object has no attribute 'as_view'
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;and the corresponding snapshot that gets saved:&lt;/p&gt;
+&lt;p&gt;This is because if you want to use RestPlus for some of your Flask functions, you have to enclose them in a scoping class. Not only that, but inside the enclosing class, you should name your methods, corresponding to the HTTP methods that REST is based on: GET, POST, PUT, and DELETE:&lt;/p&gt;
 
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;exports&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Link renders correctly 1'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'
-&amp;lt;a
-  className=&quot;normal&quot;
-  href=&quot;http://www.facebook.com&quot;
-  onMouseEnter={[Function bound _onMouseEnter]}
-  onMouseLeave={[Function bound _onMouseLeave]}&amp;gt;
-  Facebook
-&amp;lt;/a&amp;gt;
-'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@api.route&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/conferences/&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ConferenceList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Resource&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;
+        returns a list of conferences
+        &quot;&quot;&quot;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Though you will certainly find snapshotting useful for verifying the rendered output of your apps and components, these are by far not the only uses cases. I find it very helpful when verifying global application state, e.g. using libraries like Redux or other similar approaches.&lt;/p&gt;
+&lt;p&gt;Before anyone starts objecting, let me explain why this is helpful. Flask-RestPlus uses the Flask concept of “Pluggable Views” to introduce &lt;code class=&quot;highlighter-rouge&quot;&gt;Resource&lt;/code&gt; (as in, REST resource).&lt;/p&gt;
 
-&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;All in all, I find Jest’s ‘zero-conf, batteries-included’ approach to testing pretty fun to work with. Starting a new project, especially a React or React Native one, it makes sense to go with it, since it comes bundled in. Even if you are already having a large codebase of tests, assuming they follow the familiar BDD conventions (and most probably using Jasmine assertions), you can get it up and running on Jest in pretty much no time. Beware that the documentation is not always up-to-date, so you might have to invest some further time checking Medium and GitHub.&lt;/p&gt;
+&lt;p&gt;Let’s be honest. While most Flask applications start simple, many of them outgrow the initial idea, and cramming several handler functions in the main module scope quickly becomes a mess. This is why &lt;a href=&quot;http://exploreflask.com/en/latest/blueprints.html&quot;&gt;Flask Blueprints&lt;/a&gt; exist to help split common functionality into multiple modules.&lt;/p&gt;
 
-&lt;p&gt;Now that I’ve cleared it up a bit what Jest is all about, I will focus on structurally testing React Native applications in my next post.&lt;/p&gt;
+&lt;p&gt;Flask-RestPlus makes great use of Blueprints too, as I will demonstrate later, but Resources go one level of granularity further. A Resource class can have multiple methods, but each one should be named after one of the accepted HTTP verbs. What if you need more than one &lt;code class=&quot;highlighter-rouge&quot;&gt;GET&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;POST&lt;/code&gt; method for your API? Well, create multiple Resource classes and put each method in the corresponding resource class. It might look a little overwhelming at first, coming from the cut-the-boilerplate nature of Flask, but with a bit of playing around, it won’t be a brainer at all, and it will pay off tremendously in the long run.&lt;/p&gt;
+
+&lt;p&gt;Let’s see how our tiny app will look after the transformations:&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;flask&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Flask&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;flask_restplus&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Api&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Resource&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Flask&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;__name__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;api&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Api&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+
+&lt;span class=&quot;nd&quot;&gt;@api.route&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/conferences/&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ConferenceList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Resource&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;
+        returns a list of conferences
+        &quot;&quot;&quot;&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;post&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;
+        Adds a new conference to the list
+        &quot;&quot;&quot;&lt;/span&gt;
+
+
+&lt;span class=&quot;nd&quot;&gt;@api.route&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/conferences/&amp;lt;int:id&amp;gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Conference&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Resource&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;
+        Displays a conference's details
+        &quot;&quot;&quot;&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;put&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;
+        Edits a selected conference
+        &quot;&quot;&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;With this tiny bit of overhead (if you even consider this any overhead at all), you get so much in return. Start the app and point to &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:5000&lt;/code&gt;. You will see that the index page has turned into a Swagger UI, which shows the already defined API endpoints, neatly organised into categories (namespaces):&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/2018/flask-restplus-part-11.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This is great for documenting, playing with, and sharing you API schema around. Yet, this is by far not the only thing that Flask-RestPlus does for you. It goes beyond simply documenting the API, in ensuring that the API is compliant with the schema. Put simply, Flask-RestPlus makes sure that if certain request parameters are marked as mandatory, or if request/response models are supposed to have a certain structure, those are checked and validated at runtime. In my opinion, this is real advantage of Flask-RestPlus, sitting on top of a Flask application. The current example is too simple to demonstrate the real power of request/response marshalling and validation, but both will be throughly described in Part 2.&lt;/p&gt;
+
+&lt;h3 id=&quot;namespaces&quot;&gt;Namespaces&lt;/h3&gt;
+
+&lt;p&gt;Namespaces are optional, and add a bit of additional organisational touch to the API, mainly, from a documentation point of view. A namespace allows you to group related Resources under a common root, and is simple to create:&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;ns_conf&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;api&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;namespace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'conferences'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Conference operations'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;To bring certain Resources under a given namespace, all you need to do, is to replace &lt;code class=&quot;highlighter-rouge&quot;&gt;@api&lt;/code&gt; with &lt;code class=&quot;highlighter-rouge&quot;&gt;@ns_conf&lt;/code&gt;. Notice also that the name of the namespace replaces the name of the resource, so endpoints can simply to refer to &lt;code class=&quot;highlighter-rouge&quot;&gt;/&lt;/code&gt;, instead of copying the name of the resource time and again:&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;flask&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Flask&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;flask_restplus&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Api&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Resource&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Flask&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;__name__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;api&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Api&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;ns_conf&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;api&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;namespace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'conferences'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Conference operations'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+
+&lt;span class=&quot;nd&quot;&gt;@ns_conf.route&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ConferenceList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Resource&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;
+        returns a list of conferences
+        &quot;&quot;&quot;&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;post&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;
+        Adds a new conference to the list
+        &quot;&quot;&quot;&lt;/span&gt;
+
+
+&lt;span class=&quot;nd&quot;&gt;@ns_conf.route&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/&amp;lt;int:id&amp;gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Conference&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Resource&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;
+        Displays a conference's details
+        &quot;&quot;&quot;&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;put&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;
+        Edits a selected conference
+        &quot;&quot;&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;One will notice afterwards that the Swagger UI display has changed too, to reflect the namespacing:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/2018/flask-restplus-part-12.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;blueprints&quot;&gt;Blueprints&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://flask.pocoo.org/docs/blueprints/#blueprints&quot;&gt;Flask Blueprints&lt;/a&gt; are a popular way of designing modular applications. The same applies to Flask-RestPlus. The production version of our application will certainly outgrow the four endpoints we started with. There might be other resources, or at the very least, you might want to move to move your API away from the root of your app. Both cases are a perfect candidate for a Blueprint.  Let’s move all of our API endpoints under &lt;code class=&quot;highlighter-rouge&quot;&gt;/api/v1&lt;/code&gt;, without touching the routes of even one of them. This example is coming straight from the Flask-RestPlus &lt;a href=&quot;https://flask-restplus.readthedocs.io/en/stable/scaling.html#use-with-blueprints&quot;&gt;documentation&lt;/a&gt;, and is illustrative enough to help close this chapter of the journey:&lt;/p&gt;
+
+&lt;p&gt;Create a Blueprint the usual way, and instead of wrapping our app instance with the RestPlus API,  we will wrap the Blueprint instead. This way, independent of our app, we are free to move our API part into a different module: (e.g. &lt;code class=&quot;highlighter-rouge&quot;&gt;blueprint/api.py&lt;/code&gt;)&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;flask&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Blueprint&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;flask_restplus&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Api&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;blueprint&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Blueprint&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'api'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__name__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;api&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Api&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;blueprint&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Bring in the rest of our API code here&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This leaves only a tiny bit of bridging code to introduce the Blueprint to the main app, and set the URL prefix. The next time you start your app, the API endpoints will be accessible only under the specified URL prefix (&lt;code class=&quot;highlighter-rouge&quot;&gt;/api/v1&lt;/code&gt;).&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;flask&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Flask&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;apis&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;blueprint&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;api&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Flask&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;__name__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;register_blueprint&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;api&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;url_prefix&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'/api/1'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Las but not least, it is always a good idea to move the Swagger UI documentation away from the root. As in everything else in RestPlus, this part is extremely ease, too. You can override the default location by passing an additional parameter to the initialiser:&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;api&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Api&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;doc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'/docs'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;This sums up the first part of my series. I hope that it was informative, and will help you structure your Flask-based REST APIs better in the future. Till next time!&lt;/p&gt;
+
+&lt;hr /&gt;
 
 &lt;h2 id=&quot;further-reading&quot;&gt;Further Reading&lt;/h2&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://facebook.github.io/jest/&quot;&gt;The official Jest website&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://thejsguy.com/2015/01/12/jasmine-vs-mocha-chai-and-sinon.html&quot;&gt;Jasmine vs. Mocha, Chai, and Sinon&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://instea.sk/2016/08/testing-react-applications-with-karma-jest-or-mocha/&quot;&gt;Testing React Applications with Karma, Jest or Mocha&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://dmitriiabramov.github.io/jest-cheatsheet/index.html&quot;&gt;Jest CheatSheet&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://facebook.github.io/jest/docs/tutorial-react-native.html&quot;&gt;Testing React Native Apps · Jest&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://medium.com/xebia/de-mystifying-jest-snapshot-test-mocks-8e7183d109ea&quot;&gt;De-mystifying Jest Snapshot Test Mocks&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;&lt;a href=&quot;http://flask.pocoo.org/&quot;&gt;Flask (A Python Microframework)&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://flask-restplus.readthedocs.io/en/stable/index.html&quot;&gt;Flask-RestPlus&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://medium.freecodecamp.org/structuring-a-flask-restplus-web-service-for-production-builds-c2ec676de563&quot;&gt;How to structure a Flask-RESTPlus web service for production builds&lt;/a&gt;&lt;/p&gt;
 </description>
         
-          <description>&lt;p&gt;When I started with React Native not long ago I was frustrated by the overwhelming amount of irrelevant information on how to test React applications. React is known to evolve fast, often introducing breaking changes, so this should not be surprising to most developers. Still, the amount of deprecated content out there leaves a sort of a bad feeling, especially among developers who have just started working with React or RN.&lt;/p&gt;
+          <description>&lt;p&gt;This is the first part of a two-part series. In this post, I will introduce &lt;a href=&quot;https://flask-restplus.readthedocs.io/en/stable/&quot;&gt;Flask-RestPlus&lt;/a&gt; and demonstrate how to start organising APIs around its simple REST-based conventions. Next time, I will address the topic of request/response marshalling (serialisation) and validation.&lt;/p&gt;
 
 </description>
         
-        <pubDate>Sat, 06 May 2017 00:00:00 +0000</pubDate>
-        <link>https://preslavrachev.github.io/2017/05/06/testing-react-native-applications-part-i-jest/</link>
-        <guid isPermaLink="true">https://preslavrachev.github.io/2017/05/06/testing-react-native-applications-part-i-jest/</guid>
+        <pubDate>Sun, 02 Dec 2018 00:00:00 +0100</pubDate>
+        <link>https://preslav.me/2018/12/02/designing-well-structured-rest-apis-with-flask-restplus-part-1/</link>
+        <guid isPermaLink="true">https://preslav.me/2018/12/02/designing-well-structured-rest-apis-with-flask-restplus-part-1/</guid>
         
+        <category>Python</category>
+        
+        <category>Flask</category>
+        
+        <category>Rest</category>
+        
+        
+        <category>Programming</category>
         
       </item>
       
     
       
       <item>
-        <title>Example Post Formatting</title>
-        <description>&lt;p class=&quot;intro&quot;&gt;&lt;span class=&quot;dropcap&quot;&gt;C&lt;/span&gt;urabitur blandit tempus porttitor. Nullam quis risus eget urna mollis ornare vel eu leo. Vestibulum id ligula porta felis euismod semper. Donec sed odio dui. Aenean lacinia bibendum nulla sed consectetur.&lt;/p&gt;
+        <title>KotlinConf 2018 Recap</title>
+        <description>&lt;p&gt;&lt;a href=&quot;https://kotlinconf.com/&quot;&gt;KotlinConf 2018&lt;/a&gt; took place in beautiful Amsterdam at the beginning of October, and this year, I had the chance to attend. Though only the second edition, KotlinConf has already become something of an institution within the developer community. Events like these help you meet the people whose work you admire, but would otherwise not be able to meet in person.&lt;/p&gt;
 
-&lt;h1 id=&quot;heading-1&quot;&gt;Heading 1&lt;/h1&gt;
+&lt;p&gt;This is my short recollection of the two wonderful days in Amsterdam:&lt;/p&gt;
 
-&lt;h2 id=&quot;heading-2&quot;&gt;Heading 2&lt;/h2&gt;
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/TczXQ_9qoA4&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 
-&lt;h3 id=&quot;heading-3&quot;&gt;Heading 3&lt;/h3&gt;
+&lt;h2 id=&quot;the-announcements&quot;&gt;The Announcements&lt;/h2&gt;
 
-&lt;h4 id=&quot;heading-4&quot;&gt;Heading 4&lt;/h4&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;We ❤️ Kotlin and Kotlin ❤️s us too!&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;h5 id=&quot;heading-5&quot;&gt;Heading 5&lt;/h5&gt;
+&lt;h3 id=&quot;kotlin-13&quot;&gt;Kotlin 1.3&lt;/h3&gt;
 
-&lt;h6 id=&quot;heading-6&quot;&gt;Heading 6&lt;/h6&gt;
+&lt;p&gt;The long-awaited &lt;a href=&quot;https://blog.jetbrains.com/kotlin/2018/10/kotlin-1-3/&quot;&gt;Kotlin 1.3&lt;/a&gt; release was announced, which would supposedly remove the “experimental” flag off of coroutines and make it a first-class language feature. It will also help promote the concept of multi-platform programming forward. Using Kotlin to develop backend systems is not a new idea, but the 1.3 release is going to firmly set foot in many domains, beyond Android.&lt;/p&gt;
 
-&lt;blockquote&gt;Aenean lacinia bibendum nulla sed consectetur. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum. Nulla vitae elit libero, a pharetra augue. Curabitur blandit tempus porttitor. Donec sed odio dui. Cras mattis consectetur purus sit amet fermentum.&lt;/blockquote&gt;
+&lt;p&gt;Best of all, we can finally use one IDE to develop on Kotlin for all platforms. We no longer need to jump back and forth over to CLion or AppCode, unless we really want to. Otherwise, IntelliJ (incl. the free Community Edition) should be more than sufficient. For finalizing the iOS builds, we ultimately still need XCode, but that’s not something under JetBrains’ control.&lt;/p&gt;
 
-&lt;p&gt;Nullam quis risus eget urna mollis ornare vel eu leo. Cras mattis consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.&lt;/p&gt;
+&lt;h2 id=&quot;the-topics&quot;&gt;The Topics&lt;/h2&gt;
 
-&lt;h2 id=&quot;unordered-list&quot;&gt;Unordered List&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;List Item&lt;/li&gt;
-  &lt;li&gt;Longer List Item
-    &lt;ul&gt;
-      &lt;li&gt;Nested List Item&lt;/li&gt;
-      &lt;li&gt;Nested Item&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;List Item&lt;/li&gt;
-&lt;/ul&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;There is a DSL for that…&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;h2 id=&quot;ordered-list&quot;&gt;Ordered List&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;List Item&lt;/li&gt;
-  &lt;li&gt;Longer List Item
-    &lt;ol&gt;
-      &lt;li&gt;Nested OL Item&lt;/li&gt;
-      &lt;li&gt;Another Nested Item&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;List Item&lt;/li&gt;
-&lt;/ol&gt;
+&lt;p&gt;Of course, topics revolved mainly around the major announcements, including, but not limited to, the development of DSLs (domain-specific languages) for solving just about any problem, multi-platform development (for the JVM, JavaScript, or natively on iOS, macOS, Linux, etc), server-side, data science and machine learning, and of course, many, many sessions targeting Android.&lt;/p&gt;
 
-&lt;h2 id=&quot;definition-list&quot;&gt;Definition List&lt;/h2&gt;
-&lt;dl&gt;
-  &lt;dt&gt;Coffee&lt;/dt&gt;
-  &lt;dd&gt;Black hot drink&lt;/dd&gt;
-  &lt;dt&gt;Milk&lt;/dt&gt;
-  &lt;dd&gt;White cold drink&lt;/dd&gt;
-&lt;/dl&gt;
+&lt;h3 id=&quot;kotlin-on-the-server&quot;&gt;Kotlin on the Server&lt;/h3&gt;
 
-&lt;p&gt;Donec id elit non mi porta gravida at eget metus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas faucibus mollis interdum. Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam.&lt;/p&gt;
+&lt;p&gt;I was happy to see the &lt;a href=&quot;https://cloud.google.com/kotlin/&quot;&gt;involvement of Google into Kotlin&lt;/a&gt;, beyond Android. In fact, there was quite a Google presence from the Cloud Platform team. Other companies, well-known using Kotlin on the server-side, such as German online-bank &lt;a href=&quot;https://n26.com/&quot;&gt;N26&lt;/a&gt;, were there to inspire the community.&lt;/p&gt;
 
-&lt;p&gt;Cras justo odio, dapibus ac facilisis in, egestas eget quam. Curabitur blandit tempus porttitor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec id elit non mi porta gravida at eget metus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.&lt;/p&gt;
+&lt;p&gt;If you are interested into trying out Kotlin on the server, I recommend these three talks straight out of KotlinConf:&lt;/p&gt;
 
-&lt;p&gt;Maecenas faucibus mollis interdum. Maecenas faucibus mollis interdum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Etiam porta sem malesuada magna mollis euismod. Vestibulum id ligula porta felis euismod semper. Cras mattis consectetur purus sit amet fermentum.&lt;/p&gt;
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/8xfQA10Cd7g&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 
-&lt;p&gt;Sed posuere consectetur est at lobortis. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.&lt;/p&gt;
+&lt;p&gt;for a quick overview, before checking out &lt;a href=&quot;https://www.http4k.org/&quot;&gt;http4k&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;Curabitur blandit tempus porttitor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Curabitur blandit tempus porttitor. Nullam quis risus eget urna mollis ornare vel eu leo. Maecenas faucibus mollis interdum. Nullam id dolor id nibh ultricies vehicula ut id elit.&lt;/p&gt;
-</description>
-        
-          <description>&lt;p class=&quot;intro&quot;&gt;&lt;span class=&quot;dropcap&quot;&gt;C&lt;/span&gt;urabitur blandit tempus porttitor. Nullam quis risus eget urna mollis ornare vel eu leo. Vestibulum id ligula porta felis euismod semper. Donec sed odio dui. Aenean lacinia bibendum nulla sed consectetur.&lt;/p&gt;
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/vdxBNh1qx1Q&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 
-</description>
-        
-        <pubDate>Mon, 15 Dec 2014 00:00:00 +0000</pubDate>
-        <link>https://preslavrachev.github.io/2014/12/15/example-post-formatting/</link>
-        <guid isPermaLink="true">https://preslavrachev.github.io/2014/12/15/example-post-formatting/</guid>
-        
-        
-      </item>
-      
-    
-      
-      <item>
-        <title>Featured Image</title>
-        <description>&lt;p class=&quot;intro&quot;&gt;&lt;span class=&quot;dropcap&quot;&gt;L&lt;/span&gt;orem ipsum thor smash liege-bastogne-liege landbouwkrediet ombregt krabbe, rouleur derby is for lovers bonk giro gilbert bidon. Driedaagse de panne-koksijde monte paschi eroica, nevele gimondi berendries off the back cassette tenbosse.&lt;/p&gt;
+&lt;p&gt;and, of course, &lt;a href=&quot;https://ktor.io/&quot;&gt;Ktor&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;Bahamontes lanterne rouge normandie belgium. Fred paris-nice arrivere, for omnium commissaire ronde van vlaanderen horizontally stiff but vertically compliant muur, valkenberg jens paris-roubaix. Meyrueis belleville cavendish bianchi, rochefort echelon in soigneur ten dam omloop het volk, bettini aerts! Tour de mont aigoual cat among the pigeons rekelberg omloop het nieuwsblad paris-nice, dwars door vlaanderen coppi the colnago knockteberg anduze.&lt;/p&gt;
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/V4PS3IjIzlw&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 
-&lt;p&gt;Kaperij lanterne rouge musette rund um koln bruges thor smash, geraardsbergen riis petacchi molteni pedaling squares. Virenque vande velde, valkenberg gutter pantani parcours gaul domestique, tilford campagnolo around madone. Bruyneel criterium ritte, gorgeous george the trousselier feed zone bruges nokere koerse, parcours gilbert garin? Anquetil valkenberg bettini cat among the pigeons.&lt;/p&gt;
+&lt;h3 id=&quot;kotlin-for-data-science&quot;&gt;Kotlin for Data Science&lt;/h3&gt;
 
-&lt;p&gt;Campagnolo the hors delai de wolf as the toto turns venga venga venga, sanchez nys. Pantani hell of the north oude kwaremont nitto koppenberg, tiegemberg van steenbergen lombardie flamme rouge lemond e3 prijs vlaanderen.&lt;/p&gt;
+&lt;p&gt;Ever since I tried Kotlin for the first time, I was convinced that it has the potential to outpace Scala, and stand shoulder to shoulder with Python and R, as the dominant programming language trio of data science. Although we are still far from this moment of ultimate bliss, the efforts of folks like &lt;a href=&quot;https://twitter.com/holgerbrandl&quot;&gt;Holger Brand&lt;/a&gt; l and &lt;a href=&quot;https://twitter.com/thomasnield9727&quot;&gt;Thomas Nield&lt;/a&gt; (and to some limited extend, my humble self) can only help reassure that there is a serious potential, which is about to unroll in the coming months.&lt;/p&gt;
 
-&lt;p&gt;Planckaert berg ter stene freire gorgeous george in rouleur derby, vaughters fabianese omloop het volk rouleur play rouleur derby. Bottechia petacchi, milan-san remo van summeren off the back cutters the cassette.&lt;/p&gt;
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/yjVW6uCmVBA&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 
-&lt;p&gt;Nyvelocity pyrenees vande velde merckx. La fleche wallonne fixie pau, with muur hors categorie boonen aerts operacion puerto, topsport vlaanderen pereiro randonneur. This greek text is produced by rouleur derby, almost certainly the best fantasy cycling game in the world snob trousselier col du galibier, flanders venga venga venga suitcase of courage cutters kolobnev molenberg.&lt;/p&gt;
-</description>
-        
-          <description>&lt;p class=&quot;intro&quot;&gt;&lt;span class=&quot;dropcap&quot;&gt;L&lt;/span&gt;orem ipsum thor smash liege-bastogne-liege landbouwkrediet ombregt krabbe, rouleur derby is for lovers bonk giro gilbert bidon. Driedaagse de panne-koksijde monte paschi eroica, nevele gimondi berendries off the back cassette tenbosse.&lt;/p&gt;
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/-zTqtEcnM7A&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 
-</description>
-        
-        <pubDate>Sun, 14 Dec 2014 00:00:00 +0000</pubDate>
-        <link>https://preslavrachev.github.io/2014/12/14/featured-image/</link>
-        <guid isPermaLink="true">https://preslavrachev.github.io/2014/12/14/featured-image/</guid>
-        
-        
-      </item>
-      
-    
-      
-      <item>
-        <title>Post With A Code Snippet</title>
-        <description>&lt;p class=&quot;intro&quot;&gt;&lt;span class=&quot;dropcap&quot;&gt;Y&lt;/span&gt;ou'll find this post in your `_posts` directory - edit this post and re-build (or run with the `-w` switch) to see your changes! To add new posts, simply add a file in the `_posts` directory that follows the convention: YYYY-MM-DD-name-of-post.ext.&lt;/p&gt;
+&lt;h3 id=&quot;kotlin--everywhere-even-on-ios&quot;&gt;Kotlin … Everywhere (Even on iOS)&lt;/h3&gt;
 
-&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
+&lt;p&gt;Yes, the big keyword of KotlinConf 2018 was &lt;em&gt;/multi-platform/&lt;/em&gt;. Although not a silver bullet, and definitely not a write-once-deploy-everywhere proposition, multi-platform has the potential to help developers organize big projects around modules that can be shared across platforms. Kotlin/Native makes this possible. Unlike Flutter or React Native, however, the idea is not to overtake the UI development of each platform, but rather, deliver the native look-and-experience, by sharing the shared business logic across.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Tom'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints 'Hi, Tom' to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/UyTBXEZ983g&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 
-&lt;p&gt;Check out the &lt;a href=&quot;http://jekyllrb.com&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/mojombo/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;.&lt;/p&gt;
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/Dul17VSiejo&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 
-</description>
-        
-          <description>&lt;p class=&quot;intro&quot;&gt;&lt;span class=&quot;dropcap&quot;&gt;Y&lt;/span&gt;ou'll find this post in your `_posts` directory - edit this post and re-build (or run with the `-w` switch) to see your changes! To add new posts, simply add a file in the `_posts` directory that follows the convention: YYYY-MM-DD-name-of-post.ext.&lt;/p&gt;
+&lt;h3 id=&quot;the-venue&quot;&gt;The Venue&lt;/h3&gt;
 
-</description>
-        
-        <pubDate>Sat, 13 Dec 2014 00:00:00 +0000</pubDate>
-        <link>https://preslavrachev.github.io/2014/12/13/code-snippet/</link>
-        <guid isPermaLink="true">https://preslavrachev.github.io/2014/12/13/code-snippet/</guid>
-        
-        
-      </item>
-      
-    
-      
-      <item>
-        <title>Figure With A Caption</title>
-        <description>&lt;p class=&quot;intro&quot;&gt;&lt;span class=&quot;dropcap&quot;&gt;L&lt;/span&gt;orem ipsum thor smash liege-bastogne-liege landbouwkrediet ombregt krabbe, rouleur derby is for lovers bonk giro gilbert bidon. Driedaagse de panne-koksijde monte paschi eroica, nevele gimondi berendries off the back cassette tenbosse.&lt;/p&gt;
+&lt;p&gt;The venue (&lt;a href=&quot;https://en.wikipedia.org/wiki/Beurs_van_Berlage&quot;&gt;Beurs van Berlage&lt;/a&gt;) is a former Dutch stock exchange, now turned into a convention center. It is located in the perfect city center, literally, 5-minute walking distance from the central station. I was extremely thankful for that, since I was commuting with the morning train from the nearby city of Utrecht.&lt;/p&gt;
 
-&lt;p&gt;Bahamontes lanterne rouge normandie belgium. Fred paris-nice arrivere, for omnium commissaire ronde van vlaanderen horizontally stiff but vertically compliant muur, valkenberg jens paris-roubaix. Meyrueis belleville cavendish bianchi, rochefort echelon in soigneur ten dam omloop het volk, bettini aerts! Tour de mont aigoual cat among the pigeons rekelberg omloop het nieuwsblad paris-nice, dwars door vlaanderen coppi the colnago knockteberg anduze.&lt;/p&gt;
-
-&lt;figure&gt;
-	&lt;img src=&quot;/assets/img/touring.jpg&quot; alt=&quot;&quot; /&gt; 
-	&lt;figcaption&gt;Fig1. - This is an example figcaption&lt;/figcaption&gt;
+&lt;figure class=&quot;&quot;&gt;
+  &lt;img src=&quot;/assets/img/2018/november/TJ1QL%25KsR8evl5H0LZjn4Q_thumb_14ca.jpg&quot; alt=&quot;A beautiful morning in Amsterdam with Beurs van Berlage in the background&quot; /&gt;
+  
+    &lt;figcaption&gt;A beautiful morning in Amsterdam with Beurs van Berlage in the background
+&lt;/figcaption&gt;
+  
 &lt;/figure&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;figure&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;img&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/assets/img/touring.jpg&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;alt=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt; 
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;figcaption&amp;gt;&lt;/span&gt;Fig1. - This is an example figcaption&lt;span class=&quot;nt&quot;&gt;&amp;lt;/figcaption&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/figure&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;The service and catering at the location were very good. Food, refreshments, and coffee were present at all times, so one could never enter a session hungry or or in lack of caffeine. The organizers and stewards were always present, always helping, politely answering questions, or helping people get to their sessions on time.&lt;/p&gt;
 
-&lt;p&gt;Kaperij lanterne rouge musette rund um koln bruges thor smash, geraardsbergen riis petacchi molteni pedaling squares. Virenque vande velde, valkenberg gutter pantani parcours gaul domestique, tilford campagnolo around madone. Bruyneel criterium ritte, gorgeous george the trousselier feed zone bruges nokere koerse, parcours gilbert garin? Anquetil valkenberg bettini cat among the pigeons.&lt;/p&gt;
+&lt;p&gt;There were however, a couple of minus points. The event felt a bit overbooked for the venue, and one could see this right from the start. The keynote hall could not fit everyone, so a separate hall was designated, where the keynote was streamed. Also, during follow-up sessions, some of the smaller halls filled up quickly, and late newcomers would stay around the edge of the room, or get ushered to a separate, silent room with a few large screens streaming each of the four parallel sessions live. Some people liked the silent rooms, but I didn’t. I go to a conference mainly for the live interaction with others, not for passive consumption of the presentations. I wish there were a little more room and space for enjoying your chat, without being ushered to move aside ever 10 seconds.&lt;/p&gt;
 
-&lt;p&gt;Campagnolo the hors delai de wolf as the toto turns venga venga venga, sanchez nys. Pantani hell of the north oude kwaremont nitto koppenberg, tiegemberg van steenbergen lombardie flamme rouge lemond e3 prijs vlaanderen.&lt;/p&gt;
+&lt;h3 id=&quot;overall&quot;&gt;Overall&lt;/h3&gt;
 
-&lt;p&gt;Planckaert berg ter stene freire gorgeous george in rouleur derby, vaughters fabianese omloop het volk rouleur play rouleur derby. Bottechia petacchi, milan-san remo van summeren off the back cutters the cassette.&lt;/p&gt;
+&lt;p&gt;Of course, all of these things are normal for such a big conference, and compared to the overall excitement to be there and meet the Kotlin community, they felt like a minor nuisance. I totally enjoyed my stay in Amsterdam and Utrecht, and am already looking forward to booking my tickets for next year’s KotlinConf.&lt;/p&gt;
 
-&lt;p&gt;Nyvelocity pyrenees vande velde merckx. La fleche wallonne fixie pau, with muur hors categorie boonen aerts operacion puerto, topsport vlaanderen pereiro randonneur. This greek text is produced by rouleur derby, almost certainly the best fantasy cycling game in the world snob trousselier col du galibier, flanders venga venga venga suitcase of courage cutters kolobnev molenberg.&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;KotlinConf 2018 through the eyes of others&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://zsmb.co/kotlinconf-18&quot;&gt;KotlinConf 18 | Zsmb&lt;/a&gt;
+&lt;a href=&quot;https://developer.epages.com/blog/events/krazy-kotlinconf-2018-in-amsterdam/&quot;&gt;Krazy KotlinConf 2018 in Amsterdam&lt;/a&gt;&lt;/p&gt;
 </description>
         
-          <description>&lt;p class=&quot;intro&quot;&gt;&lt;span class=&quot;dropcap&quot;&gt;L&lt;/span&gt;orem ipsum thor smash liege-bastogne-liege landbouwkrediet ombregt krabbe, rouleur derby is for lovers bonk giro gilbert bidon. Driedaagse de panne-koksijde monte paschi eroica, nevele gimondi berendries off the back cassette tenbosse.&lt;/p&gt;
+          <description>&lt;p&gt;&lt;a href=&quot;https://kotlinconf.com/&quot;&gt;KotlinConf 2018&lt;/a&gt; took place in beautiful Amsterdam at the beginning of October, and this year, I had the chance to attend. Though only the second edition, KotlinConf has already become something of an institution within the developer community. Events like these help you meet the people whose work you admire, but would otherwise not be able to meet in person.&lt;/p&gt;
 
 </description>
         
-        <pubDate>Fri, 12 Dec 2014 00:00:00 +0000</pubDate>
-        <link>https://preslavrachev.github.io/2014/12/12/figure-with-caption/</link>
-        <guid isPermaLink="true">https://preslavrachev.github.io/2014/12/12/figure-with-caption/</guid>
+        <pubDate>Thu, 01 Nov 2018 20:17:00 +0100</pubDate>
+        <link>https://preslav.me/2018/11/01/kotlinconf-2018-recap/</link>
+        <guid isPermaLink="true">https://preslav.me/2018/11/01/kotlinconf-2018-recap/</guid>
+        
+        <category>Kotlin</category>
+        
+        
+        <category>Programming</category>
+        
+      </item>
+      
+    
+      
+      <item>
+        <title>A New Stochastic Oscillator?</title>
+        <description>&lt;p&gt;&lt;strong&gt;&lt;em&gt;Disclaimer:&lt;/em&gt;&lt;/strong&gt; &lt;em&gt;None of what follows is an actual trading advice. It was meant to educate and share my learning experience with the community, and should not be used as-is for making assumptions about the future direction of any market asset. Always do your own research!&lt;/em&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;In most domains of science (and I dare consider market technical analysis a form applied statistics/data science), serendipity plays an enormous role. Just the other day, I was playing around with the &lt;a href=&quot;https://www.investopedia.com/terms/s/stochasticoscillator.asp&quot;&gt;Stochastic Oscillator&lt;/a&gt; — a well-known TA indicator, trying to create an ML-driven trading strategy that beats &lt;a href=&quot;https://www.investopedia.com/terms/d/dollarcostaveraging.asp&quot;&gt;Dollar-Cost-Averaging (DCA)&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;There is a popular belief that regularly investing small sums of money over a longer period of time (also known as Dollar-Cost-Averaging) is a relatively low-risk way of beating the market. I decided to try and use machine learning to beat DCA, by keeping the same manner of investing small amounts of money over time.&lt;/p&gt;
+
+&lt;h2 id=&quot;stochastic-oscillator&quot;&gt;Stochastic Oscillator&lt;/h2&gt;
+
+&lt;p&gt;The Stochastic Oscillator (STOCH) is a momentum indicator, which compares the current price of an asset to the minimum and maximum price of the same asset over a period of time (usually, 14 or 30 days). The formula for calculating STOCH is very simple:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;current_price - min_price / max_price - min_price
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;figure class=&quot;&quot;&gt;
+  &lt;img src=&quot;https://cdn-images-1.medium.com/max/1600/0*4GYfb9dMM0CGxKgA.gif&quot; alt=&quot;this is a placeholder image&quot; /&gt;
+  
+    &lt;figcaption&gt;source: Investopedia
+&lt;/figcaption&gt;
+  
+&lt;/figure&gt;
+
+&lt;p&gt;By giving out a ratio between 0 and 100 (or 0 and 1, depending on how you frame it), STOCH is a simple way of identifying if the market has been &lt;em&gt;oversold&lt;/em&gt;(perhaps, time to buy), or &lt;em&gt;overbought&lt;/em&gt; (perhaps, time to sell). There are many who believe that the oversold threshold should be 20, and the overbought one around 80.&lt;/p&gt;
+
+&lt;p&gt;Of course, using the STOCH indicator alone, will rarely, if ever bring you any significant trading performance. The truth lies in creatively combining STOCHs of different time periods together with other indicators in a model that is versatile against market swings. I would usually use a &lt;a href=&quot;https://en.wikipedia.org/wiki/Random_forest&quot;&gt;random forest&lt;/a&gt; of multiple shallow &lt;a href=&quot;https://en.wikipedia.org/wiki/Decision_tree_learning&quot;&gt;decision trees&lt;/a&gt;, each using only one or two indicators to classify the available data.&lt;/p&gt;
+
+&lt;p&gt;It turns out that while calculating STOCH, I had left an error. Instead of the formula above, it read:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mean_of_price_across_period - min_price / max_price - min_price
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;I calculated both for a 3-month period of the price Bitcoin/Euro. My version (blue line) seems like a strangely smoothed out version of STOCH (orange line). One would argue that what I have created is just a simple smoothing of the orange line. For comparison, I have added a 14-day simple smoothed out version of the STOCH indicator (the green line). Indeed, the blue and the green lines tend to converge, but not all the time. What makes the blue one even more interesting, is that unlike the fully smoothed-out version, it retains a certain level of detail, without swinging into extremes, the way pure STOCH does.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://cdn-images-1.medium.com/max/1600/1*kWaD_z7De592VPG3Obim0Q.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Comparing my version of STOCH with what should be its correct calculation&lt;/p&gt;
+
+&lt;h2 id=&quot;trading-performance&quot;&gt;Trading Performance&lt;/h2&gt;
+
+&lt;p&gt;I would not have started writing about this, if it weren’t for the interesting trading performance I got from this supposedly “wrong” STOCH indicator. Let’s put this into perspective. I tested four different strategies on the Bitcoin/Euro price starting from Jan 01, 2018. All the strategies involved investing EUR 50 at the beginning of each month, and except DCA (the blue line), all others included selling of Bitcoin at various points and in varying magnitudes. This is what I got:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://cdn-images-1.medium.com/max/1600/1*FyHtLmfhZuflH4fRmqJpEA.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Comparing trading strategy performance: Jan 2018 — Nov 2018&lt;/p&gt;
+
+&lt;p&gt;Using the old STOCH rule of thumb — buy under 20, sell above 80 (orange line) does perform a little better than simply buying regularly and holding. In fact, it does perform slightly better even than a random forest ML model that has STOCH as one of its features (the green line). Yet, only in this short bearish period of 11 months. Interestingly enough, the real “winner” seems to be the same version of the random forest strategy, which uses the “wrongly” calculated STOCH. Of all strategies, it is the only one that manages to break even (go above the purple step line), albeit, only by a little.&lt;/p&gt;
+
+&lt;p&gt;Dragging the starting point a mere 6 months earlier, right in the middle of the the wild crypto market uprise, shows a completely different picture. Buying and selling using the rule of thumb is nowhere near close. It has remained mostly under the break-even line. The other three strategies pretty much follow the market swings, but the one that really stands out, is the random forest model that uses the variation of STOCH that I thought I’d computed wrongly.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://cdn-images-1.medium.com/max/1600/1*U-FoyA4z-apvKVcKfPhqIA.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Comparing trading strategy performance: Jun 2017 — Nov 2018&lt;/p&gt;
+
+&lt;p&gt;Coincidence? Yet, stretching the start of the trading period as far back as the beginning of 2016would pretty much result int he same picture. By using the modified STOCH as part of my ML model, the strategy has somehow managed to take advantage of the second downfall wave of Bitcoin during February/March of 2018, by selling at the top and re-buying again down at the bottom.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://cdn-images-1.medium.com/max/1600/1*EV5qh9zlW8Nm5f6gt4D4gw.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Comparing trading strategy performance: Jan 2016 — Nov 2018&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Whether this is a good strategy or not, it is hard for me to judge, based on only the limited data I used. Frankly, as mentioned at the top of the article, its goal is to share some of my learning with the community, and not to give trading advice of any sort.&lt;/p&gt;
+
+&lt;p&gt;It seems like I would keep seeing this interpretation of STOCH in future iterations of my strategy. Serendipity plays a huge role in my research, and I will try to &lt;em&gt;break&lt;/em&gt; a few more rules of the technical analysis establishment, with the hope that I find some more gems hidden hidden beneath the rocks.&lt;/p&gt;
+</description>
+        
+          <description>&lt;p&gt;&lt;strong&gt;&lt;em&gt;Disclaimer:&lt;/em&gt;&lt;/strong&gt; &lt;em&gt;None of what follows is an actual trading advice. It was meant to educate and share my learning experience with the community, and should not be used as-is for making assumptions about the future direction of any market asset. Always do your own research!&lt;/em&gt;&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Thu, 01 Nov 2018 17:38:53 +0100</pubDate>
+        <link>https://preslav.me/2018/11/01/a-new-stochastic-oscillator/</link>
+        <guid isPermaLink="true">https://preslav.me/2018/11/01/a-new-stochastic-oscillator/</guid>
+        
+        <category>Algorithmic Trading</category>
+        
+        <category>Machine Learning</category>
+        
+        <category>Data Science</category>
+        
+        <category>Bitcoin</category>
+        
+        
+        <category>Trading</category>
+        
+      </item>
+      
+    
+      
+      <item>
+        <title>A Photo Recap of the Past Week</title>
+        <description>&lt;p&gt;Wow, it has been quite a week! It is time for a quick photo recap.&lt;/p&gt;
+
+&lt;p&gt;First, a &lt;a href=&quot;https://preslav.me/micro/2018/10032205/&quot;&gt;visit to Bremen&lt;/a&gt;, the place where I studied my Master’s and lived for five years. I hadn’t visited the place for three years, so this was quite an emotional thing. I also managed to meet friends from the good old Uni days.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/2018/10072056-7.jpeg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Having stayed only a couple of days, I took the train to &lt;a href=&quot;https://en.wikipedia.org/wiki/Randstad?wprov=sfti1&quot;&gt;Utrecht, The Netherlands&lt;/a&gt;, where I stayed at a friend’s house and used Utrecht as my base point during the two days of KotlinConf. Utrecht is a great place to live, because it is quiet and peaceful, but large enough that you won’t ever miss a thing. At the same time, its proximity to Amsterdam (a 25 min train ride) makes it a perfect residence for many commuters working in Amsterdam.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/2018/10072056-3.jpeg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;During one of the days, we checked an exhibition depicting the history of music-making machines.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/2018/10072056-2.jpeg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/2018/10072056-6.jpeg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;We also traveled up north to &lt;a href=&quot;https://en.wikipedia.org/wiki/Enkhuizen?wprov=sfti1&quot;&gt;Enkhuizen&lt;/a&gt;, a small seaside town that hosts a unique open &lt;a href=&quot;https://www.zuiderzeemuseum.nl/&quot;&gt;museum&lt;/a&gt;. The museum depicts the life of the Dutch people between the 19th and 20th century.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/2018/10072056-4.jpeg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;But the journey does not stop here. The following couple of days, I took the early train to Amsterdam, where I attended this year’s &lt;a href=&quot;https://kotlinconf.com/&quot;&gt;KotlinConf&lt;/a&gt; conference. KotlinConf is quite a thing and deserves its own separate post. For now, I would just note  that it was great to meet so many people in person, many of which I follow online, and whose work I greatly admire. It was a great forum.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/2018/10072056-5.jpeg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Only a day after my return to Munich, I visited a concert by &lt;a href=&quot;https://bit.ly/2y5QyCW&quot;&gt;Maluma&lt;/a&gt;, a Colombian reggaeton singer, who, as I heard from my fiancée, is quite the thing these days. Long story short, I went with her and wasn’t disappointed. I have to admit, despite his music being directed at ladies (who represented roughly 80% of the audience yesterday) the guy is quite a good performer.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/2018/10072056-1.jpeg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;So this was, in short, my crazy week on the road. I did not manage to run while on the go, but I walked quite significantly. According to my watch, I have managed to walk between 13km and 14km per day, on average. Today, I topped the distance with a 10km run.&lt;/p&gt;
+
+&lt;p&gt;That said, the week is finally about to end.&lt;/p&gt;
+</description>
+        
+          <description>&lt;p&gt;Wow, it has been quite a week! It is time for a quick photo recap.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Sun, 07 Oct 2018 20:57:00 +0200</pubDate>
+        <link>https://preslav.me/2018/10/07/photo-recap/</link>
+        <guid isPermaLink="true">https://preslav.me/2018/10/07/photo-recap/</guid>
+        
+        <category>Travel</category>
+        
+        <category>Conference</category>
+        
+        
+        <category>Photo Stories</category>
+        
+      </item>
+      
+    
+      
+      <item>
+        <title>Software Disenchantment: A Slightly Philosophical Look</title>
+        <description>&lt;p&gt;As a software developer who roams around the social media circles, you might have already stumbled upon Nikita Tonsky’s &lt;a href=&quot;http://tonsky.me/blog/disenchantment/&quot;&gt;post&lt;/a&gt;. I have been tinkering with programming every since I can remember. I have been writing code professionally for close to a decade now. Therefore, I couldn’t just leave Nikita’s words pass by me, and not leave a remark. Here’s a quote from Nikita’s post that sets the overall tone:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Only in software, it’s fine if a program runs at 1% or even 0.01% of the possible performance. Everybody just seems to be ok with it. People are often even proud about how much inefficient it is, as in “why should we worry, computers are fast enough.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Also…&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;So everything is just a pile of barely working code added on top of previously written barely working code. It keeps growing in size and complexity, diminishing any chance for a change.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;And this…&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;That is not engineering. That’s just lazy programming. Engineering is understanding performance, structure, limits of what you build, deeply. Combining poorly written stuff with more poorly written stuff goes strictly against that. To progress, we need to understand what and why are we doing.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;What should I say, I have been feeling very much the same way lately. Almost a decade down the road, I am yet to work on a project that only does one thing, but does it so well that there is no urgent need to maintain it. A project where updates, although inevitable, would take hours instead of months. Something that simply works and does not eat the resources of the system it is sitting on, just because it can.&lt;/p&gt;
+
+&lt;p&gt;Why stuff became so bloated, can be partially traced to the fact that hardware has gotten cheaper and more efficient, and this trend is most probably going to continue in the future. One could say that our willingness to reuse code has adversely led to overlaps and unintentional repetition. No doubt. Yet, IMHO, the real reason is that we as developers, or should I rather say human beings, hate to specialise. We love to abstract, to generalise, to hide the underlying details under the carpet.&lt;/p&gt;
+
+&lt;p&gt;This has a lot more to do with our evolution as humans, rather than with anything else. If you have ever seen or studied Maslow’s &lt;em&gt;Hierarchy of Needs&lt;/em&gt;, you’ll know exactly what I mean. As organisms begin to evolve, their priorities shift away from the basics (food, toilet, reproduction, etc) to more abstract and higher-level goals. Having found a way to satisfy their basic needs, humanity started looking beyond the individual, and into the surrounding world. Having somewhat become the masters of their surroundings, humans started looking even further - into the deep unknowns of the Universe. All with one goal in mind - discovering who they are and what their purpose in life really is.&lt;/p&gt;
+
+&lt;p class=&quot;align-center u-photo&quot;&gt;&lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/MaslowsHierarchyOfNeeds.svg/800px-MaslowsHierarchyOfNeeds.svg.png&quot; alt=&quot;Maslow’s Hierarchy of Needs&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;source &lt;a href=&quot;https://en.wikipedia.org/wiki/Maslow%27s_hierarchy_of_needs&quot;&gt;Wikipedia&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;That’s it. It’s really simple. Our inability to solve this very existential question, makes us push ourselves further, in order to reach the next clue that might potentially give us the answer. Yet, the more we develop our, the more complex it becomes. In fact, so complex that we often underestimate the complexity we have created, and keep building right on top of it. From time to time, a major reality check would happen (what Nassim Nicholas Taleb calls a &lt;a href=&quot;https://amzn.to/2NrYyDo&quot;&gt;“Black Swan”&lt;/a&gt;, which stirs things a bit, but rarely does it manage to stall them, or reset them back significantly.&lt;/p&gt;
+
+&lt;p&gt;In case you’re still reading (I am impressed), let me reiterate with the particular case in mind. In striving to future-proof our creations, we overengineer them to the point that often starting from scratch is inevitable. I don’t think that this will change, or even, that it can change. The more we develop, the further away we’ll keep looking, and the more complex our surroundings will become.&lt;/p&gt;
+
+&lt;p&gt;As developers, we are especially prone to falling into the rabbit hole of complexity. Being aware of complexity, will perhaps help us restrain it in certain situations, or raise our awareness about the risk of potential failures. Such will be more and more deeply rooted, the further humanity progresses, and will occasionally reappear to restore balance.&lt;/p&gt;
+
+&lt;p&gt;One way to go about this is to simply acknowledge the fact, and design your life around the enjoyment of finding beauty in simple things. It’s not all lost, and it’s not that bad, actually. It’s just how human nature works. Nikita’s post ends on a positive nature about a brighter future, and so will I. Just like a negative black swan event might destroy the project you’ve been working on for years, so a positive one might bring the mythical well-scoped project that any developer has ever dreamed about.&lt;/p&gt;
+</description>
+        
+          <description>&lt;p&gt;As a software developer who roams around the social media circles, you might have already stumbled upon Nikita Tonsky’s &lt;a href=&quot;http://tonsky.me/blog/disenchantment/&quot;&gt;post&lt;/a&gt;. I have been tinkering with programming every since I can remember. I have been writing code professionally for close to a decade now. Therefore, I couldn’t just leave Nikita’s words pass by me, and not leave a remark. Here’s a quote from Nikita’s post that sets the overall tone:&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Sat, 06 Oct 2018 16:00:00 +0200</pubDate>
+        <link>https://preslav.me/2018/10/06/software-disenchantment/</link>
+        <guid isPermaLink="true">https://preslav.me/2018/10/06/software-disenchantment/</guid>
+        
+        <category>2 Cents</category>
+        
+        
+        <category>Programming</category>
+        
+      </item>
+      
+    
+      
+      <item>
+        <title>Python: Automatic Argument Unpacking from a Dictionary</title>
+        <description>&lt;p&gt;Programming often involves creating configuration objects/dicts and passing them around to functions. Let’s say we want to pass the following configuration dict to a function:&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;config&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;'prop_a'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'foo'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;'prop_b'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'bar'&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Usually, a function that consumes this configuration dict would either expect a single parameter:&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;do_something&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;prop_a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'prop_a'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;prop_b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'prop_b'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;# do something with the props&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Or would rather have them listed as separate params, but those have to be manually read out of &lt;code class=&quot;highlighter-rouge&quot;&gt;config&lt;/code&gt; when calling the function:&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;do_something&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;prop_a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;prop_b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;# do something with the props&lt;/span&gt;
+    
+&lt;span class=&quot;n&quot;&gt;do_something&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;prop_a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'prop_a'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;prop_b&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'prop_b'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;    
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;What if we didn’t have to explicitly unpack each and every property? If the keys in the dictionary exactly match the names of parameters expected by the function, one could simply use the &lt;code class=&quot;highlighter-rouge&quot;&gt;**&lt;/code&gt; operator and those would be unpacked and assigned automatically:&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;do_something&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;prop_a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;prop_b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;# do something with the props&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;do_something&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;**&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;see-also&quot;&gt;See also&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://docs.python.org/3/tutorial/controlflow.html#unpacking-argument-lists&quot;&gt;Unpacking Argument Lists&lt;/a&gt;&lt;/p&gt;
+</description>
+        
+          <description>&lt;p&gt;Programming often involves creating configuration objects/dicts and passing them around to functions. Let’s say we want to pass the following configuration dict to a function:&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Sat, 22 Sep 2018 09:30:00 +0200</pubDate>
+        <link>https://preslav.me/2018/09/22/python-automatic-argument-unpacking/</link>
+        <guid isPermaLink="true">https://preslav.me/2018/09/22/python-automatic-argument-unpacking/</guid>
+        
+        <category>Python</category>
+        
+        <category>Tips</category>
+        
+        
+        <category>Programming</category>
+        
+      </item>
+      
+    
+      
+      <item>
+        <title>Revisiting IntStreams in Java8+</title>
+        <description>&lt;p&gt;This post is mainly a reiteration of &lt;a href=&quot;http://www.deadcoderising.com/2015-05-19-java-8-replace-traditional-for-loops-with-intstreams/&quot;&gt;an article&lt;/a&gt;, I found online. As of Java 8, we have had the ability to replace looping operations on collections with streams and functional operations. This applies to situations where we don’t have an up-front collection to iterate upon.&lt;/p&gt;
+
+&lt;p&gt;What traditionally would have been solved by a &lt;code class=&quot;highlighter-rouge&quot;&gt;for-loop&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;list&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ArrayList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;();&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Username&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// we can now use list&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;can be replaced by the much more elegant-looking &lt;a href=&quot;https://docs.oracle.com/javase/8/docs/api/java/util/stream/IntStream.html&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;IntStream&lt;/code&gt;&lt;/a&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;list&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IntStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;mapToObj&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Username&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;it&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;collect&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Collectors&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;toList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;It is a matter of taste, but I prefer the functional approach from the latter example. A nice advantage of using &lt;code class=&quot;highlighter-rouge&quot;&gt;IntStream&lt;/code&gt; are the reducing helper methods coming from &lt;code class=&quot;highlighter-rouge&quot;&gt;Stream&lt;/code&gt;, such as &lt;code class=&quot;highlighter-rouge&quot;&gt;allMatch&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;anyMatch&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;noneMatch&lt;/code&gt;, or even &lt;code class=&quot;highlighter-rouge&quot;&gt;reduce&lt;/code&gt; itself. This is helpful when testing multiple conditions and need a single answer at the end:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;allMatch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;list&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IntStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;allMatch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;booleanTestOn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;it&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This is really nothing special that the &lt;code class=&quot;highlighter-rouge&quot;&gt;IntStream&lt;/code&gt; class itself brings on the table, but functionality that it inherits from &lt;a href=&quot;https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Stream&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Analogous to the &lt;code class=&quot;highlighter-rouge&quot;&gt;IntStream&lt;/code&gt; class, alternatives exist for handling Long (https://docs.oracle.com/javase/8/docs/api/java/util/stream/LongStream.html) and Double (&lt;a href=&quot;https://docs.oracle.com/javase/8/docs/api/java/util/stream/DoubleStream.html&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;DoubleStream&lt;/code&gt;&lt;/a&gt;) values.&lt;/p&gt;
+</description>
+        
+          <description>&lt;p&gt;This post is mainly a reiteration of &lt;a href=&quot;http://www.deadcoderising.com/2015-05-19-java-8-replace-traditional-for-loops-with-intstreams/&quot;&gt;an article&lt;/a&gt;, I found online. As of Java 8, we have had the ability to replace looping operations on collections with streams and functional operations. This applies to situations where we don’t have an up-front collection to iterate upon.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Tue, 11 Sep 2018 19:00:00 +0200</pubDate>
+        <link>https://preslav.me/2018/09/11/int-streams-in-java8/</link>
+        <guid isPermaLink="true">https://preslav.me/2018/09/11/int-streams-in-java8/</guid>
+        
+        <category>Java</category>
+        
+        <category>Tips</category>
+        
+        
+        <category>Programming</category>
+        
+      </item>
+      
+    
+      
+      <item>
+        <title>Medium Is Turning into the Walled Garden It Did Not Want to Be</title>
+        <description>&lt;p&gt;A few days ago, I got a question from an online friend of mine, whether to self-host his new blog, or start directly on Medium. I advised him to self-host and use Medium only for content distribution. I have always been pro writer independence, and though I have tried quite a few platforms over the years, none has really withstood the test of time. Medium makes no exception.&lt;/p&gt;
+
+&lt;p&gt;There was a time, when I veneered Medium with much respect. It was when it stood for something. It proclaimed no boundaries to freedom of speech, and levels of quality content rarely seen anywhere else. It also set out to avoid advertising in its ugliest form, the one that sticks in your face from the moment you open a Web page&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Medium is a new place on the Internet where people share ideas and stories that are longer than 140 characters and not just for friends. It’s designed for little stories that make your day better and manifestos that change the world. It’s used by everyone from professional journalists to amateur cooks. It’s simple, beautiful, collaborative, and it helps you find the right audience for whatever you have to say.&lt;br /&gt;
+— &lt;a href=&quot;https://medium.com/@ev/welcome-to-medium-9e53ca408c48&quot;&gt;Ev Williams&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Indeed, early Medium did actually look very promising. Clean, nicely-designed Web pages focused on the content and on beautiful imagery that catches the eye. While the early version of the platform was somewhat elitist and exclusive, writers who made it in, gladly shared their writings free of charge.  There was a sort of intrinsic motivation, that made early writers double, and triple-check the quality of their writings.&lt;/p&gt;
+
+&lt;p&gt;Yet, Medium had grander goals for both its community, and its business. Of course, it is a Silicon Valley startup, so one couldn’t expect anything less. Initially, like most other content businesses, the company heavily experimented with an ad-driven model, especially targeting native advertising and brand publishing. People and companies jumped on board, with the intention to sell their stuff, disguised behind a boastful message, and some beautiful imagery. For a time, Medium turned into a content fan. Whatever you threw at it, got instantly popular, regardless of its quality. In &lt;a href=&quot;https://blog.medium.com/renewing-mediums-focus-98f374a960be&quot;&gt;early 2017&lt;/a&gt;, this period was claimed to have been a rather “failed experiment”, and the ship got steered in a new direction. One, based on the belief that &lt;em&gt;“people who write and share ideas should be rewarded on their ability to enlighten and inform, not simply their ability to attract a few seconds of attention”&lt;/em&gt;. The so-called &lt;a href=&quot;https://medium.com/membership&quot;&gt;Membership Program&lt;/a&gt;.  A noble idea with, IMHO, a sub-optimal execution.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/2018/september/AA3E40DC-2BD0-4465-84F9-126FC12869E1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The Membership Program (MP) relies on monthly reader subscriptions, and spreads the money around, to authors who have put their content into a pool of member-only posts. How the money gets distributed exactly is not really clear, but Medium claims it to be based on the &lt;strong&gt;amount of engagement&lt;/strong&gt; members spend on a particular piece of content. The sad fact is that member stories eventually get hidden from non-members, after a certain number of previews. This is the opposite of what Medium originally claimed to have stood for, and to prove it, I decided to become both a member and to add a few of my popular stories to the MP. A month later, despite the fact that one of my previously free articles had amassed more than 100 thousand reads, it still hasn’t received a single cent from the MP, while the engagement I actually care for (replies, comments, discussions, etc) has nearly stalled. I am not sure if this was the “reward” that Ev was talking about. Moreover, I did not see any benefit of being a paid member either.&lt;/p&gt;
+
+&lt;p&gt;The MP is just one of the aspects, in which Medium is trying to enclose its community into a silo. For one, despite being the favourite go-to place for most developers nowadays, Medium never really engaged with the developer community, and giving them a chance to build engaging experiences around the platform. There is still only one Medium app, which is not bad, but not something I get to use particularly often. I wanted to build a Medium article reader once, a slick experience that focuses on the text, and not so much on the imagery, one that could potentially even use text-to-speech to read you articles while one the go. I quickly realised that while possible, hacking around Medium’s undocumented internal API did not make much fun.&lt;/p&gt;
+
+&lt;p class=&quot;notice&quot;&gt;NOTE: As for what I believe is the future of distributed content monetization, I will rather leave this for a separate post.&lt;/p&gt;
+
+&lt;p&gt;Brands also found themselves disengaged, since, as of November last year, custom domains for new users &lt;a href=&quot;https://help.medium.com/hc/en-us/articles/115003053487-Custom-Domains-service-deprecation&quot;&gt;were deprecated&lt;/a&gt;.&lt;/p&gt;
+
+&lt;blockquote class=&quot;twitter-tweet&quot; data-lang=&quot;en&quot;&gt;&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;I would not recommend anyone to use Medium for a new publication without custom domain support. Medium has proven themselves an excessively volatile partner to publications already. Their whims will change again. You need an escape hatch. &lt;a href=&quot;https://t.co/JFBDFm9nsf&quot;&gt;https://t.co/JFBDFm9nsf&lt;/a&gt;&lt;/p&gt;&amp;mdash; DHH (@dhh) &lt;a href=&quot;https://twitter.com/dhh/status/1037101907972505601?ref_src=twsrc%5Etfw&quot;&gt;September 4, 2018&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async=&quot;&quot; src=&quot;https://platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+
+&lt;h2 id=&quot;the-bottom-line&quot;&gt;The Bottom Line&lt;/h2&gt;
+
+&lt;p&gt;Medium is a business, and not a pro-bono community. We should all just get that and not get too caught up, when the company does things in ways to increase profits or increase investor dividends. That’s the primary goal of every business. Medium’s shortcoming is only that by trying to proclaim itself as non-exclusive and available to everyone, it turns into its own walled garden of sorts. Exactly the thing that early Medium claimed to fight against.&lt;/p&gt;
+
+&lt;h2 id=&quot;related-reading&quot;&gt;Related Reading&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://medium.com/@ev/welcome-to-medium-9e53ca408c48&quot;&gt;Welcome to Medium&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://blog.medium.com/renewing-mediums-focus-98f374a960be&quot;&gt;Renewing Medium’s focus&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        
+          <description>&lt;p&gt;A few days ago, I got a question from an online friend of mine, whether to self-host his new blog, or start directly on Medium. I advised him to self-host and use Medium only for content distribution. I have always been pro writer independence, and though I have tried quite a few platforms over the years, none has really withstood the test of time. Medium makes no exception.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Wed, 05 Sep 2018 19:00:00 +0200</pubDate>
+        <link>https://preslav.me/2018/09/05/medium-walled-garden/</link>
+        <guid isPermaLink="true">https://preslav.me/2018/09/05/medium-walled-garden/</guid>
+        
+        <category>Medium</category>
+        
+        <category>Writing</category>
+        
+        <category>Social Media</category>
+        
+        <category>2Cents</category>
         
         
       </item>
@@ -386,29 +749,93 @@
     
       
       <item>
-        <title>Image in Post</title>
-        <description>&lt;p class=&quot;intro&quot;&gt;&lt;span class=&quot;dropcap&quot;&gt;L&lt;/span&gt;orem ipsum thor smash liege-bastogne-liege landbouwkrediet ombregt krabbe, rouleur derby is for lovers bonk giro gilbert bidon. Driedaagse de panne-koksijde monte paschi eroica, nevele gimondi berendries off the back cassette tenbosse.&lt;/p&gt;
+        <title>Xamarin Impressions</title>
+        <description>&lt;p class=&quot;notice&quot;&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; The following post discusses the impressions I got with the &lt;a href=&quot;https://docs.microsoft.com/en-us/xamarin/ios/&quot;&gt;Xamarin.iOS&lt;/a&gt; framework alone. It was intended to discuss only the iOS development support and not the cross-platform capabilities of the Xamarin suite. It is also worth mentioning that Xamarin.iOS has nothing to do with &lt;a href=&quot;https://docs.microsoft.com/en-us/xamarin/xamarin-forms/&quot;&gt;Xamarin.Forms&lt;/a&gt;, a ver different beast focusing on cross-platform development, and a point of lots of online debating.&lt;/p&gt;
 
-&lt;p&gt;Bahamontes lanterne rouge normandie belgium. Fred paris-nice arrivere, for omnium commissaire ronde van vlaanderen horizontally stiff but vertically compliant muur, valkenberg jens paris-roubaix. Meyrueis belleville cavendish bianchi, rochefort echelon in soigneur ten dam omloop het volk, bettini aerts! Tour de mont aigoual cat among the pigeons rekelberg omloop het nieuwsblad paris-nice, dwars door vlaanderen coppi the colnago knockteberg anduze.&lt;/p&gt;
+&lt;p&gt;Yes, you heard it right. I tried Xamarin this weekend. I got an idea for a new app a few weeks ago, and I was interested to try something different. Plus, for those that have read my &lt;a href=&quot;https://preslav.me/2018/07/20/dont-throw-react-native-away-just-yet/&quot;&gt;recent post about React Native&lt;/a&gt;, I am always on the hunt for ways to avoid Apple’s prescribed choice of language or tooling, so Xamarin seemed like a nice opportunity to do so.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/img/touring.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p class=&quot;notice&quot;&gt;&lt;strong&gt;SIDENOTE:&lt;/strong&gt; There is no such thing like avoiding Apple’s tech or tooling, but one can abstract it away as much as possible, in the name a better and faster developer experience.&lt;/p&gt;
 
-&lt;p&gt;Kaperij lanterne rouge musette rund um koln bruges thor smash, geraardsbergen riis petacchi molteni pedaling squares. Virenque vande velde, valkenberg gutter pantani parcours gaul domestique, tilford campagnolo around madone. Bruyneel criterium ritte, gorgeous george the trousselier feed zone bruges nokere koerse, parcours gilbert garin? Anquetil valkenberg bettini cat among the pigeons.&lt;/p&gt;
+&lt;h2 id=&quot;basic-info&quot;&gt;Basic Info&lt;/h2&gt;
+&lt;p&gt;Xamarin dates back to 2011, originally developed by &lt;a href=&quot;https://twitter.com/migueldeicaza&quot;&gt;@migueldeicaza&lt;/a&gt; and his team, who also brought &lt;a href=&quot;https://en.wikipedia.org/wiki/Mono_(software)&quot;&gt;Mono&lt;/a&gt;, Mono for Android and MonoTouch to the world, and was later bought by Microsoft in 2016. Currently, Xamarin gets shipped together with every version of Visual Studio, including the &lt;a href=&quot;https://visualstudio.microsoft.com/vs/community/&quot;&gt;VS Community Edition&lt;/a&gt;, allowing &lt;a href=&quot;https://visualstudio.microsoft.com/license-terms/mlt553321/&quot;&gt;individuals or small non-enterprise teams&lt;/a&gt; to create mobile apps and distribute across the app stores, free of charge.&lt;/p&gt;
 
-&lt;p&gt;Campagnolo the hors delai de wolf as the toto turns venga venga venga, sanchez nys. Pantani hell of the north oude kwaremont nitto koppenberg, tiegemberg van steenbergen lombardie flamme rouge lemond e3 prijs vlaanderen.&lt;/p&gt;
+&lt;h3 id=&quot;what-is-the-big-deal&quot;&gt;What is the big deal?&lt;/h3&gt;
+&lt;p&gt;In short, Xamarin facilitates the development of cross-platform applications using a shared code base, while utilizing the best of the C# language and the .NET ecosystem. I will leave the cross-platform topic since it does not concern me for now, but from what I have seen, it seems to allow for a good deal of code sharing.&lt;/p&gt;
 
-&lt;p&gt;Planckaert berg ter stene freire gorgeous george in rouleur derby, vaughters fabianese omloop het volk rouleur play rouleur derby. Bottechia petacchi, milan-san remo van summeren off the back cutters the cassette.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://docs.microsoft.com/en-us/xamarin/ios/internals/architecture-images/aot-large.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;h6 id=&quot;source-microsoft&quot;&gt;Source: &lt;a href=&quot;https://docs.microsoft.com/en-us/xamarin/ios/internals/architecture&quot;&gt;Microsoft&lt;/a&gt;&lt;/h6&gt;
 
-&lt;p&gt;Nyvelocity pyrenees vande velde merckx. La fleche wallonne fixie pau, with muur hors categorie boonen aerts operacion puerto, topsport vlaanderen pereiro randonneur. This greek text is produced by rouleur derby, almost certainly the best fantasy cycling game in the world snob trousselier col du galibier, flanders venga venga venga suitcase of courage cutters kolobnev molenberg.&lt;/p&gt;
+&lt;p&gt;As for iOS, Xamarin actually impressed me from the get go. It is hard to believe it for someone who has not tried Xamarin, but developing an iOS app does not differ much syntactically from using Swift. On top, one gets to use C#, a very mature and elegant language, albeit somewhat restricted by the platform availability that the .NET framework gets to run on.&lt;/p&gt;
+
+&lt;p class=&quot;notice&quot;&gt;&lt;strong&gt;SIDENOTE:&lt;/strong&gt; During and shortly after my Undergraduate years about a decade ago, I spent a significant part of my programming practice writing C# and working with the .NET. My opinion can thus be a little bit biased, due to my nostalgia of that time.&lt;/p&gt;
+
+&lt;p&gt;A Xamarin developer has the entire CocoaTouch SDK at their disposal, plus a fairly good deal of the .NET framework. Bringing-in new .NET libraries is a piece of cake, and as long as they don’t rely on any platform or OS-specific SDKs, they work out of the box. Bridging to 3rd-party Objective-C libraries is also not a problem. There is a tool made available from Microsoft, called &lt;a href=&quot;https://docs.microsoft.com/en-us/xamarin/cross-platform/macios/binding/objective-sharpie/&quot;&gt;Objective Sharipie&lt;/a&gt;, which facilitates the bridging, by parsing Objective-C headers and creating a C# bridge. Bridging to Swift libraries is not officially supported for various reasons, but also not impossible. There are a &lt;a href=&quot;https://medium.com/@Flash3001/binding-swift-libraries-xamarin-ios-ff32adbc7c76&quot;&gt;few caveats&lt;/a&gt; to keep in mind before bridging a Swift library, so I can’t be 100% certain that the bridging effort will be always worth it. It’s … just there for those who are ready to spend some effort and take advantage of it.&lt;/p&gt;
+
+&lt;h2 id=&quot;tooling&quot;&gt;Tooling&lt;/h2&gt;
+&lt;h3 id=&quot;visual-studio&quot;&gt;Visual Studio&lt;/h3&gt;
+&lt;p&gt;The last time I really used VS (not to be mistaken with VSCode), was around 2010. Even back then, VS was a very good developer environment, but tightly bound to the Windows OS and its platform ecosystem. In that regard, VS back then as pretty much the Windows equivalent of XCode was at the time, … and still is 🤔.&lt;/p&gt;
+
+&lt;p&gt;A lot has changed since then and in a very positive direction. VS follows along Microsoft’s core strategic pivot and rekindled love for developers of all kinds, and this can be seen right from the opening screen. I had very few issues installing VS on my Mac (&lt;a href=&quot;https://blogs.msdn.microsoft.com/visualstudio/2016/11/16/visual-studio-for-mac/&quot;&gt;On a Mac&lt;/a&gt;!!!) and right after setting up a demo iOS project, I set out to change my preferences. I was pleasantly surprised by the fact that the very first screen let me choose a dark UI. Not just a dark colour scheme. A full-scale dark UI.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/2018/august/vs_1.png&quot; alt=&quot;changing the default UI color is easy&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Next step, change the key shortcuts to something matching my IntelliJ workflow. Here too, I was positively surprised that Microsoft provided a key mapping coming straight out of &lt;a href=&quot;https://www.jetbrains.com/rider/&quot;&gt;Rider&lt;/a&gt; (JetBrains’ .NET IDE), which brought most of my favourite key mappings right away.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/2018/august/vs_2.png&quot; alt=&quot;VS allows allows for an easy switch of the defaultkey mapping&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Unfortunately, not all mappings were provided, due to the fact that VS simply does not expose all the functionality available for key-mapping. As of yet, my two biggest issues are the inability to ditch tabs, and use a sorted “recently opened files” panel instead.&lt;/p&gt;
+
+&lt;p&gt;In case I decide to continue on the Xamarin path, I would definitely give &lt;a href=&quot;https://www.jetbrains.com/rider/&quot;&gt;Rider&lt;/a&gt; a try. I have heard many good things about it, and its seamless integration with .NET and Xamarin. Indeed, it’s a paid product, but I paid for &lt;a href=&quot;https://www.jetbrains.com/objc/&quot;&gt;AppCode&lt;/a&gt; and was utterly disappointed by it, so I think that there might be bit of room in the budget for the upcoming year.&lt;/p&gt;
+
+&lt;h3 id=&quot;the-integrated-ios-ui-designer&quot;&gt;The integrated iOS UI designer&lt;/h3&gt;
+&lt;p&gt;The built-in &lt;a href=&quot;https://docs.microsoft.com/en-us/xamarin/ios/user-interface/ios-ui/creating-ui-objects?tabs=vsmac&quot;&gt;UI designer&lt;/a&gt; is definitely not as bad as what I have been hearing from others. It reminds me of Xcode’s Interface Builder and is not any better or worse (I believe that it is actually using IB under the hood). For those who can’t part from their beloved Interface Builder, the storyboard file export format is exactly the same, so one can open the files in Xcode and do the necessary tweaks there instead. I am not so much of a fan of IB, and would rather often prefer to manage my views in code, so please, don’t rely on my opinion alone.&lt;/p&gt;
+
+&lt;p&gt;One interesting fact is that code references to views laid out using the UI designer, get autogenerated in code, and conveniently placed in a  C# &lt;a href=&quot;https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/partial-classes-and-methods&quot;&gt;partial class&lt;/a&gt; right under the main view controller, essentially separating the UI logic from the instantiation of the view. I found this neat.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/2018/august/vs_3.png&quot; alt=&quot;view references are neatly hidden inside a partial C# class&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;the-debugger&quot;&gt;The Debugger&lt;/h3&gt;
+&lt;p&gt;Unlike what I’ve heard or read previously, the debugger was also on par with everything I had expected. I haven’t had much time form some more thorough runtime introspection and profiling, so I can’t really comment on those features, but I believe that they should be on par with the rest.&lt;/p&gt;
+
+&lt;h3 id=&quot;build-time&quot;&gt;Build Time&lt;/h3&gt;
+&lt;p&gt;The build time seems fast or even faster than building the same app using Swift. During my test runs, I did not hear the fan of my laptop start even once. This is certainly not the case when compiling Swift code. One thing to remember is that the Xamarin code generator is essentially compiling the managed .NET intermediate language (IL) into a set of native instructions, using a process called &lt;a href=&quot;https://www.mono-project.com/docs/advanced/aot/&quot;&gt;Ahead of Time Compilation (AOT)&lt;/a&gt;, which has some certain &lt;a href=&quot;https://docs.microsoft.com/en-us/xamarin/ios/internals/limitations&quot;&gt;limitations&lt;/a&gt;. Also, in order to speed compilation time, the generator will not use the &lt;a href=&quot;https://www.mono-project.com/docs/advanced/mono-llvm/&quot;&gt;LLVM&lt;/a&gt; optimising compiler. By default, &lt;a href=&quot;https://docs.microsoft.com/en-us/xamarin/ios/deploy-test/compiling-for-different-devices?tabs=vsmac#code-generation-engine&quot;&gt;LLVM optimisation&lt;/a&gt; and other heavy-duty preprocessing steps (stripping unused parts of the code) are reserved for when issuing an actual release build. One needs to keep those in mind, and not merely discard Xamarin just solely based on the size or performance of a simulator test build.&lt;/p&gt;
+
+&lt;h2 id=&quot;what-i-wish-were-better&quot;&gt;What I Wish Were Better&lt;/h2&gt;
+&lt;h3 id=&quot;the-documentation&quot;&gt;The Documentation&lt;/h3&gt;
+&lt;p&gt;A lot of stuff seems scrambled around. There are many good pages on the Microsoft site, which I tried to link to, but much of the information is still spread around. I found some of the juicy under-the-hood parts only by stumbling upon the original &lt;a href=&quot;https://www.mono-project.com&quot;&gt;Mono Project website&lt;/a&gt;. Others I found after some digging around StackOverflow or in developers’ blogs, but from a very brief point of interaction, I seem to be missing a strong developer community which to turn to, in case one needs an answer.&lt;/p&gt;
+
+&lt;p&gt;I spotted a lot of false accusations online targeting Xamarin.Forms, or  Xamarin’s capabilities at cross-platform development. There were, in fact, very posts that targeted Xamarin.iOS in particular, which would start right away with the negative stuff. My assumption is that people, just as it is the case with React Native, wrongly approach a framework like Xamarin, thinking that it will allow them to build cross-platform applications with native look and feel on each platform, and 99.99% shared code. I am sorry to unveil the mystery, but nothing like that exists on the market, or will ever exist for that matter.&lt;/p&gt;
+
+&lt;p&gt;Besides the documentation and the available information online, I think that the one of the biggest issues around Xamarin seems to be the Microsoft stigma around it. Somehow, if a framework were developed by, say, Google or Facebook, everyone would cheerfully jump on it in no time, but see, Microsoft is a whole other story.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;I have decided, for the time being, to give Xamarin.iOS a chance. This does not mean that I would stop searching for new ways to undercut Apple. Let’s call it a bit of nostalgia of the old days, and partially, giving Microsoft the benefit of the doubt. C# as a language, and .NET as a toolkit are a mighty part, and I believe that people should give them a chance, before throwing the option right was as just another Microsoft product, whose legacy would chase you forever (as if Apple’s or Google’s don’t).&lt;/p&gt;
+
+&lt;h2 id=&quot;further-reading&quot;&gt;Further Reading&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.microsoft.com/en-us/xamarin/ios/internals/architecture&quot;&gt;iOS App Architecture&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://medium.com/@JMangia/swift-c-llvm-compiler-optimization-842012568bb7&quot;&gt;Swift, C, LLVM Compiler Optimization&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://blog.xamarin.com/xamarin-for-all/&quot;&gt;Xamarin for Everyone&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://dev.to/jonstodle/xamarin-products-explained-clo&quot;&gt;Xamarin products explained&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.altexsoft.com/blog/engineering/performance-comparison-xamarin-forms-xamarin-ios-xamarin-android-vs-android-and-ios-native-applications/&quot;&gt;Performance Comparison: Xamarin.Forms, Xamarin.iOS, Xamarin.Android vs Android and iOS Native Applications&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 </description>
         
-          <description>&lt;p class=&quot;intro&quot;&gt;&lt;span class=&quot;dropcap&quot;&gt;L&lt;/span&gt;orem ipsum thor smash liege-bastogne-liege landbouwkrediet ombregt krabbe, rouleur derby is for lovers bonk giro gilbert bidon. Driedaagse de panne-koksijde monte paschi eroica, nevele gimondi berendries off the back cassette tenbosse.&lt;/p&gt;
+          <description>&lt;p class=&quot;notice&quot;&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; The following post discusses the impressions I got with the &lt;a href=&quot;https://docs.microsoft.com/en-us/xamarin/ios/&quot;&gt;Xamarin.iOS&lt;/a&gt; framework alone. It was intended to discuss only the iOS development support and not the cross-platform capabilities of the Xamarin suite. It is also worth mentioning that Xamarin.iOS has nothing to do with &lt;a href=&quot;https://docs.microsoft.com/en-us/xamarin/xamarin-forms/&quot;&gt;Xamarin.Forms&lt;/a&gt;, a ver different beast focusing on cross-platform development, and a point of lots of online debating.&lt;/p&gt;
 
 </description>
         
-        <pubDate>Thu, 11 Dec 2014 00:00:00 +0000</pubDate>
-        <link>https://preslavrachev.github.io/2014/12/11/image-in-post/</link>
-        <guid isPermaLink="true">https://preslavrachev.github.io/2014/12/11/image-in-post/</guid>
+        <pubDate>Mon, 27 Aug 2018 00:00:00 +0200</pubDate>
+        <link>https://preslav.me/2018/08/27/xamarin-impressions/</link>
+        <guid isPermaLink="true">https://preslav.me/2018/08/27/xamarin-impressions/</guid>
+        
+        <category>iOS</category>
+        
+        <category>Programming</category>
+        
+        <category>Xamarin</category>
+        
+        <category>Microsoft</category>
         
         
       </item>
@@ -416,54 +843,51 @@
     
       
       <item>
-        <title>Test Post</title>
-        <description>&lt;p class=&quot;intro&quot;&gt;&lt;span class=&quot;dropcap&quot;&gt;L&lt;/span&gt;orem ipsum thor smash liege-bastogne-liege landbouwkrediet ombregt krabbe, rouleur derby is for lovers bonk giro gilbert bidon. Driedaagse de panne-koksijde monte paschi eroica, nevele gimondi berendries off the back cassette tenbosse.&lt;/p&gt;
+        <title>I Made a Mastodon Account and so Far I like It</title>
+        <description>&lt;p&gt;So, you might have heard about &lt;a href=&quot;https://joinmastodon.org/&quot;&gt;Mastodon&lt;/a&gt;. A micro-blogging alternative to Twitter, boasting itself for being 100% open-source, and for its decentralised nature.&lt;/p&gt;
 
-&lt;p&gt;Bahamontes lanterne rouge normandie belgium. Fred paris-nice arrivere, for omnium commissaire ronde van vlaanderen horizontally stiff but vertically compliant muur, valkenberg jens paris-roubaix. Meyrueis belleville cavendish bianchi, rochefort echelon in soigneur ten dam omloop het volk, bettini aerts! Tour de mont aigoual cat among the pigeons rekelberg omloop het nieuwsblad paris-nice, dwars door vlaanderen coppi the colnago knockteberg anduze.&lt;/p&gt;
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/IPSbNdBmWKE&quot; frameborder=&quot;0&quot; allow=&quot;autoplay; encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 
-&lt;p&gt;Kaperij lanterne rouge musette rund um koln bruges thor smash, geraardsbergen riis petacchi molteni pedaling squares. Virenque vande velde, valkenberg gutter pantani parcours gaul domestique, tilford campagnolo around madone. Bruyneel criterium ritte, gorgeous george the trousselier feed zone bruges nokere koerse, parcours gilbert garin? Anquetil valkenberg bettini cat among the pigeons.&lt;/p&gt;
+&lt;p&gt;Unlike traditional social networks like Twitter and Facebook, Mastodon is not driven by a single company profiting by selling your identity to others, but by a network of instance maintainers and supporters who put their own money on the line. Ensuring that Mastodon is going to live in the long term sounds easy…on paper. Many of the instance maintainers gladly accept donations through &lt;a href=&quot;https://www.patreon.com/ashfurrow&quot;&gt;Patreon&lt;/a&gt; or other means, and of course, adding your own instance to the network is relatively easy. Whether this is actually going to work in the long run, is a different question. There has been a list of alleged P2P Facebook/Twitter killers, which for one reason or another, have failed to the critical mass needed for mass adoption. I am willing to bet on a hopeful “YES”.&lt;/p&gt;
 
-&lt;p&gt;Campagnolo the hors delai de wolf as the toto turns venga venga venga, sanchez nys. Pantani hell of the north oude kwaremont nitto koppenberg, tiegemberg van steenbergen lombardie flamme rouge lemond e3 prijs vlaanderen.&lt;/p&gt;
+&lt;p&gt;Being an early adopter of all things digital, and annoyed by the direction that Twitter is taking, I signed up for an account yesterday: &lt;a href=&quot;https://mastodon.technology/@preslavrachev&quot;&gt;@preslavrachev@mastodon.technology&lt;/a&gt;. I gladly encourage everyone to join and follow me. In case you ask yourselves what &lt;a href=&quot;https://mastodon.technology/about&quot;&gt;@mastodon.technology&lt;/a&gt; has to do with my username, this is the name of the instance where I registered my account.&lt;/p&gt;
 
-&lt;p&gt;Planckaert berg ter stene freire gorgeous george in rouleur derby, vaughters fabianese omloop het volk rouleur play rouleur derby. Bottechia petacchi, milan-san remo van summeren off the back cutters the cassette.&lt;/p&gt;
+&lt;p&gt;Instance names are somewhat like email domains. Being on a particular instance ensures that one will get the entire flow of communication inside the given instance. Just like email however, cross-instance communication is an essential part of what makes Mastodon work. In fact, a large percentage of the people I follow now are not on the same instance as I am but communicate flawlessly with each other.&lt;/p&gt;
 
-&lt;p&gt;Nyvelocity pyrenees vande velde merckx. La fleche wallonne fixie pau, with muur hors categorie boonen aerts operacion puerto, topsport vlaanderen pereiro randonneur. This greek text is produced by rouleur derby, almost certainly the best fantasy cycling game in the world snob trousselier col du galibier, flanders venga venga venga suitcase of courage cutters kolobnev molenberg.&lt;/p&gt;
+&lt;p&gt;Just like with email, the real advantage of having multiple identities on Mastodon comes when one wants to claim allegiance to a certain organisation, group, or topic of interest. Say, your company decided to run a private Mastodon instance. Having an identity there would allow you to follow locally shared chatter, but also prove to the rest of the Mastodon Universe that you belong to the given organisation. As of yet, I haven’t yet figured out how multi-identity management really works, so I might have to leave this part for a later post.&lt;/p&gt;
+
+&lt;p&gt;The last 24 hours of being on Mastodon feel very much like the early days of Twitter. When I joined Twitter in 2008, it was still a very turbulent time for both the service and the team. There have been way too many occasions when the fail whale appeared on my screen, something which I have not really witnessed during the past couple of years.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/2018/august/fail-whale.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;With the frequent downtimes and shakes inside the team, something else slowly started going away - the community spirit of the early days. Don’t get me wrong, I still use Twitter on a daily basis, though somewhat automatically. The community is still there, it is just that the bond and the friendly chatter of the early days is gone. It got replaced by incessant advertising (which I fervently mute on every occasion) and a stream of posts clearly optimised to target eyeballs and clicks. And of course, the clear statement to third-party app developers. I still remember the early days, when budding app or Web developers would use the developer-friendly Twitter API and boast with the client they developed. In no small terms, it was the developers who helped Twitter reach mainstream fame, and it is just sad that things had to reach their current state. Looks like my thoughts are being shared by the community as well:&lt;/p&gt;
+
+&lt;figure&gt;
+    &lt;iframe src=&quot;https://mastodon.social/@bastianallgeier/100577435213222907/embed&quot; class=&quot;mastodon-embed&quot; style=&quot;max-width: 100%; border: 0&quot; width=&quot;400&quot;&gt;&lt;/iframe&gt;&lt;script src=&quot;https://mastodon.social/embed.js&quot; async=&quot;async&quot;&gt;&lt;/script&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Back to Mastodon, during my first 24 hours, I spent an hour browsing among the many available alternative clients for both iOS and macOS. I spent another couple of hours waiting for the instance to go back up after a maintenance downtime that took longer than expected. Everyone else in my place would have backed off and left, but this just raised my level of excitement. It showed me that there is some actual work needed, and that the community is working hard to put things where they should be. I can but clap in respect to the efforts that the maintainers of my instance put yesterday, in order to ensure its stability in the upcoming days and weeks. During the hours when the instance was online, I managed to set up a few friendships and engaged in some interesting discussions. It seems like a bunch fo the early spirit is back. People reply more often, and others join in to the chat. I have the feeling that conversations flow more easily.&lt;/p&gt;
+
+&lt;p&gt;In many respects, being on Mastodon feels like the Wild West. There are many open questions I have, like how to manage multiple accounts, what would happen with my identity, if an instance dies. I am not yet sure if I am going to leave Twitter for Mastodon (not in the foreseeable future, at least), but it sure feels exciting to try a refreshing look at what Twitter might have evolved into, had it not been forced to turn into an ordinary business.&lt;/p&gt;
 </description>
         
-          <description>&lt;p class=&quot;intro&quot;&gt;&lt;span class=&quot;dropcap&quot;&gt;L&lt;/span&gt;orem ipsum thor smash liege-bastogne-liege landbouwkrediet ombregt krabbe, rouleur derby is for lovers bonk giro gilbert bidon. Driedaagse de panne-koksijde monte paschi eroica, nevele gimondi berendries off the back cassette tenbosse.&lt;/p&gt;
-
-</description>
-        
-        <pubDate>Wed, 10 Dec 2014 00:00:00 +0000</pubDate>
-        <link>https://preslavrachev.github.io/2014/12/10/test-post/</link>
-        <guid isPermaLink="true">https://preslavrachev.github.io/2014/12/10/test-post/</guid>
-        
-        
-      </item>
-      
-    
-      
-      <item>
-        <title>Tip: Create an empty branch in Git</title>
-        <description>&lt;p&gt;By default, when you create a new branch off an existing one, the entire history as well as the index get replicated to the new branch. Of course, this makes total sense for branches concerning the source code. Want to develop a new feature? Make a copy of the main branch, add your changes, and merge it back with the core. Yet, the source code is only one part of a project. There are other aspects of a project, such as documentation, runtime, and deployment configuration, etc, which you’d rather not want to mix with the flow of your code. You can of course make a normal branch, add your files there and simply never merge back. A cleaner and a preferred option is to create an empty branch with no pre-existing history or files.&lt;/p&gt;
-
-&lt;p&gt;Git calls these “orphan branches”&lt;/p&gt;
-
-&lt;p&gt;To create an orphan branch simply call &lt;code class=&quot;highlighter-rouge&quot;&gt;git checkout&lt;/code&gt;:
-&lt;code class=&quot;highlighter-rouge&quot;&gt;git checkout --orphan &amp;lt;NEW_BRANCH&amp;gt;&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;This puts you in the newly created orphan branch automatically. If you then call &lt;code class=&quot;highlighter-rouge&quot;&gt;git status&lt;/code&gt;, you will see that the branch has no files yet. Now you can add files to it.&lt;/p&gt;
-</description>
-        
-          <description>&lt;p&gt;By default, when you create a new branch off an existing one, the entire history as well as the index get replicated to the new branch. Of course, this makes total sense for branches concerning the source code. Want to develop a new feature? Make a copy of the main branch, add your changes, and merge it back with the core. Yet, the source code is only one part of a project. There are other aspects of a project, such as documentation, runtime, and deployment configuration, etc, which you’d rather not want to mix with the flow of your code. You can of course make a normal branch, add your files there and simply never merge back. A cleaner and a preferred option is to create an empty branch with no pre-existing history or files.&lt;/p&gt;
+          <description>&lt;p&gt;So, you might have heard about &lt;a href=&quot;https://joinmastodon.org/&quot;&gt;Mastodon&lt;/a&gt;. A micro-blogging alternative to Twitter, boasting itself for being 100% open-source, and for its decentralised nature.&lt;/p&gt;
 
 </description>
         
-        <pubDate>Sat, 20 Sep 2014 00:00:00 +0000</pubDate>
-        <link>https://preslavrachev.github.io/2014/09/20/git-empty-branch/</link>
-        <guid isPermaLink="true">https://preslavrachev.github.io/2014/09/20/git-empty-branch/</guid>
+        <pubDate>Sun, 19 Aug 2018 00:00:00 +0200</pubDate>
+        <link>https://preslav.me/2018/08/19/i-made-a-mastodon-account-and-i-like-it/</link>
+        <guid isPermaLink="true">https://preslav.me/2018/08/19/i-made-a-mastodon-account-and-i-like-it/</guid>
         
-        <category>python</category>
+        <category>Mastodon</category>
+        
+        <category>Twitter</category>
+        
+        <category>Social Media</category>
+        
+        <category>Social Networking</category>
+        
+        <category>2Cents</category>
         
         
       </item>

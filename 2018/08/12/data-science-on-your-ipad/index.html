@@ -1,0 +1,829 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.13.0 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Data Science on Your iPad - Preslav Rachev</title>
+<meta name="description" content="This article is a follow-up transcription to a talk I recently gave at a local Munich machine learning meetup. Unlike my previous talk, this time I wanted to convey the idea of using an iPad for actively running data science experiments, as opposed to passively consuming information. I illustrated my point with a few example iOS applications I personally use on a daily basis, which I hope would be good starting points to get the audience interested in the idea. Being an iOS developer, who has once built a 3rd-party App Store search engine, I know first-hand how difficult it is to find anything inside the App Store, more so, when carefully specifying what one is looking for. Therefore, I believe that if nothing else, even having this one collection of links should be a valuable starting point for further exploration.">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Preslav Rachev">
+<meta property="og:title" content="Data Science on Your iPad">
+<meta property="og:url" content="https://preslav.me/2018/08/12/data-science-on-your-ipad/">
+
+
+  <meta property="og:description" content="This article is a follow-up transcription to a talk I recently gave at a local Munich machine learning meetup. Unlike my previous talk, this time I wanted to convey the idea of using an iPad for actively running data science experiments, as opposed to passively consuming information. I illustrated my point with a few example iOS applications I personally use on a daily basis, which I hope would be good starting points to get the audience interested in the idea. Being an iOS developer, who has once built a 3rd-party App Store search engine, I know first-hand how difficult it is to find anything inside the App Store, more so, when carefully specifying what one is looking for. Therefore, I believe that if nothing else, even having this one collection of links should be a valuable starting point for further exploration.">
+
+
+
+  <meta property="og:image" content="https://source.unsplash.com/collection/1922729/1280x400">
+
+
+
+
+
+  <meta property="article:published_time" content="2018-08-12T00:00:00+02:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://preslav.me/2018/08/12/data-science-on-your-ipad/">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "Your Name",
+      "url": "https://preslav.me",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Preslav Rachev Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    
+    <link rel="amphtml" href="https://preslav.me/amp/2018/08/12/data-science-on-your-ipad.html">
+
+
+<link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700|PT+Serif:400,700,400italic" rel="stylesheet" type="text/css">
+<link href="https://micro.blog/preslavrachev" rel="me" />
+  </head>
+
+  <body class="layout--post">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/">Preslav Rachev</a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/about-me" >About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/micro" >Microblog</a>
+            </li><li class="masthead__menu-item">
+              <a href="/archive" >Archive</a>
+            </li><li class="masthead__menu-item">
+              <a href="/contact" >Contact</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style=" background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://source.unsplash.com/collection/1922729/1280x400');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          Data Science on Your iPad
+
+        
+      </h1>
+      
+      
+        <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  7 minute read
+</p>
+      
+      
+      
+        <p>
+        
+          
+          <a href="https://twitter.com/intent/tweet?text=Hey%2C%20%40preslavrachev%2C%20I%20have%20been%20reading%20your%20blog%3A%20https%3A%2F%2Fpreslav.me%2F" class="btn btn--light-outline btn--large">Discuss this post on Twitter</a>
+        
+          
+          <a href="/contact" class="btn btn--light-outline btn--large">Contact me</a>
+        
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div class="h-card" itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img class="u-photo" src="/assets/img/avatar.jpg" alt="Preslav Rachev" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Preslav Rachev</h3>
+    
+    
+      <p class="author__bio p-note" itemprop="description">
+        A runner and a programming / data science polymath. A Bulgarian living in Germany. Bridging the gap between software engineering and data science.
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Munich, Germany</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li>
+  <a href="https://twitter.com/preslavrachev" itemprop="sameAs">
+    <i class="fab fa-fw fa-twitter" aria-hidden="true"></i> Twitter
+  </a>
+  <a href="https://github.com/preslavrachev" itemprop="sameAs">
+    <i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub
+  </a>
+  <a href="https://www.linkedin.com/in/preslavrachev/" itemprop="sameAs">
+    <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn
+  </a>
+  <a href="https://mastodon.technology/@preslavrachev" itemprop="sameAs">
+    <i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon
+  </a>
+</li>
+
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Data Science on Your iPad">
+    <meta itemprop="description" content="This article is a follow-up transcription to a talk I recently gave at a local Munich machine learning meetup. Unlike my previous talk, this time I wanted to convey the idea of using an iPad for actively running data science experiments, as opposed to passively consuming information. I illustrated my point with a few example iOS applications I personally use on a daily basis, which I hope would be good starting points to get the audience interested in the idea. Being an iOS developer, who has once built a 3rd-party App Store search engine, I know first-hand how difficult it is to find anything inside the App Store, more so, when carefully specifying what one is looking for. Therefore, I believe that if nothing else, even having this one collection of links should be a valuable starting point for further exploration.">
+    <meta itemprop="datePublished" content="August 12, 2018">
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>This article is a follow-up transcription to a talk I recently gave at a local <a href="https://www.meetup.com/Hacking-Machine-Learning">Munich machine learning meetup</a>. Unlike <a href="https://preslav.me/2018/05/25/my-first-machine-learning-talk/">my previous talk</a>, this time I wanted to convey the idea of using an iPad for actively running data science experiments, as opposed to passively consuming information. I illustrated my point with a few example iOS applications I personally use on a daily basis, which I hope would be good starting points to get the audience interested in the idea. Being an iOS developer, who has once built a 3rd-party App Store search engine, I know first-hand how difficult it is to find anything inside the App Store, more so, when carefully specifying what one is looking for. Therefore, I believe that if nothing else, even having this one collection of links should be a valuable starting point for further exploration.</p>
+
+<p>Before I get to the apps, let me start with some background:</p>
+
+<h2 id="why-a-tablet">Why a Tablet?</h2>
+<p>Although it might no longer get the media’s attention as the tech sector’s latest sexy gadget, the tablet has replaced the laptop/desktop in a number of activities, where one previously needed a “real machine”. What is more, the tablet is slowly getting out of people’s notion as being handy coffee table device for content consumption. It is rather becoming the preferred content creation choice of many, particularly, creative professions, such as writers, musicians, and visual artists. This has caught the eye of companies like Apple, who have decided to double-down on the iPad’s Pro model, targeted primarily at professionals.</p>
+
+<p>If there is one thing that could describe our generation best, this would be our constant state of movement. We spend so much time commuting, or in some form of passive travel. We might as well try to start reclaiming some of this time and use it for creative and productive activities. This is where a tablet fits in for me.</p>
+
+<p>Even at the bulkiest of sizes, an iPad is more convenient to carry around than a laptop. It is “always on”, can be used while sitting, lying or standing, with or without a keyboard, and requires less interactions than a laptop. More than anything else, I find the level of multitasking exactly right for this type of medium. Indeed, one can do way less things at the same time on an iPad than one can do using a laptop. I tend to consider this a feature rather than a shortcoming: less multitasking =&gt; less distraction, i.e. more immersion.</p>
+
+<p>Although my daily work involves sitting behind a laptop and crafting complex systems, it is rarely behind the laptop where these ideas originate. I feel most creative when discussing things with people or when I drift away somewhere outside, my iPad in my hand.</p>
+
+<p>Now back to the main topic…</p>
+
+<h2 id="coding-on-an-ipad">Coding on an iPad?</h2>
+<p>It is certainly doable, and getting used to it takes way less time than one might expect. As an example, take developer Richard Morgan, who <a href="https://www.imore.com/starsceptre-ios-game-was-entirely-coded-ipad">developed an iOS game on his iPad</a>, entirely during his commute around London. Everything is possible when you have the right mindset and the right tools.</p>
+
+<p>As for the tools, there are quite a few good ones, hidden inside the App Store. In fact, code editors for iOS have existed even before the release of the original iPad. Among them, many in-app IDEs of sorts. Yet, it wasn’t until last year, when I started seriously taking look at the possibility writing code and running it entirely on an iPad. In 2017, Apple <a href="https://www.macstories.net/linked/apples-app-store-guidelines-now-allow-executable-code-in-educational-apps-and-developer-tools/">permitted</a> the sharing and downloading of executable code on iOS devices, for teaching, learning and personal development purposes. A validation that writing code on iOS is here to stay.</p>
+
+<p>The apps below are in no particular order, besides the fact that I will be specifically looking at Pythonista later on. All apps are paid, which is something I firmly stand behind and support, yet this post is no product or service endorsement of any kind. I am just a happy customer:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>App Name</th>
+      <th>Languages</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="http://omz-software.com/pythonista/">Pythonista 3</a></td>
+      <td>Python 2/3</td>
+    </tr>
+    <tr>
+      <td><a href="https://codea.io/">Codea</a></td>
+      <td>Lua</td>
+    </tr>
+    <tr>
+      <td><a href="http://continuous.codes/">Continuous</a></td>
+      <td>C# / F# .NET</td>
+    </tr>
+    <tr>
+      <td><a href="https://itunes.apple.com/gb/app/irstudio/id1173749340">iRstudio</a></td>
+      <td> R</td>
+    </tr>
+    <tr>
+      <td><a href="https://itunes.apple.com/gb/app/analyser/id1083042861?mt=8">Analyser</a></td>
+      <td>Python</td>
+    </tr>
+    <tr>
+      <td><a href="https://itunes.apple.com/us/app/swift-playgrounds/id908519492">Playgrounds</a></td>
+      <td>Swift</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="pythonista">Pythonista</h2>
+<p><a href="http://omz-software.com/pythonista/">Pythonista</a> is one the few apps, just like <a href="https://ia.net/writer">iA Writer</a> (which I am using right now to write this post), which IMHO, deserves to come on an iPad pre-installed. To those having tried the Swift Playgrounds app on an iPad, it is just mere peanuts in comparison with what Pythonista offers:</p>
+
+<ul>
+  <li>Fully featured support for both Python 2 and Python 3</li>
+  <li>Excellent documentation, keyboard extensions, and code completion</li>
+  <li>Has an integrated debugger, a property inspector, and its own REPL-like console</li>
+  <li>Provides extensions for writing GUIs and communication with other apps on your device</li>
+</ul>
+
+<p><img src="/assets/img/2018/august/pythonista-1.jpg" alt="" /></p>
+
+<p><img src="/assets/img/2018/august/pythonista-2.jpg" alt="" /></p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/UYIZlqQPusw" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>
+
+<p>Pythonista comes pre-packed with a ton of libraries we love and use every day: NumPy, Matplotlib, Requests, BeatufulSoup, etc. Yet, lacks some of our favourites, due to Apple’s restrictions: Pandas, SciPy, Scikit-Learn, and unfortunately, TensorFlow. There are other apps like 
+<a href="https://itunes.apple.com/gb/app/analyser/id1083042861?mt=8">Analyser</a> and the now defunct Computable, which feature many of those as part of the app bundle, which lets me remain optimistic that we will see many of those included in future releases of Pythonista too.</p>
+
+<p>Pythonista is great for quickly scrapping ideas, and doing exploratory data analysis. In fact, I am running most of my early-stage exploratory analysis on cryptocurrency pricing directly in the app. It is absolutely indispensable when learning new concepts, be those Python, or math / science-related. Last but not least, the integrated GUI and extension capabilities allow for creating entire iOS applications using Python. Think about it. An iOS app, built using Python, using only an iPad. It can’t get better than this.</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/a7QcX4Ke3Hc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>
+
+<h2 id="what-about-jupyter">What about Jupyter?</h2>
+<p>Indeed, what about <a href="https://jupyter.org/">Jupyter</a>? Unless you have been living in a cave, and self-proclaimed yourself a data scientist, you should know that Jupyter  Notebook, and similar tools which mix code and narrative have taken the scientific world by storm. Moreover, Jupyter Notebook is entirely Web-based. Therefore, it shouldn’t be a big deal to run your private Jupyter instance, or use of the many readily available instances from <a href="https://notebooks.azure.com/">Microsoft</a>, <a href="https://www.kaggle.com/kernels">Kaggle</a>, <a href="https://colab.research.google.com/">Google</a>, and many other providers. My answer to this is <strong>yes and no</strong>. Although Jupyter Notebook is Web-based and technically opens up in mobile Safari, the actual usability of the Web version on mobile is less than ideal. Browsing through and reading code somehow works. It is the editing of code, where things get really painful. Many of the beloved Jupyter shortcuts are not supported, due to the lack of corresponding keys on the iPad’s keyboard. When trying to type inside a cell, the browser tries to compensate by zooming in in and out in a horrible fashion. A very, very unpleasant thing.</p>
+
+<p>So far, so good, but there must be an app that brings the best of Jupyter and the native iOS experience together, right? Indeed, but a bit later on that. First, a word about Computable.</p>
+
+<p><a href="http://computableapp.com/index_old.html">Computable</a> was an app that promised to be the best of Pythonista, with  even more DS libraries under the hood, and its own native Jupyter support. The ultimate bliss.</p>
+
+<p><img src="http://www.computableapp.com/img/keyboard@2x.png" alt="" /></p>
+<h6 id="computable-in-action-photo-source">Computable in Action. <a href="http://www.computableapp.com/index_old.html">Photo Source</a></h6>
+
+<p>Sadly, the app is no longer available. It was pulled from the App Store in 2015 for various reasons, but the developer was kind enough to <a href="https://github.com/ktraunmueller/Computable">put the original code up on GitHub</a>, and make it open-source. In fact, as far as I know, I have been the first one to <a href="https://github.com/preslavrachev/Computable">fork</a> the repository, and I am keen on trying to at least trying to revive it. I am looking for other contributors as well, so anyone willing to help is more than welcome.</p>
+
+<p>Now, back to my dilemma. Indeed, there is a great app I discovered last year, which brings the best of both worlds. It is called 
+<a href="https://juno.sh/">Juno</a> and it is a slick, brand new, native iOS client for working with Jupyter Notebook and JupyterLab instances.</p>
+
+<p><img src="https://navoshta.com/images/posts/juno/screenshot_h_01@2x.png" alt="" /></p>
+<h6 id="photo-source"><a href="https://navoshta.com">Photo Source</a></h6>
+
+<p>Juno will easily connect to a self-hosted Jupyter server, or to a cloud-provided Jupyter VM (e.g. Azure, CoCalc, and many more coming soon). It also supports <a href="https://mybinder.org/">Binder</a>, for a series of pre-made tutorial notebooks, which is ideal for people to get on board without yet having an actual Jupyter instance running.</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/6QNFi4EIz6U" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>
+
+<p>Indeed, the lack of working truly offline might be a show-stopper for some, but I am more than sure that the developers are working hard to address this in future versions. Understanding the difficulties of having all Python libraries locally under the hood, I can only wish for an easy way to browse through, and perhaps, locally caching pre-rendered Jupyter notebooks for later reference. This would be great, and one won’t have to render those to PDF or something more obscure.</p>
+
+<h2 id="a-few-more-apps">A few more apps</h2>
+<p>Before closings have decided to reiterate on my original statement that  the App Store is full of hidden gems which unfortunately, often did not really get the credit they deserve. This is the reason why I decided to share a few complementary apps that professionals from all disciplines will surely be interested in trying out. As before, those are not in any particular order, and I am not endorsing any of them, just sharing my personal opinion.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Purpose</th>
+      <th>Apps</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Taking Notes and Documenting</td>
+      <td><a href="http://happenapps.com/#quiver">Quiver</a>, <a href="https://ia.net/writer">iAWriter</a>, <a href="http://www.bear-writer.com/">Bear</a>, <a href="https://fsnot.es/">FSNotes</a></td>
+    </tr>
+    <tr>
+      <td>Source Control</td>
+      <td><a href="https://workingcopyapp.com/">Working Copy</a></td>
+    </tr>
+    <tr>
+      <td>SSH and Terminal Emulation</td>
+      <td><a href="https://www.termius.com/">Termius</a>, <a href="https://panic.com/prompt/">Prompt</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<p>Last but not least, here are <a href="https://speakerdeck.com/preslavrachev/data-science-on-your-ipad">my slides</a> from the talk. Until next time!</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/data-science" class="page__taxonomy-item" rel="tag">Data Science</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/ios" class="page__taxonomy-item" rel="tag">iOS</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/ipad" class="page__taxonomy-item" rel="tag">iPad</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/meetup" class="page__taxonomy-item" rel="tag">Meetup</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/munich" class="page__taxonomy-item" rel="tag">Munich</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/presentation" class="page__taxonomy-item" rel="tag">Presentation</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/programming" class="page__taxonomy-item" rel="tag">Programming</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2018-08-12T00:00:00+02:00">August 12, 2018</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Data+Science+on+Your+iPad%20https%3A%2F%2Fpreslav.me%2F2018%2F08%2F12%2Fdata-science-on-your-ipad%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fpreslav.me%2F2018%2F08%2F12%2Fdata-science-on-your-ipad%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=https%3A%2F%2Fpreslav.me%2F2018%2F08%2F12%2Fdata-science-on-your-ipad%2F" class="btn btn--google-plus" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Google Plus"><i class="fab fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fpreslav.me%2F2018%2F08%2F12%2Fdata-science-on-your-ipad%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2018/08/05/twil/" class="pagination--pager" title="TWIL Jul30-Aug05 2018
+">Previous</a>
+    
+    
+      <a href="/2018/08/13/twil/" class="pagination--pager" title="TWIL Aug06-Aug12 2018
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+  
+      <h4 class="page__comments-title">Leave a comment</h4>
+      <section id="disqus_thread"></section>
+    
+</div>
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://source.unsplash.com/collection/1922729/400x300"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2018/12/02/designing-well-structured-rest-apis-with-flask-restplus-part-1/" rel="permalink">Designing Well-Structured REST APIs with Flask-RestPlus: Part 1
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  7 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">This is the first part of a two-part series. In this post, I will introduce Flask-RestPlus and demonstrate how to start organising APIs around its simple REST-based conventions. Next time, I will address the topic of request/response marshalling (serialisation) and validation.
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://source.unsplash.com/collection/1922729/400x300"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2018/11/01/kotlinconf-2018-recap/" rel="permalink">KotlinConf 2018 Recap
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">KotlinConf 2018 took place in beautiful Amsterdam at the beginning of October, and this year, I had the chance to attend. Though only the second edition, KotlinConf has already become something of an institution within the developer community. Events like these help you meet the people whose work you admire, but would otherwise not be able to meet in person.
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://source.unsplash.com/collection/1922729/400x300"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2018/11/01/a-new-stochastic-oscillator/" rel="permalink">A New Stochastic Oscillator?
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Disclaimer: None of what follows is an actual trading advice. It was meant to educate and share my learning experience with the community, and should not be used as-is for making assumptions about the future direction of any market asset. Always do your own research!
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://source.unsplash.com/collection/1922729/400x300"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2018/10/07/photo-recap/" rel="permalink">A Photo Recap of the Past Week
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  1 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Wow, it has been quite a week! It is time for a quick photo recap.
+
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><input type="text" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+    <div id="results" class="results"></div></div>
+      </div>
+    
+
+    <div class="page__footer">
+      <footer>
+        <script type="text/javascript">
+  var clicky_custom = clicky_custom || {};
+  clicky_custom.cookies_disable = 1;
+</script>
+<script src="//static.getclicky.com/js" type="text/javascript"></script>
+<script type="text/javascript">try { clicky.init(101131786); } catch (e) { }</script>
+<noscript><p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/101131786ns.gif" /></p></noscript>
+
+<script type="text/javascript">
+  // This should effectively disable all cookies being set on this site
+  // It is a bit of a crude measure, but I think it is necessary, having in mind how many seemingly innoncent
+  // 3rd-party scripts and embeds bring in tracking cookies with themselves
+  if (!document.__defineGetter__) {
+    Object.defineProperty(document, 'cookie', {
+      get: function () { return '' },
+      set: function () { return true },
+    });
+  } else {
+    document.__defineGetter__("cookie", function () { return ''; });
+    document.__defineSetter__("cookie", function () { });
+  }
+</script>
+
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2019 Your Name. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://preslav.me/2018/08/12/data-science-on-your-ipad/";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "/2018/08/12/data-science-on-your-ipad"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://preslav.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+  </body>
+</html>

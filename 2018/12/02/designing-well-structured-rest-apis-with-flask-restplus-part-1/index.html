@@ -1,0 +1,942 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.13.0 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Designing Well-Structured REST APIs with Flask-RestPlus: Part 1 - Preslav Rachev</title>
+<meta name="description" content="This is the first part of a two-part series. In this post, I will introduce Flask-RestPlus and demonstrate how to start organising APIs around its simple REST-based conventions. Next time, I will address the topic of request/response marshalling (serialisation) and validation.">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Preslav Rachev">
+<meta property="og:title" content="Designing Well-Structured REST APIs with Flask-RestPlus: Part 1">
+<meta property="og:url" content="https://preslav.me/2018/12/02/designing-well-structured-rest-apis-with-flask-restplus-part-1/">
+
+
+  <meta property="og:description" content="This is the first part of a two-part series. In this post, I will introduce Flask-RestPlus and demonstrate how to start organising APIs around its simple REST-based conventions. Next time, I will address the topic of request/response marshalling (serialisation) and validation.">
+
+
+
+  <meta property="og:image" content="https://images.unsplash.com/photo-1531083894382-04a4f09c998f?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjExNzczfQ&amp;s=774784f0805880a8b64693a15540c1ef">
+
+
+
+
+
+  <meta property="article:published_time" content="2018-12-02T00:00:00+01:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://preslav.me/2018/12/02/designing-well-structured-rest-apis-with-flask-restplus-part-1/">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "Your Name",
+      "url": "https://preslav.me",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Preslav Rachev Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    
+    <link rel="amphtml" href="https://preslav.me/amp/2018/12/02/designing-well-structured-rest-apis-with-flask-restplus-part-1.html">
+
+
+<link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700|PT+Serif:400,700,400italic" rel="stylesheet" type="text/css">
+<link href="https://micro.blog/preslavrachev" rel="me" />
+  </head>
+
+  <body class="layout--post">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/">Preslav Rachev</a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/about-me" >About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/micro" >Microblog</a>
+            </li><li class="masthead__menu-item">
+              <a href="/archive" >Archive</a>
+            </li><li class="masthead__menu-item">
+              <a href="/contact" >Contact</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style=" background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1531083894382-04a4f09c998f?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjExNzczfQ&s=774784f0805880a8b64693a15540c1ef');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          Designing Well-Structured REST APIs with Flask-RestPlus: Part 1
+
+        
+      </h1>
+      
+        <p class="page__lead">This is the first part of a two-part series. In this post, I will introduce <a href="https://flask-restplus.readthedocs.io/en/stable/">Flask-RestPlus</a> and demonstrate how to start organising APIs around its simple REST-based conventions. Next time, I will address the topic of request/response marshalling (serialisation) and validation.
+
+</p>
+      
+      
+        <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  7 minute read
+</p>
+      
+      
+      
+        <p>
+        
+          
+          <a href="https://twitter.com/intent/tweet?text=Hey%2C%20%40preslavrachev%2C%20I%20have%20been%20reading%20your%20blog%3A%20https%3A%2F%2Fpreslav.me%2F" class="btn btn--light-outline btn--large">Discuss this post on Twitter</a>
+        
+          
+          <a href="/contact" class="btn btn--light-outline btn--large">Contact me</a>
+        
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div class="h-card" itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img class="u-photo" src="/assets/img/avatar.jpg" alt="Preslav Rachev" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Preslav Rachev</h3>
+    
+    
+      <p class="author__bio p-note" itemprop="description">
+        A runner and a programming / data science polymath. A Bulgarian living in Germany. Bridging the gap between software engineering and data science.
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Munich, Germany</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li>
+  <a href="https://twitter.com/preslavrachev" itemprop="sameAs">
+    <i class="fab fa-fw fa-twitter" aria-hidden="true"></i> Twitter
+  </a>
+  <a href="https://github.com/preslavrachev" itemprop="sameAs">
+    <i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub
+  </a>
+  <a href="https://www.linkedin.com/in/preslavrachev/" itemprop="sameAs">
+    <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn
+  </a>
+  <a href="https://mastodon.technology/@preslavrachev" itemprop="sameAs">
+    <i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon
+  </a>
+</li>
+
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Designing Well-Structured REST APIs with Flask-RestPlus: Part 1">
+    <meta itemprop="description" content="This is the first part of a two-part series. In this post, I will introduce Flask-RestPlus and demonstrate how to start organising APIs around its simple REST-based conventions. Next time, I will address the topic of request/response marshalling (serialisation) and validation.">
+    <meta itemprop="datePublished" content="December 02, 2018">
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>This is the first part of a two-part series. In this post, I will introduce <a href="https://flask-restplus.readthedocs.io/en/stable/">Flask-RestPlus</a> and demonstrate how to start organising APIs around its simple REST-based conventions. Next time, I will address the topic of request/response marshalling (serialisation) and validation.</p>
+
+<hr />
+
+<p>A seasoned Spring developer, I felt a bit uneasy when designing and future-proofing a <a href="http://flask.pocoo.org/">Flask</a>-based API for the first time. I have recently started using Python way beyond my original intention to just play with data, and found Flask to be a super-easy micro-service alternative to <a href="https://spring.io/projects/spring-boot">Spring Boot</a> or <a href="https://ktor.io/">Ktor</a>. The one thing I was really concerned about, was making sure that the API  request/response format was standardised (think, providing a Swagger schema), well-documented, and validated. While working with Java, much of this would come straight from the compiler itself, due to the static-type nature of the language. When you combine this with a couple of great libraries like <a href="https://github.com/FasterXML/jackson">Jackson</a> and <a href="http://springfox.github.io/springfox/">SpringFox</a>, the API communication gets documented and validated with minimal intrusion to the actual code. In Python, this would require tedious <code class="highlighter-rouge">if-else</code> checks all over the place … or so I thought.</p>
+
+<h2 id="flask-restplus-to-the-rescue">Flask-RestPlus to the Rescue</h2>
+
+<p>Unlike <a href="https://www.djangoproject.com/">Django</a>, Flask does not come with batteries included, but there is a whole ecosystem of open-source libraries and extensions contributed by the community. One of these is called <a href="https://flask-restplus.readthedocs.io/en/stable/">Flask-RestPlus</a> and it is the absolute dream-come-true for every Flask API designer. Flask-RestPlus is a <a href="http://flask.pocoo.org/docs/1.0/extensiondev/">Flask extension</a> library, and as the name suggests, it helps ease the building of structured RESTful APIs with minimal setup, and encourages best practices. Flask RestPlus follows certain conventions, but does not insist on them, the way Django does.  In a way, Flask-RestPlus tries to help organise a growing Flask project, but without it losing its minimal overhead, which is the greatest charm of Flask.</p>
+
+<p>The goal of this series is to start with a simple Flask app, and try to address the following points with a bit of Flask-RestPlus at a time:</p>
+
+<ol>
+  <li>Structure and auto-document an API <strong>(Part 1)</strong></li>
+  <li>Ensure request/response payload validation <strong>(Part 2)</strong></li>
+</ol>
+
+<h3 id="demo-app">Demo App</h3>
+
+<p>Let’s start with a simple Flask-based API for a conference management application:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s">"/conferences/"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">get_all__conferences</span><span class="p">():</span>
+    <span class="s">"""
+    returns a list of conferences
+    """</span>
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s">"/conferences/"</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s">'POST'</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">add_conference</span><span class="p">():</span>
+    <span class="s">"""
+    Adds a new conference to the list
+    """</span>
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s">"/conferences/&lt;int:id&gt;"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">get_conference</span><span class="p">(</span><span class="nb">id</span><span class="p">):</span>
+    <span class="s">"""
+    Displays a conference's details
+    """</span>
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s">"/conferences/&lt;int:id&gt;"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">edit_conference</span><span class="p">(</span><span class="nb">id</span><span class="p">):</span>
+    <span class="s">"""
+    Edits a selected conference
+    """</span>
+</code></pre></div></div>
+
+<p>Installing Flask-RestPlus is easy</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install </span>Flask-RestPlus
+</code></pre></div></div>
+
+<p>Let’s simply introduce an <code class="highlighter-rouge">Api</code> object for now, try to wrap our app instance with it, replace the routing decorators, and see what happens:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+<span class="kn">from</span> <span class="nn">flask_restplus</span> <span class="kn">import</span> <span class="n">Api</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+<span class="n">api</span> <span class="o">=</span> <span class="n">Api</span><span class="p">(</span><span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">)</span>
+
+
+<span class="nd">@api.route</span><span class="p">(</span><span class="s">"/conferences/"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">get_all__conferences</span><span class="p">():</span>
+    <span class="k">pass</span>
+
+
+<span class="nd">@api.route</span><span class="p">(</span><span class="s">"/conferences/"</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s">'POST'</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">add_conference</span><span class="p">():</span>
+    <span class="s">"""
+    Adds a new conference to the list
+    """</span>
+
+<span class="nd">@api.route</span><span class="p">(</span><span class="s">"/conferences/&lt;int:id&gt;"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">get_conference</span><span class="p">(</span><span class="nb">id</span><span class="p">):</span>
+    <span class="s">"""
+    Displays a conference's details
+    """</span>
+
+<span class="nd">@api.route</span><span class="p">(</span><span class="s">"/conferences/&lt;int:id&gt;"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">edit_conference</span><span class="p">(</span><span class="nb">id</span><span class="p">):</span>
+    <span class="s">"""
+    Edits a selected conference
+    """</span>
+</code></pre></div></div>
+
+<p>As soon as the app starts, we will get the following error:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AttributeError: 'function' object has no attribute 'as_view'
+</code></pre></div></div>
+
+<p>This is because if you want to use RestPlus for some of your Flask functions, you have to enclose them in a scoping class. Not only that, but inside the enclosing class, you should name your methods, corresponding to the HTTP methods that REST is based on: GET, POST, PUT, and DELETE:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@api.route</span><span class="p">(</span><span class="s">"/conferences/"</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">ConferenceList</span><span class="p">(</span><span class="n">Resource</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">"""
+        returns a list of conferences
+        """</span>
+</code></pre></div></div>
+
+<p>Before anyone starts objecting, let me explain why this is helpful. Flask-RestPlus uses the Flask concept of “Pluggable Views” to introduce <code class="highlighter-rouge">Resource</code> (as in, REST resource).</p>
+
+<p>Let’s be honest. While most Flask applications start simple, many of them outgrow the initial idea, and cramming several handler functions in the main module scope quickly becomes a mess. This is why <a href="http://exploreflask.com/en/latest/blueprints.html">Flask Blueprints</a> exist to help split common functionality into multiple modules.</p>
+
+<p>Flask-RestPlus makes great use of Blueprints too, as I will demonstrate later, but Resources go one level of granularity further. A Resource class can have multiple methods, but each one should be named after one of the accepted HTTP verbs. What if you need more than one <code class="highlighter-rouge">GET</code> or <code class="highlighter-rouge">POST</code> method for your API? Well, create multiple Resource classes and put each method in the corresponding resource class. It might look a little overwhelming at first, coming from the cut-the-boilerplate nature of Flask, but with a bit of playing around, it won’t be a brainer at all, and it will pay off tremendously in the long run.</p>
+
+<p>Let’s see how our tiny app will look after the transformations:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+<span class="kn">from</span> <span class="nn">flask_restplus</span> <span class="kn">import</span> <span class="n">Api</span><span class="p">,</span> <span class="n">Resource</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+<span class="n">api</span> <span class="o">=</span> <span class="n">Api</span><span class="p">(</span><span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">)</span>
+
+
+<span class="nd">@api.route</span><span class="p">(</span><span class="s">"/conferences/"</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">ConferenceList</span><span class="p">(</span><span class="n">Resource</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">"""
+        returns a list of conferences
+        """</span>
+
+    <span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">"""
+        Adds a new conference to the list
+        """</span>
+
+
+<span class="nd">@api.route</span><span class="p">(</span><span class="s">"/conferences/&lt;int:id&gt;"</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">Conference</span><span class="p">(</span><span class="n">Resource</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
+        <span class="s">"""
+        Displays a conference's details
+        """</span>
+
+    <span class="k">def</span> <span class="nf">put</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
+        <span class="s">"""
+        Edits a selected conference
+        """</span>
+</code></pre></div></div>
+
+<p>With this tiny bit of overhead (if you even consider this any overhead at all), you get so much in return. Start the app and point to <code class="highlighter-rouge">http://localhost:5000</code>. You will see that the index page has turned into a Swagger UI, which shows the already defined API endpoints, neatly organised into categories (namespaces):</p>
+
+<p><img src="/assets/img/2018/flask-restplus-part-11.png" alt="" /></p>
+
+<p>This is great for documenting, playing with, and sharing you API schema around. Yet, this is by far not the only thing that Flask-RestPlus does for you. It goes beyond simply documenting the API, in ensuring that the API is compliant with the schema. Put simply, Flask-RestPlus makes sure that if certain request parameters are marked as mandatory, or if request/response models are supposed to have a certain structure, those are checked and validated at runtime. In my opinion, this is real advantage of Flask-RestPlus, sitting on top of a Flask application. The current example is too simple to demonstrate the real power of request/response marshalling and validation, but both will be throughly described in Part 2.</p>
+
+<h3 id="namespaces">Namespaces</h3>
+
+<p>Namespaces are optional, and add a bit of additional organisational touch to the API, mainly, from a documentation point of view. A namespace allows you to group related Resources under a common root, and is simple to create:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ns_conf</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">namespace</span><span class="p">(</span><span class="s">'conferences'</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s">'Conference operations'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>To bring certain Resources under a given namespace, all you need to do, is to replace <code class="highlighter-rouge">@api</code> with <code class="highlighter-rouge">@ns_conf</code>. Notice also that the name of the namespace replaces the name of the resource, so endpoints can simply to refer to <code class="highlighter-rouge">/</code>, instead of copying the name of the resource time and again:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+<span class="kn">from</span> <span class="nn">flask_restplus</span> <span class="kn">import</span> <span class="n">Api</span><span class="p">,</span> <span class="n">Resource</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+<span class="n">api</span> <span class="o">=</span> <span class="n">Api</span><span class="p">(</span><span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">)</span>
+<span class="n">ns_conf</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">namespace</span><span class="p">(</span><span class="s">'conferences'</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s">'Conference operations'</span><span class="p">)</span>
+
+
+<span class="nd">@ns_conf.route</span><span class="p">(</span><span class="s">"/"</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">ConferenceList</span><span class="p">(</span><span class="n">Resource</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">"""
+        returns a list of conferences
+        """</span>
+
+    <span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">"""
+        Adds a new conference to the list
+        """</span>
+
+
+<span class="nd">@ns_conf.route</span><span class="p">(</span><span class="s">"/&lt;int:id&gt;"</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">Conference</span><span class="p">(</span><span class="n">Resource</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
+        <span class="s">"""
+        Displays a conference's details
+        """</span>
+
+    <span class="k">def</span> <span class="nf">put</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
+        <span class="s">"""
+        Edits a selected conference
+        """</span>
+</code></pre></div></div>
+
+<p>One will notice afterwards that the Swagger UI display has changed too, to reflect the namespacing:</p>
+
+<p><img src="/assets/img/2018/flask-restplus-part-12.png" alt="" /></p>
+
+<h3 id="blueprints">Blueprints</h3>
+
+<p><a href="http://flask.pocoo.org/docs/blueprints/#blueprints">Flask Blueprints</a> are a popular way of designing modular applications. The same applies to Flask-RestPlus. The production version of our application will certainly outgrow the four endpoints we started with. There might be other resources, or at the very least, you might want to move to move your API away from the root of your app. Both cases are a perfect candidate for a Blueprint.  Let’s move all of our API endpoints under <code class="highlighter-rouge">/api/v1</code>, without touching the routes of even one of them. This example is coming straight from the Flask-RestPlus <a href="https://flask-restplus.readthedocs.io/en/stable/scaling.html#use-with-blueprints">documentation</a>, and is illustrative enough to help close this chapter of the journey:</p>
+
+<p>Create a Blueprint the usual way, and instead of wrapping our app instance with the RestPlus API,  we will wrap the Blueprint instead. This way, independent of our app, we are free to move our API part into a different module: (e.g. <code class="highlighter-rouge">blueprint/api.py</code>)</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Blueprint</span>
+<span class="kn">from</span> <span class="nn">flask_restplus</span> <span class="kn">import</span> <span class="n">Api</span>
+
+<span class="n">blueprint</span> <span class="o">=</span> <span class="n">Blueprint</span><span class="p">(</span><span class="s">'api'</span><span class="p">,</span> <span class="n">__name__</span><span class="p">)</span>
+<span class="n">api</span> <span class="o">=</span> <span class="n">Api</span><span class="p">(</span><span class="n">blueprint</span><span class="p">)</span>
+
+<span class="c"># Bring in the rest of our API code here</span>
+</code></pre></div></div>
+
+<p>This leaves only a tiny bit of bridging code to introduce the Blueprint to the main app, and set the URL prefix. The next time you start your app, the API endpoints will be accessible only under the specified URL prefix (<code class="highlighter-rouge">/api/v1</code>).</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+<span class="kn">from</span> <span class="nn">apis</span> <span class="kn">import</span> <span class="n">blueprint</span> <span class="k">as</span> <span class="n">api</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">register_blueprint</span><span class="p">(</span><span class="n">api</span><span class="p">,</span> <span class="n">url_prefix</span><span class="o">=</span><span class="s">'/api/1'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Las but not least, it is always a good idea to move the Swagger UI documentation away from the root. As in everything else in RestPlus, this part is extremely ease, too. You can override the default location by passing an additional parameter to the initialiser:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">api</span> <span class="o">=</span> <span class="n">Api</span><span class="p">(</span><span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s">'/docs'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<hr />
+
+<p>This sums up the first part of my series. I hope that it was informative, and will help you structure your Flask-based REST APIs better in the future. Till next time!</p>
+
+<hr />
+
+<h2 id="further-reading">Further Reading</h2>
+
+<p><a href="http://flask.pocoo.org/">Flask (A Python Microframework)</a></p>
+
+<p><a href="https://flask-restplus.readthedocs.io/en/stable/index.html">Flask-RestPlus</a></p>
+
+<p><a href="https://medium.freecodecamp.org/structuring-a-flask-restplus-web-service-for-production-builds-c2ec676de563">How to structure a Flask-RESTPlus web service for production builds</a></p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/flask" class="page__taxonomy-item" rel="tag">Flask</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/python" class="page__taxonomy-item" rel="tag">Python</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/rest" class="page__taxonomy-item" rel="tag">Rest</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/programming" class="page__taxonomy-item" rel="tag">Programming</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2018-12-02T00:00:00+01:00">December 02, 2018</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Designing+Well-Structured+REST+APIs+with+Flask-RestPlus%3A+Part+1%20https%3A%2F%2Fpreslav.me%2F2018%2F12%2F02%2Fdesigning-well-structured-rest-apis-with-flask-restplus-part-1%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fpreslav.me%2F2018%2F12%2F02%2Fdesigning-well-structured-rest-apis-with-flask-restplus-part-1%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=https%3A%2F%2Fpreslav.me%2F2018%2F12%2F02%2Fdesigning-well-structured-rest-apis-with-flask-restplus-part-1%2F" class="btn btn--google-plus" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Google Plus"><i class="fab fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fpreslav.me%2F2018%2F12%2F02%2Fdesigning-well-structured-rest-apis-with-flask-restplus-part-1%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2018/11/01/kotlinconf-2018-recap/" class="pagination--pager" title="KotlinConf 2018 Recap
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+  
+      <h4 class="page__comments-title">Leave a comment</h4>
+      <section id="disqus_thread"></section>
+    
+</div>
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://source.unsplash.com/collection/1922729/400x300"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2018/11/01/kotlinconf-2018-recap/" rel="permalink">KotlinConf 2018 Recap
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">KotlinConf 2018 took place in beautiful Amsterdam at the beginning of October, and this year, I had the chance to attend. Though only the second edition, KotlinConf has already become something of an institution within the developer community. Events like these help you meet the people whose work you admire, but would otherwise not be able to meet in person.
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://source.unsplash.com/collection/1922729/400x300"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2018/11/01/a-new-stochastic-oscillator/" rel="permalink">A New Stochastic Oscillator?
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Disclaimer: None of what follows is an actual trading advice. It was meant to educate and share my learning experience with the community, and should not be used as-is for making assumptions about the future direction of any market asset. Always do your own research!
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://source.unsplash.com/collection/1922729/400x300"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2018/10/07/photo-recap/" rel="permalink">A Photo Recap of the Past Week
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  1 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Wow, it has been quite a week! It is time for a quick photo recap.
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://source.unsplash.com/collection/1922729/400x300"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2018/10/06/software-disenchantment/" rel="permalink">Software Disenchantment: A Slightly Philosophical Look
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  3 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">As a software developer who roams around the social media circles, you might have already stumbled upon Nikita Tonsky’s post. I have been tinkering with programming every since I can remember. I have been writing code professionally for close to a decade now. Therefore, I couldn’t just leave Nikita’s words pass by me, and not leave a remark. Here’s a quote from Nikita’s post that sets the overall tone:
+
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><input type="text" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+    <div id="results" class="results"></div></div>
+      </div>
+    
+
+    <div class="page__footer">
+      <footer>
+        <script type="text/javascript">
+  var clicky_custom = clicky_custom || {};
+  clicky_custom.cookies_disable = 1;
+</script>
+<script src="//static.getclicky.com/js" type="text/javascript"></script>
+<script type="text/javascript">try { clicky.init(101131786); } catch (e) { }</script>
+<noscript><p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/101131786ns.gif" /></p></noscript>
+
+<script type="text/javascript">
+  // This should effectively disable all cookies being set on this site
+  // It is a bit of a crude measure, but I think it is necessary, having in mind how many seemingly innoncent
+  // 3rd-party scripts and embeds bring in tracking cookies with themselves
+  if (!document.__defineGetter__) {
+    Object.defineProperty(document, 'cookie', {
+      get: function () { return '' },
+      set: function () { return true },
+    });
+  } else {
+    document.__defineGetter__("cookie", function () { return ''; });
+    document.__defineSetter__("cookie", function () { });
+  }
+</script>
+
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2019 Your Name. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://preslav.me/2018/12/02/designing-well-structured-rest-apis-with-flask-restplus-part-1/";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "/2018/12/02/designing-well-structured-rest-apis-with-flask-restplus-part-1"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://preslav.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+  </body>
+</html>

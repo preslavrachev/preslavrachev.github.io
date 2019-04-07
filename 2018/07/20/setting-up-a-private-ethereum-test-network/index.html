@@ -1,0 +1,790 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.13.0 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Setting up a Private Ethereum Test Network - Preslav Rachev</title>
+<meta name="description" content="I want to play around with a few Ethereum smart contracts, without spending real money before the final versions are ready. Thankfully, Ethereum has been designed in a way, allowing for the easy setup of new networks, especially private ones, which have no connection to the main net. I will try to explain the first steps here, both for myself, and for anyone else looking for an easy and safe way to play with Ethereum smart contracts.">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Preslav Rachev">
+<meta property="og:title" content="Setting up a Private Ethereum Test Network">
+<meta property="og:url" content="https://preslav.me/2018/07/20/setting-up-a-private-ethereum-test-network/">
+
+
+  <meta property="og:description" content="I want to play around with a few Ethereum smart contracts, without spending real money before the final versions are ready. Thankfully, Ethereum has been designed in a way, allowing for the easy setup of new networks, especially private ones, which have no connection to the main net. I will try to explain the first steps here, both for myself, and for anyone else looking for an easy and safe way to play with Ethereum smart contracts.">
+
+
+
+  <meta property="og:image" content="https://source.unsplash.com/collection/1922729/1280x400">
+
+
+
+
+
+  <meta property="article:published_time" content="2018-07-20T00:00:00+02:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://preslav.me/2018/07/20/setting-up-a-private-ethereum-test-network/">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "Your Name",
+      "url": "https://preslav.me",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Preslav Rachev Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    
+    <link rel="amphtml" href="https://preslav.me/amp/2018/07/20/setting-up-a-private-ethereum-test-network.html">
+
+
+<link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700|PT+Serif:400,700,400italic" rel="stylesheet" type="text/css">
+<link href="https://micro.blog/preslavrachev" rel="me" />
+  </head>
+
+  <body class="layout--post">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/">Preslav Rachev</a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/about-me" >About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/micro" >Microblog</a>
+            </li><li class="masthead__menu-item">
+              <a href="/archive" >Archive</a>
+            </li><li class="masthead__menu-item">
+              <a href="/contact" >Contact</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style=" background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://source.unsplash.com/collection/1922729/1280x400');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          Setting up a Private Ethereum Test Network
+
+        
+      </h1>
+      
+      
+        <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  5 minute read
+</p>
+      
+      
+      
+        <p>
+        
+          
+          <a href="https://twitter.com/intent/tweet?text=Hey%2C%20%40preslavrachev%2C%20I%20have%20been%20reading%20your%20blog%3A%20https%3A%2F%2Fpreslav.me%2F" class="btn btn--light-outline btn--large">Discuss this post on Twitter</a>
+        
+          
+          <a href="/contact" class="btn btn--light-outline btn--large">Contact me</a>
+        
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div class="h-card" itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img class="u-photo" src="/assets/img/avatar.jpg" alt="Preslav Rachev" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Preslav Rachev</h3>
+    
+    
+      <p class="author__bio p-note" itemprop="description">
+        A runner and a programming / data science polymath. A Bulgarian living in Germany. Bridging the gap between software engineering and data science.
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Munich, Germany</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li>
+  <a href="https://twitter.com/preslavrachev" itemprop="sameAs">
+    <i class="fab fa-fw fa-twitter" aria-hidden="true"></i> Twitter
+  </a>
+  <a href="https://github.com/preslavrachev" itemprop="sameAs">
+    <i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub
+  </a>
+  <a href="https://www.linkedin.com/in/preslavrachev/" itemprop="sameAs">
+    <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn
+  </a>
+  <a href="https://mastodon.technology/@preslavrachev" itemprop="sameAs">
+    <i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon
+  </a>
+</li>
+
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Setting up a Private Ethereum Test Network">
+    <meta itemprop="description" content="I want to play around with a few Ethereum smart contracts, without spending real money before the final versions are ready. Thankfully, Ethereum has been designed in a way, allowing for the easy setup of new networks, especially private ones, which have no connection to the main net. I will try to explain the first steps here, both for myself, and for anyone else looking for an easy and safe way to play with Ethereum smart contracts.">
+    <meta itemprop="datePublished" content="July 20, 2018">
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>I want to play around with a few Ethereum smart contracts, without spending real money before the final versions are ready. Thankfully, Ethereum has been designed in a way, allowing for the easy setup of new networks, especially private ones, which have no connection to the main net. I will try to explain the first steps here, both for myself, and for anyone else looking for an easy and safe way to play with Ethereum smart contracts.</p>
+
+<p>Note: There are a few projects out there that allow a single-click setup of a private Ethereum network, such as <a href="https://truffleframework.com/ganache">Ganache</a>. I am not going to discuss these, because I would like to go a little bit deeper under the hood.</p>
+
+<h2 id="what-do-we-need">What do we Need?</h2>
+<h3 id="geth">GETH</h3>
+
+<p><a href="https://geth.ethereum.org/">Geth</a> stands for “Go Ethereum” and is a full-node Ethereum protocol implementation, written in Go. It is one of the three original implementations (along with C++ and Python). Geth will allow us to set up the test net from a so-called “genesis file”. First things first, let’s install it. For macOS users like me, there is a convenient installation through Homebrew:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew <span class="nb">install </span>geth
+</code></pre></div></div>
+
+<p>Once having Geth installed, we need to set up our genesis file.</p>
+
+<h3 id="genesis-file">Genesis File</h3>
+
+<p>The genesis file is a JSON configuration file that Geth uses to create the <a href="https://en.bitcoin.it/wiki/Genesis_block">genesis block</a>. The purpose of this block is to define the rules of the game, and it looks pretty much like this (thanks, <a href="https://github.com/ethereum/pyethapp/wiki/Custom-genesis">pyethapp</a>):</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"nonce"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x0000000000000042"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"difficulty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x200"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"mixhash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x0000000000000000000000000000000000000000000000000000000000000000"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"coinbase"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x0000000000000000000000000000000000000000"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"parentHash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x0000000000000000000000000000000000000000000000000000000000000000"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"extraData"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x11bbe8db4e347b4e8c937c1c8370e4b5ed33adb3db69cbdb7a38e1e50b1b82fa"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"gasLimit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x1388"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"alloc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"3282791d6fd713f1e94f4bfd565eaa78b3a0599d"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"balance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1337000000000000000000"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"17961d633bcf20a7b029a7d94b7df4da2ec5427f"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"balance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"229427000000000000000"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>It sets up some pretty important basic values such as the starting <code class="highlighter-rouge">difficulty</code> and the <code class="highlighter-rouge">gas limit</code>. The difficulty, in PoW sense, dictates the entropy of every next hash, or in simpler terms, how much computational power is needed, in order to solve the next block and guess the combination of <code class="highlighter-rouge">mixhash</code> and <code class="highlighter-rouge">nonce</code>. We want it to be sufficiently low on our test net, so that we can “mine” using only a laptop, without waiting or melting it down.</p>
+
+<p>On the other hand, we want the <code class="highlighter-rouge">gas limit</code> to be sufficiently high, so that we can allow for operations of arbitrary complexity, without having to reinitialise our net form scratch. Nevertheless, before going live with a smart contract, always keep an eye on the amount of gas that gets spent on operations, because on the main net, it means real actual money.</p>
+
+<p>The <code class="highlighter-rouge">alloc</code> object is optional, but it allows for setting up an initial number of wallets, each with its own balance. You may want to leave that out though, as you will be able to easily create wallets within Mist later on.</p>
+
+<p>The rest of the values are pretty much either zeroes, or some starting random hashes that you don’t have to care much about. Just copy a sample like this one, adjust the difficulty and gas limit, and start from there. If you want a deeper explanation of what each of these properties mean, I found <a href="https://ethereum.stackexchange.com/a/2377">this answer here</a> very thorough.</p>
+
+<h3 id="mist">Mist</h3>
+
+<p><img src="/assets/img/2018/july/mist-dapps-store.jpg" alt="Mist Dapps Store" /></p>
+
+<p><a href="https://github.com/ethereum/mist">Mist</a> is a GUI Ethereum Dapp browser, containing its own integrated Geth node, as well as an integrated ETH wallet manager. If you have so far only used an ETH wallet, the concept of a Dapp browser will seem daunting at first. Besides managing wallets, Mist also functions as a de-facto Dapp Store, allowing the user to discover and play with already developed Dapps, such as CryptoKitties, Augur, Bancor, etc. Best of all, Mist allows the creating, deploying, and executing functions on smart contracts. This is primarily what we will be using it for.</p>
+
+<h2 id="initialising-the-net">Initialising the Net</h2>
+
+<p>First things first, let’s initialise our net. We’ll need some initial folder structure, which might look like this:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mytestnet/
+- chaindata/
+- genesis.json
+</code></pre></div></div>
+
+<p>Of course, how you name the directories and the configuration file is completely up to you. The important thing is to keep the folder where the block chain will be stored separate from the genesis file. With that in mind, go into the <code class="highlighter-rouge">mytestnet</code> directory, and execute the following command:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>geth <span class="nt">--datadir</span><span class="o">=</span>.chaindata init genesis.json
+</code></pre></div></div>
+
+<p>Geth will init the blockchain and will close itself. Once the chain has been initialised, you can start one Geth instance and keep it running:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>geth <span class="nt">--datadir</span><span class="o">=</span>.chaindata
+</code></pre></div></div>
+
+<p>Geth will connect and keep a server running. The one thing you want to keep a note on is the last line of the connection process, which should look something like this:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>INFO <span class="o">[</span>07-29|09:53:20.327] IPC endpoint opened   <span class="nv">url</span><span class="o">=</span>/path/to/my/testnet/.chaindata/geth.ipc
+</code></pre></div></div>
+
+<p>The <code class="highlighter-rouge">.ipc</code> file is what we will be using to connect Mist to in the next step.</p>
+
+<h3 id="start-mist">Start Mist</h3>
+<p>A point to be noted about Mist. It comes with its own version of Geth, which, if no other version is running on your machine, will start automatically. This may cause Mist to try to connect to the main net and start downloading a copy of the real Ethereum blockchain. We want to prevent that. Instead, we will start Mist from the command line and point it to the <code class="highlighter-rouge">.ipc</code> file that our Geth instance has opened:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/Applications/Mist.app/Contents/MacOS/Mist <span class="nt">--rpc</span> /path/to/my/testnet/.chaindata/geth.ipc
+</code></pre></div></div>
+
+<p>After a bit of setup, Mist will start. Regardless of whether you have previously allocated ETH to some addresses in the genesis file, you won’t be able to access those. You will need to create a new wallet and mine some ETH.</p>
+
+<p><img src="/assets/img/2018/july/mist-create-wallet.png" alt="Create a new wallet" /></p>
+
+<p>Once you have your first wallet set up, why don’t you mine some ETH as well. Assuming you left the <code class="highlighter-rouge">difficulty</code> value sufficiently low, this should be a rather fast and easy process. Open up a new tab and fire up a second Geth instance like this:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>geth attach /path/to/my/testnet/.chaindata/geth.ipc
+</code></pre></div></div>
+
+<p>It will fire up a console, in which you write the following set of commands:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">miner</span><span class="p">.</span><span class="nx">setEtherbase</span><span class="p">(</span><span class="s2">"the_address_of_your_wallet"</span><span class="p">);</span>
+
+<span class="nx">miner</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="c1">// # of parallel threads.</span>
+<span class="c1">// To stop the miner, type miner.stop()</span>
+</code></pre></div></div>
+
+<p>After a short while, Mist will start showing a constantly increasing number of ETH in your wallet.</p>
+
+<p>As an exercise, try sending some ETH to another wallet you create via Mist. In order to confirm the transaction, you have to start the miner shortly and keep it running until all confirmations have been fulfilled. Normally Mist should be responsive enough to show this in real time. Sometimes however, Mist might become unresponsive or lose connection to the socket. If that happens, simply restart it, and it should be up an running again.</p>
+
+<p>That’s it for now. In a follow-up post, I will be discussing the creation and deployment of a simple smart contract on our new private test net. Stay tuned.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/blockchain" class="page__taxonomy-item" rel="tag">Blockchain</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/cryptocurrency" class="page__taxonomy-item" rel="tag">Cryptocurrency</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/ethereum" class="page__taxonomy-item" rel="tag">Ethereum</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/programming" class="page__taxonomy-item" rel="tag">Programming</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2018-07-20T00:00:00+02:00">July 20, 2018</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Setting+up+a+Private+Ethereum+Test+Network%20https%3A%2F%2Fpreslav.me%2F2018%2F07%2F20%2Fsetting-up-a-private-ethereum-test-network%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fpreslav.me%2F2018%2F07%2F20%2Fsetting-up-a-private-ethereum-test-network%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=https%3A%2F%2Fpreslav.me%2F2018%2F07%2F20%2Fsetting-up-a-private-ethereum-test-network%2F" class="btn btn--google-plus" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Google Plus"><i class="fab fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fpreslav.me%2F2018%2F07%2F20%2Fsetting-up-a-private-ethereum-test-network%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2018/07/20/dont-throw-react-native-away-just-yet/" class="pagination--pager" title="Don’t Throw React Native Away Just Yet
+">Previous</a>
+    
+    
+      <a href="/2018/08/04/21k_no_4_self_organized/" class="pagination--pager" title="21K #4 (Self-Organized)
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+  
+      <h4 class="page__comments-title">Leave a comment</h4>
+      <section id="disqus_thread"></section>
+    
+</div>
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://source.unsplash.com/collection/1922729/400x300"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2018/12/02/designing-well-structured-rest-apis-with-flask-restplus-part-1/" rel="permalink">Designing Well-Structured REST APIs with Flask-RestPlus: Part 1
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  7 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">This is the first part of a two-part series. In this post, I will introduce Flask-RestPlus and demonstrate how to start organising APIs around its simple REST-based conventions. Next time, I will address the topic of request/response marshalling (serialisation) and validation.
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://source.unsplash.com/collection/1922729/400x300"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2018/11/01/kotlinconf-2018-recap/" rel="permalink">KotlinConf 2018 Recap
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">KotlinConf 2018 took place in beautiful Amsterdam at the beginning of October, and this year, I had the chance to attend. Though only the second edition, KotlinConf has already become something of an institution within the developer community. Events like these help you meet the people whose work you admire, but would otherwise not be able to meet in person.
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://source.unsplash.com/collection/1922729/400x300"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2018/11/01/a-new-stochastic-oscillator/" rel="permalink">A New Stochastic Oscillator?
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Disclaimer: None of what follows is an actual trading advice. It was meant to educate and share my learning experience with the community, and should not be used as-is for making assumptions about the future direction of any market asset. Always do your own research!
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://source.unsplash.com/collection/1922729/400x300"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2018/10/07/photo-recap/" rel="permalink">A Photo Recap of the Past Week
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  1 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Wow, it has been quite a week! It is time for a quick photo recap.
+
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><input type="text" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+    <div id="results" class="results"></div></div>
+      </div>
+    
+
+    <div class="page__footer">
+      <footer>
+        <script type="text/javascript">
+  var clicky_custom = clicky_custom || {};
+  clicky_custom.cookies_disable = 1;
+</script>
+<script src="//static.getclicky.com/js" type="text/javascript"></script>
+<script type="text/javascript">try { clicky.init(101131786); } catch (e) { }</script>
+<noscript><p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/101131786ns.gif" /></p></noscript>
+
+<script type="text/javascript">
+  // This should effectively disable all cookies being set on this site
+  // It is a bit of a crude measure, but I think it is necessary, having in mind how many seemingly innoncent
+  // 3rd-party scripts and embeds bring in tracking cookies with themselves
+  if (!document.__defineGetter__) {
+    Object.defineProperty(document, 'cookie', {
+      get: function () { return '' },
+      set: function () { return true },
+    });
+  } else {
+    document.__defineGetter__("cookie", function () { return ''; });
+    document.__defineSetter__("cookie", function () { });
+  }
+</script>
+
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2019 Your Name. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://preslav.me/2018/07/20/setting-up-a-private-ethereum-test-network/";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "/2018/07/20/setting-up-a-private-ethereum-test-network"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://preslav.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+  </body>
+</html>

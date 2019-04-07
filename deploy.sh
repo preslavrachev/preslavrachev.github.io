@@ -3,7 +3,6 @@
 set -ex
 
 build_site() {
-  gulp sass
   bundle exec jekyll build
 }
 
@@ -20,7 +19,7 @@ commit_website_files() {
 
 upload_files() {
   git remote add origin-pages https://${GITHUB_TOKEN}@github.com/preslavrachev/preslavrachev.github.io.git
-  git push --quiet --set-upstream origin-pages build
+  git push origin-pages `git subtree split --prefix _site build`:master --force
 }
 
 build_site

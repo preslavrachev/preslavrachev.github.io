@@ -1,0 +1,862 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.13.0 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Introducing My New Pet Project: Should I HODL - Preslav Rachev</title>
+<meta name="description" content="My crypto-obsession from last year might have died down a little, but I still remain a long-term investor and a believer of decentralization. Moreover, it was predicting the crypto market’s next move that made dust off some of my old machine learning experiments and gave a fresh boost to my mission of becoming a data scientist. Though one could hardly hear me speak about this coin or that, I am still actively researching and building tools.">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Preslav Rachev">
+<meta property="og:title" content="Introducing My New Pet Project: Should I HODL">
+<meta property="og:url" content="https://preslav.me/2018/06/02/my-new-pet-project-shouldidhodl/">
+
+
+  <meta property="og:description" content="My crypto-obsession from last year might have died down a little, but I still remain a long-term investor and a believer of decentralization. Moreover, it was predicting the crypto market’s next move that made dust off some of my old machine learning experiments and gave a fresh boost to my mission of becoming a data scientist. Though one could hardly hear me speak about this coin or that, I am still actively researching and building tools.">
+
+
+
+  <meta property="og:image" content="https://source.unsplash.com/collection/1922729/1280x400">
+
+
+
+
+
+  <meta property="article:published_time" content="2018-06-02T00:00:00+02:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://preslav.me/2018/06/02/my-new-pet-project-shouldidhodl/">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "Your Name",
+      "url": "https://preslav.me",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Preslav Rachev Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    
+    <link rel="amphtml" href="https://preslav.me/amp/2018/06/02/my-new-pet-project-shouldidhodl.html">
+
+
+<link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700|PT+Serif:400,700,400italic" rel="stylesheet" type="text/css">
+<link href="https://micro.blog/preslavrachev" rel="me" />
+  </head>
+
+  <body class="layout--post">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/">Preslav Rachev</a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/about-me" >About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/micro" >Microblog</a>
+            </li><li class="masthead__menu-item">
+              <a href="/archive" >Archive</a>
+            </li><li class="masthead__menu-item">
+              <a href="/contact" >Contact</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style=" background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://source.unsplash.com/collection/1922729/1280x400');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          Introducing My New Pet Project: Should I HODL
+
+        
+      </h1>
+      
+      
+        <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  7 minute read
+</p>
+      
+      
+      
+        <p>
+        
+          
+          <a href="https://twitter.com/intent/tweet?text=Hey%2C%20%40preslavrachev%2C%20I%20have%20been%20reading%20your%20blog%3A%20https%3A%2F%2Fpreslav.me%2F" class="btn btn--light-outline btn--large">Discuss this post on Twitter</a>
+        
+          
+          <a href="/contact" class="btn btn--light-outline btn--large">Contact me</a>
+        
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div class="h-card" itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img class="u-photo" src="/assets/img/avatar.jpg" alt="Preslav Rachev" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Preslav Rachev</h3>
+    
+    
+      <p class="author__bio p-note" itemprop="description">
+        A runner and a programming / data science polymath. A Bulgarian living in Germany. Bridging the gap between software engineering and data science.
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Munich, Germany</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li>
+  <a href="https://twitter.com/preslavrachev" itemprop="sameAs">
+    <i class="fab fa-fw fa-twitter" aria-hidden="true"></i> Twitter
+  </a>
+  <a href="https://github.com/preslavrachev" itemprop="sameAs">
+    <i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub
+  </a>
+  <a href="https://www.linkedin.com/in/preslavrachev/" itemprop="sameAs">
+    <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn
+  </a>
+  <a href="https://mastodon.technology/@preslavrachev" itemprop="sameAs">
+    <i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon
+  </a>
+</li>
+
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Introducing My New Pet Project: Should I HODL">
+    <meta itemprop="description" content="My crypto-obsession from last year might have died down a little, but I still remain a long-term investor and a believer of decentralization. Moreover, it was predicting the crypto market’s next move that made dust off some of my old machine learning experiments and gave a fresh boost to my mission of becoming a data scientist. Though one could hardly hear me speak about this coin or that, I am still actively researching and building tools.">
+    <meta itemprop="datePublished" content="June 02, 2018">
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>My crypto-obsession from last year might have died down a little, but I still remain a long-term investor and a believer of decentralization. Moreover, it was predicting the crypto market’s next move that made dust off some of my old machine learning experiments and gave a fresh boost to my mission of becoming a data scientist. Though one could hardly hear me speak about this coin or that, I am still actively researching and building tools.</p>
+
+<p>Tools like <a href="https://preslav.me/shouldihodl/">ShouldIHODL</a>. It is an extremely simple website that does nothing else, but spit out a Yes or No to the question, of whether it is a good day to invest in Bitcoin or not. Emphasis on the word <strong>invest</strong> =&gt; buy for the longer term. I am not interested in sheer speculation, or the manipulated pump-and-dump schemes that flooded the markets last year. Also, it should go without saying that this is a simple side project built mainly for fun and learning purposes, and no financial advice of any kind. I don’t want to bear any responsibility for potential losses or missed opportunities on anyone’s behalf.</p>
+
+<p><img src="/assets/img/2018/june/shouldihodl_screen.jpg" alt="ShouldIHODL" /></p>
+
+<h2 id="how-does-it-work">How does it work?</h2>
+<h3 id="the-raw-data">The raw data</h3>
+<p>There is a fair bit of machine learning involved into the decision. First, a few tens of thousands of data points get fetched through the open <a href="https://poloniex.com/support/api/">Poloniex API</a>. Each data point represents a 30-min interval from Bitcoin’s price history, containing data known from common charting tools and APIs:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">open</code> - price at the start of the interval</li>
+  <li><code class="highlighter-rouge">close</code> - price at the end of the interval</li>
+  <li><code class="highlighter-rouge">low</code> - lowest price reached throughout the interval</li>
+  <li><code class="highlighter-rouge">high</code> - the highest price reached throughout the interval</li>
+  <li><code class="highlighter-rouge">quoteVolume</code> - volume movement expressed in units of the quote currency, a.k.a BTC</li>
+  <li><code class="highlighter-rouge">baseVolume</code> - volume movement expressed in units of the base currency, either USD, EUR, or as in our case <a href="https://tether.to/">USDT</a></li>
+</ul>
+
+<p>The first four are better known to chart enthusiasts and traders as what describes a <a href="https://www.investopedia.com/terms/c/candlestick.asp">candlestick</a>:</p>
+
+<p><img src="https://i.investopedia.com/inv/dictionary/terms/candle.gif" alt="Candlestick" />
+Photo: <a href="https://www.investopedia.com/terms/c/candlestick.asp">Investopedia</a></p>
+
+<h3 id="cleaning-up-and-extracting-some-features">Cleaning up and extracting some features</h3>
+<p>The next step is taming the raw data into a <a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html">Pandas DataFrame</a>:</p>
+
+<p><img src="/assets/img/2018/june/raw_inputs.jpg" alt="Raw Data Inputs" /></p>
+
+<p>Having a few thousand candlesticks, one can use Pandas’ amazing <a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.rolling.html">rolling</a> capabilities, in order to roll down HiLo ratios and moving averages normalized to the maximum in a given period:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">num_periods_in_7d</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">24</span> <span class="o">*</span> <span class="mi">7</span> <span class="c"># Once, every 30 min</span>
+
+<span class="n">df</span><span class="p">[</span><span class="s">'hilo_7d'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s">'low'</span><span class="p">]</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">num_periods_in_7d</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">/</span>
+<span class="n">df</span><span class="p">[</span><span class="s">'high].rolling(num_periods_in_7d).mean()</span><span class="err">
+</span></code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Still volatile, but less so than the current price</span>
+<span class="n">df</span><span class="p">[</span><span class="s">'ma_30'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s">'avg_price'</span><span class="p">]</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+<span class="c"># Reacting slowly to rapid changes. Can be used as a line of</span>
+<span class="c"># support / resistance</span>
+<span class="n">df</span><span class="p">[</span><span class="s">'ma_6400'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s">'avg_price'</span><span class="p">]</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">6400</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+<span class="c"># Gives an idea how far the average price is from a past peak,</span>
+<span class="c"># or if it is at the peak itself</span>
+<span class="n">df</span><span class="p">[</span><span class="s">'ma_30_6400_ratio'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s">'ma_30'</span><span class="p">]</span> <span class="o">/</span> 
+<span class="n">df</span><span class="p">[</span><span class="s">'avg_price'</span><span class="p">]</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">6400</span><span class="p">)</span><span class="o">.</span><span class="nb">max</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>Gather a few of those, and you will effectively have established a simple way of representing <a href="https://www.investopedia.com/articles/technical/112601.asp">price patterns</a> across a certain time window:</p>
+
+<p><img src="/assets/img/2018/june/price_patterns.jpg" alt="Price Patterns" /></p>
+
+<p>To save you further details, ratios like these are quite popular in technical analysis, and go under the name of “oscillators”. It has been proven that prices don’t just go wildly in one direction or another, but behave somewhat like forces in physics. An upward movement for instance, is caused by the force applied to the price by the buying group. It can’t go up indefinitely (even in crypto-land), but eventually faces a force of resistance which forces the price downward. That’s why after normalization, prices lines resemble sine waves and can be analyzed as such. For those of you interested in more technical analysis fundamentals, I would suggest getting familiar with the concepts of <a href="https://www.investopedia.com/university/technical/techanalysis4.asp">support and resistance</a>.</p>
+
+<h3 id="categorizing-the-cases">Categorizing the cases</h3>
+<p>Based only on the inputs, how will our machine learning algorithm know which of them indicate a potential upward or downward movement? That’s right, we need to categorize them first. One simple way to do so, is to compare the price at any given time <code class="highlighter-rouge">T</code> with a price some time in the future (say, a week) - <code class="highlighter-rouge">T'</code>. If the price a week down the road is greater than the price at time <code class="highlighter-rouge">T</code>, we label the case as 1 (uptrend), or alternatively, as -1 (downtrend). Using Pandas’ forwards-and-backwards shifting function, this is a piece of cake:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># negative shifting will pair </span>
+<span class="n">df</span><span class="p">[</span><span class="s">'future_price'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s">'ma_6400'</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="n">num_periods_in_7d</span><span class="p">)</span>
+
+<span class="n">df</span><span class="p">[</span><span class="s">'future_price_chg'</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s">'future_price'</span><span class="p">]</span> <span class="o">/</span> <span class="n">df</span><span class="p">[</span><span class="s">'ma_6400'</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s">'future_price_chg'</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">,</span> <span class="s">'label'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s">'future_price_chg'</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">,</span> <span class="s">'label'</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+</code></pre></div></div>
+
+<h3 id="choosing-a-machine-learning-algorithm">Choosing a machine learning algorithm</h3>
+
+<p>Having extracted the features and labeled the data, our input matrix starts looking like a bunch of gibberish, but to the trained eye, and hopefully, to our machine learning algorithm it will be more than enough.</p>
+
+<p><img src="/assets/img/2018/june/extracted_input_features.jpg" alt="Extracted Input Features" /></p>
+
+<p>In the world of machine learning, there are many algorithms, each of which serving a different purpose. As much as media want you to believe in, ML is not all about neural nets. In fact, for the purposes of this project, I will use a <a href="http://scikit-learn.org/stable/modules/tree.html">decision tree classifier</a> instead. Designed well, decision trees can be just as effective, at a fraction of the size and complexity of a decent neural network.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">sklearn</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">criterion</span><span class="o">=</span><span class="err">’</span><span class="n">gini</span><span class="err">’</span><span class="p">,</span> 
+                                          <span class="n">splitter</span><span class="o">=</span><span class="err">’</span><span class="n">best</span><span class="err">’</span><span class="p">,</span> 
+                                          <span class="n">max_depth</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> 
+                                          <span class="n">min_samples_split</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> 
+                                          <span class="n">min_samples_leaf</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> 
+                                          <span class="n">min_weight_fraction_leaf</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> 
+                                          <span class="n">max_features</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> 
+                                          <span class="n">random_state</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> 
+                                          <span class="n">max_leaf_nodes</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> 
+                                          <span class="n">min_impurity_decrease</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> 
+                                          <span class="n">min_impurity_split</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> 
+                                          <span class="n">class_weight</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> 
+                                          <span class="n">presort</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Unlike deep NNs, decision trees have the advantage that they can be visualized easily. A decision tree graph can be exported and presented to a human expert who could confirm, if the branching criteria selected by the algorithm seems logical.</p>
+
+<p><img src="/assets/img/2018/june/sample_decision_tree.jpg" alt="Sample Decision Tree" /></p>
+
+<p>One disadvantage of decision trees is that they easily overfit, i.e. learn to solve the problem with the particular inputs at hand, but fail to really generalize the solution. All types of machine learning algorithm suffer from this, and there is really no single answer as to how to cope with it. One way is having your input data shuffled and split into two subsets. One goes for training the classifier, the other one for testing the accuracy of the algorithm:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeClassifier</span>
+
+<span class="n">inputs_train</span><span class="p">,</span> <span class="n">inputs_test</span><span class="p">,</span> <span class="n">labels_train</span><span class="p">,</span> <span class="n">labels_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
+
+<span class="n">tree_classifier</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">()</span>
+<span class="n">tree_classifier</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">inputs_train</span><span class="p">,</span> <span class="n">labels_train</span><span class="p">)</span>
+
+<span class="c"># The testing data has not been fed to the estimator before</span>
+<span class="n">score</span> <span class="o">=</span> <span class="n">tree_classifier</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">inputs_test</span><span class="p">,</span> <span class="n">labels_test</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>While training, you can also introduce epoch-wise fitting using something like input data folding. Folding is a fancy name for splitting the original data set into a number of subsets, and deriving training and testing data points from each one:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">KFold</span>
+<span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeClassifier</span>
+
+<span class="n">tree_classifier</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">train_index</span> <span class="n">test_index</span> <span class="ow">in</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+	<span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span> <span class="o">=</span> <span class="n">inputs</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">train_index</span><span class="p">],</span> <span class="n">labels</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">train_index</span><span class="p">]</span>
+	<span class="n">X_test</span><span class="p">,</span> <span class="n">Y_test</span> <span class="o">=</span> <span class="n">inputs</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">test_index</span><span class="p">],</span> <span class="n">labels</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">test_index</span><span class="p">]</span>
+	
+	<span class="n">tree_classifier</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">inputs_train</span><span class="p">,</span> <span class="n">labels_train</span><span class="p">)</span>
+	
+	<span class="c"># This score relates to the particular subset only</span>
+	<span class="c"># You can yield it and average out the scores for all subsets</span>
+	<span class="c"># at then end. You can also fit each subset into a new tree.</span>
+	<span class="c"># When predicting the overall score, all trees need to be called,</span>
+	<span class="c"># and the results of their scores averaged out. </span>
+	<span class="n">score</span> <span class="o">=</span> <span class="n">tree_classifier</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">inputs_test</span><span class="p">,</span> <span class="n">labels_test</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="note-on-random-forests">Note on Random Forests</h4>
+<p>Another, perhaps even better option is to use random forests. A random forest is a collection of trees, generated using randomized hyperparameters (max depth, min split count, max number of leaf nodes, etc), to each of which different inputs are fed. When predictions are derived, each tree is asked to predict a result separately, and the majority vote is taken:</p>
+
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Randomforests_ensemble.gif" alt="Random Forest Ensemble / Wikimedia" /> 
+Source: <a href="https://commons.wikimedia.org/wiki/File:Randomforests_ensemble.gif">Wikimedia</a></p>
+
+<p>A random forest is trained and tested in pretty much the same way as a single decision tree:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">cross_val_score</span>
+
+<span class="c"># An important parameter here is the number of trees in the forest</span>
+<span class="n">tree_classifier</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+
+<span class="c"># Cross-val-score combines folding, splitting, and scoring in one function</span>
+<span class="n">score</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">tree_classifier</span><span class="p">,</span> <span class="n">X</span><span class="o">=</span><span class="n">inputs</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>No matter how you approach it, once trained, the classifier can be used for predicting the outcome of a future event, by feeding it with current pricing data (transformed into input features, of course):</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">current_point_as_inputs</span> <span class="o">=</span> <span class="n">extract_inputs_from_data_frame</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+
+<span class="c"># This call will return either `1` or `-1` (our labels)</span>
+<span class="n">end_class</span> <span class="o">=</span> <span class="n">tree_classifier</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">current_point_as_inputs</span><span class="p">)</span>
+
+<span class="c"># This call will return an array of probabilities for each class to occur</span>
+<span class="n">class_probs</span> <span class="o">=</span> <span class="n">tree_classifier</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">current_point_as_inputs</span><span class="p">)</span>
+<span class="c"># class_probs =&gt; [0.23, 0,77]</span>
+</code></pre></div></div>
+
+<h3 id="rendering-the-outputs-and-scheduling-daily-updates">Rendering the outputs and scheduling daily updates</h3>
+<p>Having made our classifier output a decision, it is time to display it to visitors of the website. Since this entire operation is being read from and hosted on GitHub, I am using the magic of <a href="https://travis-ci.org/">Travis</a> to fetch and transform historical data, feed it through a decision tree classifier, and render the output using a static site generator for Python, called <a href="https://blog.getpelican.com/">Pelican</a>. Travis supports scheduled corn rebuilds of a certain branch which are ideal for my purpose. So, in essence, I’m doing all of this using pretty much using only a crown job, and some GitHub disk space for storing the rendered outputs. Let’s talk about serverless architecture, shall we? 😀</p>
+
+<h2 id="what-is-in-it-for-me">What is in it for me?</h2>
+<p>Nothing. I am neither planning to profit from the website, nor to collect user data or track user behavior. At the moment, I am doing this only for learning, and personal development purposes. Everyone is allowed to check out the site, as well as the code, leave comments, posts suggestions and pull requests. As mentioned at the beginning of the article, this tool is not a professional trading advice, and basing your trading decisions solely on what it shows you, will be equal to spending your money on the national lottery (which many of you do, but still).</p>
+
+<p>Enjoy, and don’t hesitate to leave me feedback, or share the word on <a href="https://twitter.com/intent/tweet?text=Should%20I%20HODL%20is%20a%20neat%20machine%20learning%20toy%20project%20by%20%40preslavrachev&amp;url=https%3A%2F%2Fpreslav.me%2Fshouldihodl">Twitter</a> with your friends.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/bitcoin" class="page__taxonomy-item" rel="tag">Bitcoin</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/cryptocurrencies" class="page__taxonomy-item" rel="tag">Cryptocurrencies</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/data-science" class="page__taxonomy-item" rel="tag">Data Science</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/machine-learning" class="page__taxonomy-item" rel="tag">Machine Learning</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/my-work" class="page__taxonomy-item" rel="tag">My Work</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/projects" class="page__taxonomy-item" rel="tag">Projects</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/python" class="page__taxonomy-item" rel="tag">Python</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2018-06-02T00:00:00+02:00">June 02, 2018</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Introducing+My+New+Pet+Project%3A+Should+I+HODL%20https%3A%2F%2Fpreslav.me%2F2018%2F06%2F02%2Fmy-new-pet-project-shouldidhodl%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fpreslav.me%2F2018%2F06%2F02%2Fmy-new-pet-project-shouldidhodl%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=https%3A%2F%2Fpreslav.me%2F2018%2F06%2F02%2Fmy-new-pet-project-shouldidhodl%2F" class="btn btn--google-plus" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Google Plus"><i class="fab fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fpreslav.me%2F2018%2F06%2F02%2Fmy-new-pet-project-shouldidhodl%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2018/05/29/using-travis-for-secure-building-and-deployment-to-github/" class="pagination--pager" title="Using Travis for Secure Building and Deployment to GitHub
+">Previous</a>
+    
+    
+      <a href="/2018/06/08/github-the-bastion-of-developer-independence/" class="pagination--pager" title="GitHub: The Bastion of Developer Independence
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+  
+      <h4 class="page__comments-title">Leave a comment</h4>
+      <section id="disqus_thread"></section>
+    
+</div>
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://source.unsplash.com/collection/1922729/400x300"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2018/12/02/designing-well-structured-rest-apis-with-flask-restplus-part-1/" rel="permalink">Designing Well-Structured REST APIs with Flask-RestPlus: Part 1
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  7 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">This is the first part of a two-part series. In this post, I will introduce Flask-RestPlus and demonstrate how to start organising APIs around its simple REST-based conventions. Next time, I will address the topic of request/response marshalling (serialisation) and validation.
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://source.unsplash.com/collection/1922729/400x300"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2018/11/01/kotlinconf-2018-recap/" rel="permalink">KotlinConf 2018 Recap
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">KotlinConf 2018 took place in beautiful Amsterdam at the beginning of October, and this year, I had the chance to attend. Though only the second edition, KotlinConf has already become something of an institution within the developer community. Events like these help you meet the people whose work you admire, but would otherwise not be able to meet in person.
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://source.unsplash.com/collection/1922729/400x300"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2018/11/01/a-new-stochastic-oscillator/" rel="permalink">A New Stochastic Oscillator?
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Disclaimer: None of what follows is an actual trading advice. It was meant to educate and share my learning experience with the community, and should not be used as-is for making assumptions about the future direction of any market asset. Always do your own research!
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://source.unsplash.com/collection/1922729/400x300"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2018/10/07/photo-recap/" rel="permalink">A Photo Recap of the Past Week
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  1 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Wow, it has been quite a week! It is time for a quick photo recap.
+
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><input type="text" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+    <div id="results" class="results"></div></div>
+      </div>
+    
+
+    <div class="page__footer">
+      <footer>
+        <script type="text/javascript">
+  var clicky_custom = clicky_custom || {};
+  clicky_custom.cookies_disable = 1;
+</script>
+<script src="//static.getclicky.com/js" type="text/javascript"></script>
+<script type="text/javascript">try { clicky.init(101131786); } catch (e) { }</script>
+<noscript><p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/101131786ns.gif" /></p></noscript>
+
+<script type="text/javascript">
+  // This should effectively disable all cookies being set on this site
+  // It is a bit of a crude measure, but I think it is necessary, having in mind how many seemingly innoncent
+  // 3rd-party scripts and embeds bring in tracking cookies with themselves
+  if (!document.__defineGetter__) {
+    Object.defineProperty(document, 'cookie', {
+      get: function () { return '' },
+      set: function () { return true },
+    });
+  } else {
+    document.__defineGetter__("cookie", function () { return ''; });
+    document.__defineSetter__("cookie", function () { });
+  }
+</script>
+
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2019 Your Name. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://preslav.me/2018/06/02/my-new-pet-project-shouldidhodl/";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "/2018/06/02/my-new-pet-project-shouldidhodl"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://preslav.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+  </body>
+</html>

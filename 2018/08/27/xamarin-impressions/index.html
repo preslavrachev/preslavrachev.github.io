@@ -1,0 +1,782 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.13.0 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Xamarin Impressions - Preslav Rachev</title>
+<meta name="description" content="NOTE: The following post discusses the impressions I got with the Xamarin.iOS framework alone. It was intended to discuss only the iOS development support and not the cross-platform capabilities of the Xamarin suite. It is also worth mentioning that Xamarin.iOS has nothing to do with Xamarin.Forms, a ver different beast focusing on cross-platform development, and a point of lots of online debating.">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Preslav Rachev">
+<meta property="og:title" content="Xamarin Impressions">
+<meta property="og:url" content="https://preslav.me/2018/08/27/xamarin-impressions/">
+
+
+  <meta property="og:description" content="NOTE: The following post discusses the impressions I got with the Xamarin.iOS framework alone. It was intended to discuss only the iOS development support and not the cross-platform capabilities of the Xamarin suite. It is also worth mentioning that Xamarin.iOS has nothing to do with Xamarin.Forms, a ver different beast focusing on cross-platform development, and a point of lots of online debating.">
+
+
+
+  <meta property="og:image" content="https://source.unsplash.com/collection/1922729/1280x400">
+
+
+
+
+
+  <meta property="article:published_time" content="2018-08-27T00:00:00+02:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://preslav.me/2018/08/27/xamarin-impressions/">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "Your Name",
+      "url": "https://preslav.me",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Preslav Rachev Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    
+    <link rel="amphtml" href="https://preslav.me/amp/2018/08/27/xamarin-impressions.html">
+
+
+<link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700|PT+Serif:400,700,400italic" rel="stylesheet" type="text/css">
+<link href="https://micro.blog/preslavrachev" rel="me" />
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/">Preslav Rachev</a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/about-me" >About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/micro" >Microblog</a>
+            </li><li class="masthead__menu-item">
+              <a href="/archive" >Archive</a>
+            </li><li class="masthead__menu-item">
+              <a href="/contact" >Contact</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style=" background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://source.unsplash.com/collection/1922729/1280x400');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          Xamarin Impressions
+
+        
+      </h1>
+      
+      
+        <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  7 minute read
+</p>
+      
+      
+      
+        <p>
+        
+          
+          <a href="https://twitter.com/intent/tweet?text=Hey%2C%20%40preslavrachev%2C%20I%20have%20been%20reading%20your%20blog%3A%20https%3A%2F%2Fpreslav.me%2F" class="btn btn--light-outline btn--large">Discuss this post on Twitter</a>
+        
+          
+          <a href="/contact" class="btn btn--light-outline btn--large">Contact me</a>
+        
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div class="h-card" itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img class="u-photo" src="/assets/img/avatar.jpg" alt="Preslav Rachev" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Preslav Rachev</h3>
+    
+    
+      <p class="author__bio p-note" itemprop="description">
+        A runner and a programming / data science polymath. A Bulgarian living in Germany. Bridging the gap between software engineering and data science.
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Munich, Germany</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li>
+  <a href="https://twitter.com/preslavrachev" itemprop="sameAs">
+    <i class="fab fa-fw fa-twitter" aria-hidden="true"></i> Twitter
+  </a>
+  <a href="https://github.com/preslavrachev" itemprop="sameAs">
+    <i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub
+  </a>
+  <a href="https://www.linkedin.com/in/preslavrachev/" itemprop="sameAs">
+    <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn
+  </a>
+  <a href="https://mastodon.technology/@preslavrachev" itemprop="sameAs">
+    <i class="fab fa-fw fa-mastodon" aria-hidden="true"></i> Mastodon
+  </a>
+</li>
+
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Xamarin Impressions">
+    <meta itemprop="description" content="NOTE: The following post discusses the impressions I got with the Xamarin.iOS framework alone. It was intended to discuss only the iOS development support and not the cross-platform capabilities of the Xamarin suite. It is also worth mentioning that Xamarin.iOS has nothing to do with Xamarin.Forms, a ver different beast focusing on cross-platform development, and a point of lots of online debating.">
+    <meta itemprop="datePublished" content="August 27, 2018">
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#basic-info">Basic Info</a>
+    <ul>
+      <li><a href="#what-is-the-big-deal">What is the big deal?</a>
+         -  <a href="#source-microsoft">Source: Microsoft</a></li>
+    </ul>
+  </li>
+  <li><a href="#tooling">Tooling</a>
+    <ul>
+      <li><a href="#visual-studio">Visual Studio</a></li>
+      <li><a href="#the-integrated-ios-ui-designer">The integrated iOS UI designer</a></li>
+      <li><a href="#the-debugger">The Debugger</a></li>
+      <li><a href="#build-time">Build Time</a></li>
+    </ul>
+  </li>
+  <li><a href="#what-i-wish-were-better">What I Wish Were Better</a>
+    <ul>
+      <li><a href="#the-documentation">The Documentation</a></li>
+    </ul>
+  </li>
+  <li><a href="#conclusion">Conclusion</a></li>
+  <li><a href="#further-reading">Further Reading</a></li>
+</ul>
+            </nav>
+          </aside>
+        
+        <p class="notice"><strong>NOTE:</strong> The following post discusses the impressions I got with the <a href="https://docs.microsoft.com/en-us/xamarin/ios/">Xamarin.iOS</a> framework alone. It was intended to discuss only the iOS development support and not the cross-platform capabilities of the Xamarin suite. It is also worth mentioning that Xamarin.iOS has nothing to do with <a href="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/">Xamarin.Forms</a>, a ver different beast focusing on cross-platform development, and a point of lots of online debating.</p>
+
+<p>Yes, you heard it right. I tried Xamarin this weekend. I got an idea for a new app a few weeks ago, and I was interested to try something different. Plus, for those that have read my <a href="https://preslav.me/2018/07/20/dont-throw-react-native-away-just-yet/">recent post about React Native</a>, I am always on the hunt for ways to avoid Apple’s prescribed choice of language or tooling, so Xamarin seemed like a nice opportunity to do so.</p>
+
+<p class="notice"><strong>SIDENOTE:</strong> There is no such thing like avoiding Apple’s tech or tooling, but one can abstract it away as much as possible, in the name a better and faster developer experience.</p>
+
+<h2 id="basic-info">Basic Info</h2>
+<p>Xamarin dates back to 2011, originally developed by <a href="https://twitter.com/migueldeicaza">@migueldeicaza</a> and his team, who also brought <a href="https://en.wikipedia.org/wiki/Mono_(software)">Mono</a>, Mono for Android and MonoTouch to the world, and was later bought by Microsoft in 2016. Currently, Xamarin gets shipped together with every version of Visual Studio, including the <a href="https://visualstudio.microsoft.com/vs/community/">VS Community Edition</a>, allowing <a href="https://visualstudio.microsoft.com/license-terms/mlt553321/">individuals or small non-enterprise teams</a> to create mobile apps and distribute across the app stores, free of charge.</p>
+
+<h3 id="what-is-the-big-deal">What is the big deal?</h3>
+<p>In short, Xamarin facilitates the development of cross-platform applications using a shared code base, while utilizing the best of the C# language and the .NET ecosystem. I will leave the cross-platform topic since it does not concern me for now, but from what I have seen, it seems to allow for a good deal of code sharing.</p>
+
+<p><img src="https://docs.microsoft.com/en-us/xamarin/ios/internals/architecture-images/aot-large.png" alt="" /></p>
+<h6 id="source-microsoft">Source: <a href="https://docs.microsoft.com/en-us/xamarin/ios/internals/architecture">Microsoft</a></h6>
+
+<p>As for iOS, Xamarin actually impressed me from the get go. It is hard to believe it for someone who has not tried Xamarin, but developing an iOS app does not differ much syntactically from using Swift. On top, one gets to use C#, a very mature and elegant language, albeit somewhat restricted by the platform availability that the .NET framework gets to run on.</p>
+
+<p class="notice"><strong>SIDENOTE:</strong> During and shortly after my Undergraduate years about a decade ago, I spent a significant part of my programming practice writing C# and working with the .NET. My opinion can thus be a little bit biased, due to my nostalgia of that time.</p>
+
+<p>A Xamarin developer has the entire CocoaTouch SDK at their disposal, plus a fairly good deal of the .NET framework. Bringing-in new .NET libraries is a piece of cake, and as long as they don’t rely on any platform or OS-specific SDKs, they work out of the box. Bridging to 3rd-party Objective-C libraries is also not a problem. There is a tool made available from Microsoft, called <a href="https://docs.microsoft.com/en-us/xamarin/cross-platform/macios/binding/objective-sharpie/">Objective Sharipie</a>, which facilitates the bridging, by parsing Objective-C headers and creating a C# bridge. Bridging to Swift libraries is not officially supported for various reasons, but also not impossible. There are a <a href="https://medium.com/@Flash3001/binding-swift-libraries-xamarin-ios-ff32adbc7c76">few caveats</a> to keep in mind before bridging a Swift library, so I can’t be 100% certain that the bridging effort will be always worth it. It’s … just there for those who are ready to spend some effort and take advantage of it.</p>
+
+<h2 id="tooling">Tooling</h2>
+<h3 id="visual-studio">Visual Studio</h3>
+<p>The last time I really used VS (not to be mistaken with VSCode), was around 2010. Even back then, VS was a very good developer environment, but tightly bound to the Windows OS and its platform ecosystem. In that regard, VS back then as pretty much the Windows equivalent of XCode was at the time, … and still is 🤔.</p>
+
+<p>A lot has changed since then and in a very positive direction. VS follows along Microsoft’s core strategic pivot and rekindled love for developers of all kinds, and this can be seen right from the opening screen. I had very few issues installing VS on my Mac (<a href="https://blogs.msdn.microsoft.com/visualstudio/2016/11/16/visual-studio-for-mac/">On a Mac</a>!!!) and right after setting up a demo iOS project, I set out to change my preferences. I was pleasantly surprised by the fact that the very first screen let me choose a dark UI. Not just a dark colour scheme. A full-scale dark UI.</p>
+
+<p><img src="/assets/img/2018/august/vs_1.png" alt="changing the default UI color is easy" /></p>
+
+<p>Next step, change the key shortcuts to something matching my IntelliJ workflow. Here too, I was positively surprised that Microsoft provided a key mapping coming straight out of <a href="https://www.jetbrains.com/rider/">Rider</a> (JetBrains’ .NET IDE), which brought most of my favourite key mappings right away.</p>
+
+<p><img src="/assets/img/2018/august/vs_2.png" alt="VS allows allows for an easy switch of the defaultkey mapping" /></p>
+
+<p>Unfortunately, not all mappings were provided, due to the fact that VS simply does not expose all the functionality available for key-mapping. As of yet, my two biggest issues are the inability to ditch tabs, and use a sorted “recently opened files” panel instead.</p>
+
+<p>In case I decide to continue on the Xamarin path, I would definitely give <a href="https://www.jetbrains.com/rider/">Rider</a> a try. I have heard many good things about it, and its seamless integration with .NET and Xamarin. Indeed, it’s a paid product, but I paid for <a href="https://www.jetbrains.com/objc/">AppCode</a> and was utterly disappointed by it, so I think that there might be bit of room in the budget for the upcoming year.</p>
+
+<h3 id="the-integrated-ios-ui-designer">The integrated iOS UI designer</h3>
+<p>The built-in <a href="https://docs.microsoft.com/en-us/xamarin/ios/user-interface/ios-ui/creating-ui-objects?tabs=vsmac">UI designer</a> is definitely not as bad as what I have been hearing from others. It reminds me of Xcode’s Interface Builder and is not any better or worse (I believe that it is actually using IB under the hood). For those who can’t part from their beloved Interface Builder, the storyboard file export format is exactly the same, so one can open the files in Xcode and do the necessary tweaks there instead. I am not so much of a fan of IB, and would rather often prefer to manage my views in code, so please, don’t rely on my opinion alone.</p>
+
+<p>One interesting fact is that code references to views laid out using the UI designer, get autogenerated in code, and conveniently placed in a  C# <a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/partial-classes-and-methods">partial class</a> right under the main view controller, essentially separating the UI logic from the instantiation of the view. I found this neat.</p>
+
+<p><img src="/assets/img/2018/august/vs_3.png" alt="view references are neatly hidden inside a partial C# class" /></p>
+
+<h3 id="the-debugger">The Debugger</h3>
+<p>Unlike what I’ve heard or read previously, the debugger was also on par with everything I had expected. I haven’t had much time form some more thorough runtime introspection and profiling, so I can’t really comment on those features, but I believe that they should be on par with the rest.</p>
+
+<h3 id="build-time">Build Time</h3>
+<p>The build time seems fast or even faster than building the same app using Swift. During my test runs, I did not hear the fan of my laptop start even once. This is certainly not the case when compiling Swift code. One thing to remember is that the Xamarin code generator is essentially compiling the managed .NET intermediate language (IL) into a set of native instructions, using a process called <a href="https://www.mono-project.com/docs/advanced/aot/">Ahead of Time Compilation (AOT)</a>, which has some certain <a href="https://docs.microsoft.com/en-us/xamarin/ios/internals/limitations">limitations</a>. Also, in order to speed compilation time, the generator will not use the <a href="https://www.mono-project.com/docs/advanced/mono-llvm/">LLVM</a> optimising compiler. By default, <a href="https://docs.microsoft.com/en-us/xamarin/ios/deploy-test/compiling-for-different-devices?tabs=vsmac#code-generation-engine">LLVM optimisation</a> and other heavy-duty preprocessing steps (stripping unused parts of the code) are reserved for when issuing an actual release build. One needs to keep those in mind, and not merely discard Xamarin just solely based on the size or performance of a simulator test build.</p>
+
+<h2 id="what-i-wish-were-better">What I Wish Were Better</h2>
+<h3 id="the-documentation">The Documentation</h3>
+<p>A lot of stuff seems scrambled around. There are many good pages on the Microsoft site, which I tried to link to, but much of the information is still spread around. I found some of the juicy under-the-hood parts only by stumbling upon the original <a href="https://www.mono-project.com">Mono Project website</a>. Others I found after some digging around StackOverflow or in developers’ blogs, but from a very brief point of interaction, I seem to be missing a strong developer community which to turn to, in case one needs an answer.</p>
+
+<p>I spotted a lot of false accusations online targeting Xamarin.Forms, or  Xamarin’s capabilities at cross-platform development. There were, in fact, very posts that targeted Xamarin.iOS in particular, which would start right away with the negative stuff. My assumption is that people, just as it is the case with React Native, wrongly approach a framework like Xamarin, thinking that it will allow them to build cross-platform applications with native look and feel on each platform, and 99.99% shared code. I am sorry to unveil the mystery, but nothing like that exists on the market, or will ever exist for that matter.</p>
+
+<p>Besides the documentation and the available information online, I think that the one of the biggest issues around Xamarin seems to be the Microsoft stigma around it. Somehow, if a framework were developed by, say, Google or Facebook, everyone would cheerfully jump on it in no time, but see, Microsoft is a whole other story.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+<p>I have decided, for the time being, to give Xamarin.iOS a chance. This does not mean that I would stop searching for new ways to undercut Apple. Let’s call it a bit of nostalgia of the old days, and partially, giving Microsoft the benefit of the doubt. C# as a language, and .NET as a toolkit are a mighty part, and I believe that people should give them a chance, before throwing the option right was as just another Microsoft product, whose legacy would chase you forever (as if Apple’s or Google’s don’t).</p>
+
+<h2 id="further-reading">Further Reading</h2>
+<ul>
+  <li><a href="https://docs.microsoft.com/en-us/xamarin/ios/internals/architecture">iOS App Architecture</a></li>
+  <li><a href="https://medium.com/@JMangia/swift-c-llvm-compiler-optimization-842012568bb7">Swift, C, LLVM Compiler Optimization</a></li>
+  <li><a href="https://blog.xamarin.com/xamarin-for-all/">Xamarin for Everyone</a></li>
+  <li><a href="https://dev.to/jonstodle/xamarin-products-explained-clo">Xamarin products explained</a></li>
+  <li><a href="https://www.altexsoft.com/blog/engineering/performance-comparison-xamarin-forms-xamarin-ios-xamarin-android-vs-android-and-ios-native-applications/">Performance Comparison: Xamarin.Forms, Xamarin.iOS, Xamarin.Android vs Android and iOS Native Applications</a></li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/ios" class="page__taxonomy-item" rel="tag">iOS</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/microsoft" class="page__taxonomy-item" rel="tag">Microsoft</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/programming" class="page__taxonomy-item" rel="tag">Programming</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/xamarin" class="page__taxonomy-item" rel="tag">Xamarin</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2018-08-27T00:00:00+02:00">August 27, 2018</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Xamarin+Impressions%20https%3A%2F%2Fpreslav.me%2F2018%2F08%2F27%2Fxamarin-impressions%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fpreslav.me%2F2018%2F08%2F27%2Fxamarin-impressions%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=https%3A%2F%2Fpreslav.me%2F2018%2F08%2F27%2Fxamarin-impressions%2F" class="btn btn--google-plus" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Google Plus"><i class="fab fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fpreslav.me%2F2018%2F08%2F27%2Fxamarin-impressions%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2018/08/19/i-made-a-mastodon-account-and-i-like-it/" class="pagination--pager" title="I Made a Mastodon Account and so Far I like It
+">Previous</a>
+    
+    
+      <a href="/2018/09/05/medium-walled-garden/" class="pagination--pager" title="Medium Is Turning into the Walled Garden It Did Not Want to Be
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+  
+      <h4 class="page__comments-title">Leave a comment</h4>
+      <section id="disqus_thread"></section>
+    
+</div>
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://source.unsplash.com/collection/1922729/400x300"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2018/12/02/designing-well-structured-rest-apis-with-flask-restplus-part-1/" rel="permalink">Designing Well-Structured REST APIs with Flask-RestPlus: Part 1
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  7 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">This is the first part of a two-part series. In this post, I will introduce Flask-RestPlus and demonstrate how to start organising APIs around its simple REST-based conventions. Next time, I will address the topic of request/response marshalling (serialisation) and validation.
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://source.unsplash.com/collection/1922729/400x300"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2018/11/01/kotlinconf-2018-recap/" rel="permalink">KotlinConf 2018 Recap
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">KotlinConf 2018 took place in beautiful Amsterdam at the beginning of October, and this year, I had the chance to attend. Though only the second edition, KotlinConf has already become something of an institution within the developer community. Events like these help you meet the people whose work you admire, but would otherwise not be able to meet in person.
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://source.unsplash.com/collection/1922729/400x300"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2018/11/01/a-new-stochastic-oscillator/" rel="permalink">A New Stochastic Oscillator?
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Disclaimer: None of what follows is an actual trading advice. It was meant to educate and share my learning experience with the community, and should not be used as-is for making assumptions about the future direction of any market asset. Always do your own research!
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://source.unsplash.com/collection/1922729/400x300"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2018/10/07/photo-recap/" rel="permalink">A Photo Recap of the Past Week
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  1 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Wow, it has been quite a week! It is time for a quick photo recap.
+
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><input type="text" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+    <div id="results" class="results"></div></div>
+      </div>
+    
+
+    <div class="page__footer">
+      <footer>
+        <script type="text/javascript">
+  var clicky_custom = clicky_custom || {};
+  clicky_custom.cookies_disable = 1;
+</script>
+<script src="//static.getclicky.com/js" type="text/javascript"></script>
+<script type="text/javascript">try { clicky.init(101131786); } catch (e) { }</script>
+<noscript><p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/101131786ns.gif" /></p></noscript>
+
+<script type="text/javascript">
+  // This should effectively disable all cookies being set on this site
+  // It is a bit of a crude measure, but I think it is necessary, having in mind how many seemingly innoncent
+  // 3rd-party scripts and embeds bring in tracking cookies with themselves
+  if (!document.__defineGetter__) {
+    Object.defineProperty(document, 'cookie', {
+      get: function () { return '' },
+      set: function () { return true },
+    });
+  } else {
+    document.__defineGetter__("cookie", function () { return ''; });
+    document.__defineSetter__("cookie", function () { });
+  }
+</script>
+
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2019 Your Name. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://preslav.me/2018/08/27/xamarin-impressions/";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "/2018/08/27/xamarin-impressions"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://preslav.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+  </body>
+</html>
