@@ -1,4 +1,4 @@
-title: Preslav's Thoughts and Ramblings
+title: Preslav Rachev
 description: Finding beauty in everyday things.
 
 url: https://preslav.me
@@ -17,9 +17,9 @@ sass:
   style: compressed
 
 social:
-   github: preslavrachev
-   twitter: preslavrachev
-   stackoverflow: 1107412/preslavrachev
+  github: preslavrachev
+  twitter: preslavrachev
+  stackoverflow: 1107412/preslavrachev
 
 disqus: preslav
 
@@ -38,7 +38,7 @@ comments:
 collections:
   micro:
     output: true
-    permalink: /:collection/:path/    
+    permalink: /:collection/:path/
 
 search: true
 defaults:
@@ -61,7 +61,7 @@ defaults:
           - label: "Discuss this post on Twitter"
             url: "https://twitter.com/intent/tweet?text=Hey%2C%20%40preslavrachev%2C%20I%20have%20been%20reading%20your%20blog%3A%20https%3A%2F%2Fpreslav.me%2F"
           - label: "Contact me"
-            url: "/contact"  
+            url: "/contact"
   # _micro
   - scope:
       path: ""
@@ -70,15 +70,15 @@ defaults:
       layout: single_micro
       author_profile: true
       share: true
-      title: ""    
+      title: ""
 
 author:
-  name   : "Preslav Rachev"
-  avatar : "/assets/img/avatar.jpg"
-  bio    : "A runner and a programming / data science polymath. A Bulgarian living in Germany. Bridging the gap between software engineering and data science." 
-  email  : # optional
+  name: "Preslav Rachev"
+  avatar: "/assets/img/avatar.jpg"
+  bio: "A runner and a programming / data science polymath. A Bulgarian living in Germany. Bridging the gap between software engineering and data science."
+  email: # optional
   #uri    : "http://your-site.com"
-  home   : # null (default), "absolute or relative url to link to author home"
+  home: # null (default), "absolute or relative url to link to author home"
   location: "Munich, Germany"
 
 teaser: https://source.unsplash.com/collection/1922729/400x300
@@ -103,4 +103,4 @@ jekyll-archives:
 feed:
   collections:
     micro:
-      path: "/micro.xml"    
+      path: "/micro.xml"
